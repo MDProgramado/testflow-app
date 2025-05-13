@@ -1,11 +1,52 @@
-import { Component } from '@angular/core';
+import { Component, OnInit }          from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Usuario } from '../interfaces/Usuario';
+import { AutentificarLoginService } from '../Services/autentificar-login.service';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'app-login-user-component',
-  imports: [],
+  imports: [ CommonModule, ReactiveFormsModule, RouterModule ],
   templateUrl: './login-user-component.component.html',
-  styleUrl: './login-user-component.component.css'
+  styleUrls: ['./login-user-component.component.css']
 })
-export class LoginUserComponentComponent {
+export class LoginUserComponentComponent implements OnInit {
+  formulario!: FormGroup;  // declara a propriedade
 
+  constructor(
+    private fb: FormBuilder,
+    private autentificarLogin: AutentificarLoginService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+   
+    this.formulario = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      senha: ['', Validators.required]
+    });
+  }
+
+  onSubmit(): void {
+    if (this.formulario.valid) {
+      this.autentificarLogin.BuscarDadosDaAPi(this.formulario.value)
+       .subscribe({ 
+      next: (usuario) => {       
+        console.log('Resposta da API:', usuario);
+
+        if (usuario?.id) {
+          this.router.navigateByUrl('/home');
+        } else {
+          alert('Usuário inválido');
+        }
+      },
+      error: (err) => {
+        console.error('Falha no login:', err);
+        alert('Credenciais inválidas ou erro de conexão');
+      }
+    });
+    }
+  }
 }

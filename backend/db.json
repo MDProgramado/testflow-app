@@ -1,0 +1,161 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "admin1@gmail.com",
+      "senha": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "email": "user",
+      "senha": "user123",
+      "role": "user"
+    },
+    {
+      "id": "31b0",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "e831",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "0daa",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "0cb6",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "3a64",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "6f25",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "cd2b",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "19a3",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "0f3b",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "70c3",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "3835",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "dabd",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "8272",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "e6da",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "b2df",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "d7d0",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "a78c",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "1e91",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "eaf8",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "5a51",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "48a1",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "130b",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "dda4",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "5837",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "e98c",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "50bd",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "b837",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "062b",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "0bbc",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    }
+  ]
+}
