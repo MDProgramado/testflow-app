@@ -19,6 +19,7 @@ server.post('/login', (req, res) => {
   }
 });
 
+
 server.use(router);
 server.listen(3000, () => {
   console.log('JSON Server está rodando na porta 3000');

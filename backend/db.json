@@ -11,26 +11,11 @@
       "email": "user",
       "senha": "user123",
       "role": "user"
-    },
-    {
-      "id": "96af",
-      "email": "admin1@gmail.com",
-      "senha": "admin123"
-    },
-    {
-      "id": "d210",
-      "email": "admin1@gmail.com",
-      "senha": "admin123"
-    },
-    {
-      "id": "89a9",
-      "email": "admin1@gmail.com",
-      "senha": "admin123"
-    },
-    {
-      "id": "63e1",
-      "email": "admin1@gmail.com",
-      "senha": "admin123"
     }
+  ],
+  "tasks": [
+    
   ]
+
+  
 }

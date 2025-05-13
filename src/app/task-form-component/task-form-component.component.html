@@ -1,1 +1,59 @@
-<p>task-form-component works!</p>
+<div id="taskForm" class="bg-white rounded-xl shadow mb-6 hidden">
+                    <div class="px-6 py-4 border-b">
+                        <h2 class="text-xl font-semibold text-gray-800">Nova Tarefa</h2>
+                    </div>
+                    <div class="p-6">
+                        <form>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Título da Tarefa</label>
+                                <input type="text" class="w-full rounded border-gray-300" placeholder="Ex: Ajustar máquina X">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
+                                <textarea class="w-full rounded border-gray-300" rows="3" placeholder="Detalhes da tarefa..."></textarea>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Setor</label>
+                                    <select class="w-full rounded border-gray-300">
+                                        <option>Selecione</option>
+                                        <option>Montagem</option>
+                                        <option>Pintura</option>
+                                        <option>Usinagem</option>
+                                        <option>Manutenção</option>
+                                        <option>Qualidade</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Responsável</label>
+                                    <select class="w-full rounded border-gray-300">
+                                        <option>Selecione</option>
+                                        <option>Operador 1</option>
+                                        <option>Operador 2</option>
+                                        <option>Técnico João</option>
+                                        <option>Equipe Manutenção</option>
+                                        <option>Inspetor Carlos</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Prioridade</label>
+                                    <select class="w-full rounded border-gray-300">
+                                        <option>Baixa</option>
+                                        <option>Média</option>
+                                        <option>Alta</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Prazo</label>
+                                    <input type="datetime-local" class="w-full rounded border-gray-300">
+                                </div>
+                            </div>
+                            <div class="flex justify-end space-x-3">
+                                <button type="button" id="cancelTaskBtn" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">Cancelar</button>
+                                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Salvar Tarefa</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
