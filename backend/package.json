@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "teszt": "echo \"Error: no test specified\" && exit 1"
+    "start": "json-server --watch db.json --port 3000"
   },
   "author": "",
   "license": "ISC",

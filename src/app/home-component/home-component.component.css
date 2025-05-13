@@ -1,3 +1,12 @@
-.fundo {
-    background-color: yellow;
+:root {
+    --primary-color: #062863;
+}
+
+.bg-primary-custom {
+    background-color: #062863 !important;
+  }
+
+  .costumizado {
+    width: 6rem;
+    height: auto;
 }
