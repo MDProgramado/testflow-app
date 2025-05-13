@@ -1,6 +1,37 @@
 # TestflowApp
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
+O *TaskFlow – Gerenciador de Tarefas de Produção e Manutenção* é um sistema simples de gerenciamento de tarefas que visa otimizar e organizar a execução de tarefas diárias em uma fábrica ou ambiente industrial. Ele facilita a visualização e o acompanhamento de tarefas, tanto para operadores quanto para técnicos de manutenção, com o objetivo de *aumentar a eficiência e minimizar falhas ou atrasos* no processo de produção.
+
+### Funcionalidades do TestflowApp
+
+#### 1. *Cadastro e Acompanhamento de Tarefas*
+
+Cada tarefa tem:
+
+* *Título*: Nome da tarefa.
+* *Descrição*: Detalhes ou instruções sobre o que precisa ser feito.
+* *Status*: Indicadores de progresso, como "Pendente", "Em Progresso" ou "Concluída".
+* *Responsável*: Atribuição de tarefas para um operador ou técnico.
+* *Prazo de Conclusão*: Quando a tarefa precisa ser finalizada.
+
+#### 2. *Interface Simples e Intuitiva*
+
+A aplicação pode ter:
+
+* *Dashboard*: Um painel com tarefas pendentes e concluídas, além de gráficos simples de desempenho.
+* *Lista de Tarefas*: Exibição de todas as tarefas programadas, com filtros por status, operador ou prazo.
+* *Formulário de Tarefa*: Para criar ou editar tarefas, permitindo adicionar descrições detalhadas e definir o status e responsável.
+
+#### 3. *Notificações e Alertas*
+
+* *Notificações* para lembrar os operadores sobre tarefas pendentes ou quando o prazo está se aproximando.
+* *Alertas* quando o número de tarefas ou o tempo de atraso ultrapassar um limite crítico.
+
+#### 4. *Relatórios e Performance*
+
+* *Relatório de Tarefas Concluídas*: Para que supervisores possam monitorar a produtividade de cada operador e o tempo médio de execução das tarefas.
+* *Gráficos de Desempenho: Gráficos simples usando **Chart.js* ou *ngx-charts*, como total de tarefas concluídas por dia, tempo médio de execução, etc.
+
 
 ## Development server
 
