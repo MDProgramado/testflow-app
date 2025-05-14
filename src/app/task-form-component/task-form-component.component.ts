@@ -1,9 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
-import { AdicionarServiceService } from '../Services/adicionar-service.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { TaskServiceService } from '../Services/task-service.service';
+import { title } from 'process';
 import { Task } from '../interfaces/Task';
+
+
 
 @Component({
   selector: 'app-task-form-component',
@@ -11,18 +14,52 @@ import { Task } from '../interfaces/Task';
   templateUrl: './task-form-component.component.html',
   styleUrl: './task-form-component.component.css'
 })
-export class TaskFormComponentComponent {
+export class TaskFormComponentComponent implements OnInit {
 
-task!: Task;
-  constructor(private adicionarService: AdicionarServiceService, private router: Router) { }
+    form!: FormGroup;
+    isEdit: boolean = false;
+    taskId!: number;
 
-  adicionarTarefa(task: Task) {
-    this.adicionarService.AdicionarTarefa(task).subscribe({
-      next: (resposta: Task) => {
-        alert('Tarefa adicionada com sucesso');
-        this.router.navigateByUrl('/createTask');
+    constructor(
+      private fb: FormBuilder,
+      private taskService: TaskServiceService,
+      private route: ActivatedRoute,
+      private router: Router,
+    ) {}
+
+    ngOnInit(): void {
+      this.form = this.fb.group({
+        title: ['', Validators.required],
+        description: [''],
+        priority: ['Média', Validators.required],
+        status: ['Pendente', Validators.required],
+        dueDate: ['', Validators.required],
+        responsible: ['', Validators.required]
+      });
+
+      const id = this.route.snapshot.paramMap.get('id');
+      if(id) {
+        this.isEdit = true;
+        this.taskId = +id;
+        this.taskService.getByid(this.taskId).subscribe(task => {
+          this.form.patchValue(task);
+        });
       }
-    })
-  }
+    }
 
+    onSubmit():void {
+      if(this.form.invalid) return;
+
+      const task: Task = this.form.value;
+
+      if(this.isEdit) {
+        task.id = this.taskId;
+
+        this.taskService.uptade(task).subscribe(() => this.router.navigate(['/tasks']));
+      } 
+      else {
+        this.taskService.create(task).subscribe(() => 
+        this.router.navigate(['/tasks']));
+      }
+    }
 }

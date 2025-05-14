@@ -16,6 +16,21 @@
       "id": "83d6",
       "email": "admin1@gmail.com",
       "senha": "admin123"
+    },
+    {
+      "id": "f007",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "861e",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "78b4",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
     }
   ],
   "tasks": []
