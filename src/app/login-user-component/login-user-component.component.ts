@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login-user-component.component.css']
 })
 export class LoginUserComponentComponent implements OnInit {
-  formulario!: FormGroup;  // declara a propriedade
+  formulario!: FormGroup;  
 
   constructor(
     private fb: FormBuilder,

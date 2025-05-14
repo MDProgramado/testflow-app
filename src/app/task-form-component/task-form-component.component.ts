@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AdicionarServiceService } from '../Services/adicionar-service.service';
 import { Task } from '../interfaces/Task';
 
@@ -14,13 +14,13 @@ import { Task } from '../interfaces/Task';
 export class TaskFormComponentComponent {
 
 task!: Task;
-  constructor(private adicionarService: AdicionarServiceService) { }
+  constructor(private adicionarService: AdicionarServiceService, private router: Router) { }
 
   adicionarTarefa(task: Task) {
     this.adicionarService.AdicionarTarefa(task).subscribe({
       next: (resposta: Task) => {
         alert('Tarefa adicionada com sucesso');
-        console.log(resposta);
+        this.router.navigateByUrl('/createTask');
       }
     })
   }

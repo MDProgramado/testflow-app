@@ -2,6 +2,7 @@
 import { Routes } from '@angular/router';
 import { LoginUserComponentComponent } from './login-user-component/login-user-component.component';
 import { HomeComponentComponent } from './home-component/home-component.component';
+import { TaskFormComponentComponent } from './task-form-component/task-form-component.component';
 
 export const routes: Routes = [
   { 
@@ -20,5 +21,9 @@ export const routes: Routes = [
     redirectTo: 'login'
   
   },
+   { 
+      path: 'createTask',   
+      component: TaskFormComponentComponent
+    },
   
 ];

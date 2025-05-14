@@ -11,11 +11,12 @@
       "email": "user",
       "senha": "user123",
       "role": "user"
+    },
+    {
+      "id": "83d6",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
     }
   ],
-  "tasks": [
-    
-  ]
-
-  
+  "tasks": []
 }

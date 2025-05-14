@@ -189,7 +189,11 @@
   
     <!-- Rodapé com botão de adicionar -->
     <div class="card-footer bg-white border-0 px-4 py-3 text-end">
-      <button id="add-task-btn" class="btn btn-outline-primary text-dark fw-medium focus-ring" aria-label="Adicionar nova tarefa">
+      <button 
+      (click)="adicionarTarefa()"
+      id="add-task-btn"
+       class="btn btn-outline-primary text-dark fw-medium focus-ring"
+        aria-label="Adicionar nova tarefa" routerLink="/createTask">
         <i class="bi bi-plus-circle me-1" aria-hidden="true"></i>Adicionar Nova Tarefa
       </button>
     </div>
