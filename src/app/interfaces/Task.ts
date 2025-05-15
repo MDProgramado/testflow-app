@@ -4,6 +4,7 @@ export interface Task {
     description?: string;
     priority: 'Baixa' | 'Média' | 'Alta';
     status?: 'Pendente' | 'Em andamento' | 'Concluída';
+    sector: 'Produção' | 'Manutenção';
     dueDate: string;
     responsible: string;
 }

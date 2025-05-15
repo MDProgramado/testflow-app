@@ -4,6 +4,7 @@ import { Usuario } from '../interfaces/Usuario';
 import { AutentificarLoginService } from '../Services/autentificar-login.service';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   standalone: true,
@@ -18,7 +19,8 @@ export class LoginUserComponentComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private autentificarLogin: AutentificarLoginService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -38,13 +40,13 @@ export class LoginUserComponentComponent implements OnInit {
 
         if (usuario?.id) {
           this.router.navigateByUrl('/home');
+          this.toastr.success('Login realizado com sucesso!');
         } else {
           alert('Usuário inválido');
         }
       },
       error: (err) => {
         console.error('Falha no login:', err);
-        alert('Credenciais inválidas ou erro de conexão');
       }
     });
     }

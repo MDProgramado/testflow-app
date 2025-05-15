@@ -1,29 +1,51 @@
-<p>task-list-component works!</p><div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center">
-      <h3>Tarefas</h3>
-      <button class="btn btn-primary" (click)="newTask()">+ Nova Tarefa</button>
-    </div>
-  
-    <table class="table table-striped mt-3">
-      <thead>
-        <tr>
-          <th>Título</th>
-          <th>Setor</th>
-          <th>Status</th>
-          <th>Prazo</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let task of tasks">
-          <td>{{ task.title }}</td>
-          <td>{{ task.status }}</td>
-          <td>{{ task.dueDate | date }}</td>
-          <td>
-            <button class="btn btn-sm btn-info" (click)="editTask(task)">Editar</button>
-            <button class="btn btn-sm btn-danger" (click)="deleteTask(task.id!)">Excluir</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>Tarefas</h3>
+    <button class="btn btn-primary" (click)="newTask()">+ Nova Tarefa</button>
   </div>
+
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <label>Filtrar por Status</label>
+      <select class="form-select" [(ngModel)]="statusFilter" (change)="filterTasks()">
+        <option value="">Todos</option>
+        <option>Pendente</option>
+        <option>Em andamento</option>
+        <option>Concluída</option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label>Filtrar por Setor</label>
+      <select class="form-select" [(ngModel)]="sectorFilter" (change)="filterTasks()">
+        <option value="">Todos</option>
+        <option>Produção</option>
+        <option>Manutenção</option>
+      </select>
+    </div>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Setor</th>
+        <th>Status</th>
+        <th>Prazo</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of filteredTasks">
+        <td>{{ task.title }}</td>
+        <td>{{ task.sector }}</td>
+        <td>{{ task.status }}</td>
+        <td>{{ task.dueDate | date }}</td>
+        <td>
+          <button class="btn btn-sm btn-info" (click)="editTask(task)">Editar</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteTask(task.id!)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

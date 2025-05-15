@@ -1,27 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../interfaces/Task';
 import { TaskServiceService } from '../Services/task-service.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-task-list-component',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './task-list-component.component.html',
   styleUrl: './task-list-component.component.css'
 })
 export class TaskListComponentComponent implements OnInit {
   tasks: Task[] = [];
 
-  constructor(private taskService: TaskServiceService, private router: Router) {}
+  filteredTasks: Task[] = []
+  statusFilter: string = '';
+  sectorFilter: string = '';
+  constructor(
+    private taskService: TaskServiceService, 
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
     ngOnInit(): void {
-      this.loadTasks();
+        this.route.queryParamMap.subscribe(params => {
+        this.statusFilter = params.get('status') || '';
+        this.sectorFilter = params.get('sector') || '';
+        this.loadTasks();
+  });
     }
 
     loadTasks(): void {
       this.taskService.getAll().subscribe(resposta => {
         this.tasks = resposta;
+        this.filterTasks();
+      })
+    }
+
+    filterTasks(): void {
+      this.filteredTasks = this.tasks.filter(task => {
+        return (!this.statusFilter || task.status === this.statusFilter) && 
+        (!this.sectorFilter || task.sector === this.sectorFilter)
       })
     }
 
@@ -41,4 +61,6 @@ export class TaskListComponentComponent implements OnInit {
     newTask(): void {
       this.router.navigate(['/tasks/new']);
     }
+
+   
 }

@@ -2,14 +2,21 @@
     <h3>{{ isEdit ? 'Editar Tarefa' : 'Nova Tarefa' }}</h3>
   
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="mb-3">
-        <label>Título</label>
+     <div class="mb-3">
+      <label>Título</label>
         <input type="text" class="form-control" formControlName="title" />
+      <div class="text-danger" *ngIf="form.get('title')?.invalid && form.get('title')?.touched">
+        O título é obrigatório.
       </div>
+    </div>
+
   
       <div class="mb-3">
         <label>Descrição</label>
         <textarea class="form-control" formControlName="description"></textarea>
+        <div class="text-danger" *ngIf="form.get('description')?.invalid && form.get('description')?.touched">
+        A descrição é obrigatório.
+      </div>
       </div>
   
       <div class="mb-3">
@@ -41,11 +48,17 @@
       <div class="mb-3">
         <label>Prazo</label>
         <input type="date" class="form-control" formControlName="dueDate" />
+        <div class="text-danger" *ngIf="form.get('dueDate')?.invalid && form.get('dueDate')?.touched">
+          O campo da data é obrigatório.
+        </div>
       </div>
   
       <div class="mb-3">
         <label>Responsável</label>
         <input type="text" class="form-control" formControlName="responsible" />
+        <div class="text-danger" *ngIf="form.get('responsible')?.invalid && form.get('responsible')?.touched">
+          O campo do Responsável é obrigatório.
+        </div>
       </div>
   
       <button type="submit" class="btn btn-success">Salvar</button>

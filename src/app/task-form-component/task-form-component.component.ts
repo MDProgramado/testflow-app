@@ -3,14 +3,20 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TaskServiceService } from '../Services/task-service.service';
-import { title } from 'process';
 import { Task } from '../interfaces/Task';
+import {  ToastrService } from 'ngx-toastr';
+
 
 
 
 @Component({
+  standalone: true, 
   selector: 'app-task-form-component',
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule, 
+    RouterModule,
+    ],
   templateUrl: './task-form-component.component.html',
   styleUrl: './task-form-component.component.css'
 })
@@ -25,6 +31,7 @@ export class TaskFormComponentComponent implements OnInit {
       private taskService: TaskServiceService,
       private route: ActivatedRoute,
       private router: Router,
+      private toastr: ToastrService,
     ) {}
 
     ngOnInit(): void {
@@ -47,19 +54,23 @@ export class TaskFormComponentComponent implements OnInit {
       }
     }
 
-    onSubmit():void {
-      if(this.form.invalid) return;
+    onSubmit(): void {
+      if (this.form.invalid) return;
 
       const task: Task = this.form.value;
 
-      if(this.isEdit) {
+      if (this.isEdit) {
         task.id = this.taskId;
-
-        this.taskService.uptade(task).subscribe(() => this.router.navigate(['/tasks']));
-      } 
-      else {
-        this.taskService.create(task).subscribe(() => 
-        this.router.navigate(['/tasks']));
+        this.taskService.uptade(task).subscribe(() => {
+          this.toastr.success('Tarefa atualizada com sucesso!');
+          this.router.navigate(['/tasks']);
+        });
+      } else {
+        this.taskService.create(task).subscribe(() => {
+          this.toastr.success('Tarefa criada com sucesso!');
+          this.router.navigate(['/tasks']);
+        });
       }
     }
+
 }
