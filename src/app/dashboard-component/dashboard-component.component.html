@@ -1,3 +1,10 @@
+<div style="display: block;">
+  <canvas baseChart
+          [data]="pieChartData"
+          [type]="pieChartType">
+  </canvas>
+</div>
+
 <div class="container mt-4">
   <div class="row g-3">
     <div class="col-md-4" *ngFor="let s of summaries">
@@ -12,4 +19,3 @@
     </div>
   </div>
 </div>
-
