@@ -25,14 +25,14 @@ export class TaskDetailComponentComponent implements OnInit{
 
  ngOnInit(): void {
   this.task$ = this.route.paramMap.pipe(
-    switchMap(params => this.taskService.getByid(+params.get('id')!))
+    switchMap(params => this.taskService.getById(params.get('id')!))
   );
  }
 
- markComplete(id: number) {
-  this.taskService.getByid(id).pipe(take(1)).subscribe(task => {
+ markComplete(id: string) {
+  this.taskService.getById(id).pipe(take(1)).subscribe(task => {
     task.status = "Concluída";
-    this.taskService.uptade(task).subscribe( () => 
+    this.taskService.update(task).subscribe( () => 
       this.router.navigate(['tasks']))
   })
  }

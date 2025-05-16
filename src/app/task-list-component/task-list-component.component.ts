@@ -1,67 +1,62 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Task } from '../interfaces/Task';
 import { TaskServiceService } from '../Services/task-service.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
 
 @Component({
+  standalone: true,
   selector: 'app-task-list-component',
-  imports: [CommonModule, FormsModule,],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './task-list-component.component.html',
-  styleUrl: './task-list-component.component.css'
+  styleUrls: ['./task-list-component.component.css']
 })
 export class TaskListComponentComponent implements OnInit {
   tasks: Task[] = [];
+  filteredTasks: Task[] = [];
+  statusFilter = '';
+  sectorFilter = '';
 
-  filteredTasks: Task[] = []
-  statusFilter: string = '';
-  sectorFilter: string = '';
   constructor(
-    private taskService: TaskServiceService, 
+    private taskService: TaskServiceService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
-    ngOnInit(): void {
-        this.route.queryParamMap.subscribe(params => {
-        this.statusFilter = params.get('status') || '';
-        this.sectorFilter = params.get('sector') || '';
-        this.loadTasks();
-  });
-    }
+  ngOnInit(): void {
+    this.route.queryParamMap.subscribe(params => {
+      this.statusFilter = params.get('status') || '';
+      this.sectorFilter = params.get('sector') || '';
+      this.loadTasks();
+    });
+  }
 
-    loadTasks(): void {
-      this.taskService.getAll().subscribe(resposta => {
-        this.tasks = resposta;
-        this.filterTasks();
-      })
-    }
+  loadTasks(): void {
+    this.taskService.getAll().subscribe(tasks => {
+      this.tasks = tasks;
+      this.applyFilters();
+    });
+  }
 
-    filterTasks(): void {
-      this.filteredTasks = this.tasks.filter(task => {
-        return (!this.statusFilter || task.status === this.statusFilter) && 
-        (!this.sectorFilter || task.sector === this.sectorFilter)
-      })
-    }
+  applyFilters(): void {
+    this.filteredTasks = this.tasks.filter(t =>
+      (!this.statusFilter || t.status === this.statusFilter) &&
+      (!this.sectorFilter || t.sector === this.sectorFilter)
+    );
+  }
 
-    deleteTask(id: number): void {
-      if(confirm(
-        'Deseja remove esta tarefa?')){
-          this.taskService.delete(id).subscribe(() => {
-            this.loadTasks();
-          })
-      }
-    }
+  deleteTask(id: string): void {
+    if (!confirm('Confirmar exclusão?')) return;
+    this.taskService.delete(id).subscribe(() => this.loadTasks());
+  }
 
-    editTask(task: Task): void {
-      this.router.navigate(['/tasks/edit', task.id]);
-    }
 
-    newTask(): void {
-      this.router.navigate(['/tasks/new']);
-    }
+  editTask(id: string): void {
+    this.router.navigate(['/tasks/edit', id]);
+  }
 
-   
+  newTask(): void {
+    this.router.navigate(['/tasks/new']);
+  }
 }

@@ -1,52 +1,198 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "email": "admin1@gmail.com",
       "senha": "admin123",
       "role": "admin"
     },
     {
-      "id": 2,
+      "id": "2",
       "email": "user@example.com",
       "senha": "user123",
       "role": "user"
     },
     {
-      "id": 933,
+      "id": "933",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "d586",
+      "email": "admin1@gmail.com",
+      "senha": "123456"
+    },
+    {
+      "id": "2ac8",
+      "email": "admin1@gmail.com",
+      "senha": "123456"
+    },
+    {
+      "id": "661b",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "53ea",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "4681",
+      "email": "admin1@gmail.com",
+      "senha": "123456"
+    },
+    {
+      "id": "671b",
+      "email": "admin1@gmail.com",
+      "senha": "123456"
+    },
+    {
+      "id": "a5f8",
       "email": "admin1@gmail.com",
       "senha": "admin123"
     }
   ],
   "tasks": [
     {
-      "id": 1,
-      "title": "teste ",
-      "description": "tesete",
-      "priority": "Média",
+      "id": "f848",
+      "title": "teste 1 criar ",
+      "description": "testando funcionalidade de testar ",
+      "sector": "Produção",
+      "priority": "Baixa",
       "status": "Pendente",
-      "dueDate": "2025-05-16",
-      "responsible": "teste",
-      "sector": "Produção"
+      "dueData": "2025-05-16",
+      "responsible": "maicon "
     },
     {
-      "id": 9034,
-      "title": "teste2",
-      "description": "teste2",
+      "id": "8283",
+      "title": "teste 1.1 criar por manutenção ",
+      "description": "testando criar por manutenção ",
+      "sector": "Manutenção",
+      "priority": "Média",
+      "status": "Pendente",
+      "dueData": "2025-05-16",
+      "responsible": "maicon "
+    },
+    {
+      "id": "de8f",
+      "title": "teste 1.2 criando por prioridade ",
+      "description": "criando por prioridade alta ",
+      "sector": "Produção",
+      "priority": "Alta",
+      "status": "Em andamento",
+      "dueData": "2025-05-16",
+      "responsible": "maicon "
+    },
+    {
+      "id": "df55",
+      "title": "teste 2.1 - editando ",
+      "description": "editando informações  ",
+      "sector": "Produção",
+      "priority": "Baixa",
+      "status": "Pendente",
+      "dueData": "2025-05-16",
+      "responsible": "maicon "
+    },
+    {
+      "id": "7ba4",
+      "title": "2.1 - editado ",
+      "description": "foi  editado as informações do chamado ",
+      "sector": "Manutenção",
+      "priority": "Alta",
+      "status": "Em andamento",
+      "dueData": "2025-05-16",
+      "responsible": "maicon "
+    },
+    {
+      "id": "f42a",
+      "title": "testando editar",
+      "description": "editar ",
+      "sector": "Manutenção",
+      "priority": "Média",
+      "status": "Concluída",
+      "dueData": "2025-05-16",
+      "responsible": "maicon "
+    },
+    {
+      "id": "9edd",
+      "title": "testando editar",
+      "description": "testando editar ",
+      "sector": "Manutenção",
+      "priority": "Alta",
+      "status": "Concluída",
+      "dueData": "2025-05-16",
+      "responsible": "maicon "
+    },
+    {
+      "id": "7be3",
+      "title": "testando editar",
+      "description": "teste ",
+      "sector": "Produção",
+      "priority": "Média",
+      "status": "Concluída",
+      "dueData": "2025-05-16",
+      "responsible": "maicon "
+    },
+    {
+      "id": "4a49",
+      "title": "testando editar",
+      "description": "teste ",
+      "sector": "Manutenção",
+      "priority": "Baixa",
+      "status": "Em andamento",
+      "dueData": "2025-05-16",
+      "responsible": "maicon "
+    },
+    {
+      "title": "editado",
+      "description": "realizado a conclusão  ",
+      "sector": "Produção",
       "priority": "Alta",
       "status": "Concluída",
       "dueDate": "2025-05-16",
-      "responsible": "teste2",
-      "sector": "Manutenção"
+      "responsible": "maicon ",
+      "id": "ee8c"
     },
     {
-      "id": "a2cf",
-      "title": "teste1",
-      "description": "teste1",
+      "id": "129b",
+      "title": "testando editar",
+      "description": "concluir ",
+      "sector": "Produção",
+      "priority": "Baixa",
+      "status": "Concluída",
+      "dueData": "2025-05-16",
+      "responsible": "maicon "
+    },
+    {
+      "id": "f4e4",
+      "title": "testando editar",
+      "description": "salvar ",
+      "sector": "Manutenção",
       "priority": "Alta",
-      "status": "Em andamento",
-      "dueDate": "2025-05-15",
-      "responsible": "teste1"
+      "status": "Concluída",
+      "dueData": "2025-05-16",
+      "responsible": "maicon "
+    },
+    {
+      "id": "1fef",
+      "title": "testando editar",
+      "description": "salvar ",
+      "sector": "Manutenção",
+      "priority": "Média",
+      "status": "Concluída",
+      "dueData": "2025-05-16",
+      "responsible": "maicon "
+    },
+    {
+      "id": "02c9",
+      "title": "teste ",
+      "description": "teds",
+      "sector": "Produção",
+      "priority": "Média",
+      "status": "Pendente",
+      "dueDate": "2025-05-16",
+      "responsible": "maivcc"
     }
   ]
 }

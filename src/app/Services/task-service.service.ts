@@ -16,7 +16,7 @@ export class TaskServiceService {
     return this.htpp.get<Task[]>(this.API);
   }
 
-  getByid(id: number): Observable<Task> {
+  getById(id: string): Observable<Task> {
     return this.htpp.get<Task>(`${this.API}/${id}`);
   }
 
@@ -24,11 +24,11 @@ export class TaskServiceService {
     return this.htpp.post<Task>(this.API, task);
   }
 
-  uptade(task: Task): Observable<Task> {
+  update(task: Task): Observable<Task> {
     return this.htpp.put<Task>(`${this.API}/${task.id}`, task);
   }
 
-  delete(id: number): Observable<void> {
+  delete(id:string): Observable<void> {
     return this.htpp.delete<void>(`${this.API}/${id}`);
   }
 }

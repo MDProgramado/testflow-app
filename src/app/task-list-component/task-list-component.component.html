@@ -2,23 +2,22 @@
 <div class="container mt-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h3>Tarefas</h3>
-    <button class="btn btn-primary" (click)="newTask()">+ Nova Tarefa</button>
+    <a class="btn btn-primary" routerLink="/tasks/new">+ Nova Tarefa</a>
   </div>
 
   <div class="row mb-3">
     <div class="col-md-4">
-      <label>Filtrar por Status</label>
-      <select class="form-select" [(ngModel)]="statusFilter" (change)="filterTasks()">
+      <label>Status</label>
+      <select class="form-select" [(ngModel)]="statusFilter" (change)="applyFilters()">
         <option value="">Todos</option>
         <option>Pendente</option>
         <option>Em andamento</option>
         <option>Concluída</option>
       </select>
     </div>
-
     <div class="col-md-4">
-      <label>Filtrar por Setor</label>
-      <select class="form-select" [(ngModel)]="sectorFilter" (change)="filterTasks()">
+      <label>Setor</label>
+      <select class="form-select" [(ngModel)]="sectorFilter" (change)="applyFilters()">
         <option value="">Todos</option>
         <option>Produção</option>
         <option>Manutenção</option>
@@ -29,22 +28,18 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Título</th>
-        <th>Setor</th>
-        <th>Status</th>
-        <th>Prazo</th>
-        <th>Ações</th>
+        <th>Título</th><th>Setor</th><th>Status</th><th>Prazo</th><th>Ações</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let task of filteredTasks">
-        <td>{{ task.title }}</td>
-        <td>{{ task.sector }}</td>
-        <td>{{ task.status }}</td>
-        <td>{{ task.dueDate | date }}</td>
+      <tr *ngFor="let t of filteredTasks">
+        <td>{{ t.id }} – {{ t.title }}</td>
+        <td>{{ t.sector }}</td>
+        <td>{{ t.status }}</td>
+        <td>{{ t.dueDate | date:'shortDate' }}</td>
         <td>
-          <button class="btn btn-sm btn-info" (click)="editTask(task)">Editar</button>
-          <button class="btn btn-sm btn-danger" (click)="deleteTask(task.id!)">Excluir</button>
+          <a class="btn btn-sm btn-info" [routerLink]="['/tasks','edit', t.id]">Editar</a>
+          <button class="btn btn-sm btn-danger" (click)="deleteTask(t.id!)">Excluir</button>
         </td>
       </tr>
     </tbody>
