@@ -1,233 +1,52 @@
 {
   "users": [
     {
-      "id": "1",
+      "id": 1,
       "email": "admin1@gmail.com",
       "senha": "admin123",
       "role": "admin"
     },
     {
-      "id": "8875",
-      "email": "admin1@gmail.com",
-      "senha": "admin123"
+      "id": 2,
+      "email": "user@example.com",
+      "senha": "user123",
+      "role": "user"
     },
     {
-      "id": "084a",
-      "email": "admin1@gmail.com",
-      "senha": "123456"
-    },
-    {
-      "id": "cefc",
-      "email": "admin1@gmail.com",
-      "senha": "123456"
-    },
-    {
-      "id": "941c",
-      "email": "admin1@gmail.com",
-      "senha": "123456"
-    },
-    {
-      "id": "7ea2",
-      "email": "admin1@gmail.com",
-      "senha": "123456"
-    },
-    {
-      "id": "9a7d",
-      "email": "admin1@gmail.com",
-      "senha": "123456"
-    },
-    {
-      "id": "289a",
-      "email": "admin1@gmail.com",
-      "senha": "123456"
-    },
-    {
-      "id": "6852",
-      "email": "admin1@gmail.com",
-      "senha": "admin123"
-    },
-    {
-      "id": "dc68",
-      "email": "admin1@gmail.com",
-      "senha": "admin123"
-    },
-    {
-      "id": "031b",
-      "email": "admin1@gmail.com",
-      "senha": "admin123"
-    },
-    {
-      "id": "ca40",
-      "email": "admin1@gmail.com",
-      "senha": "admin123"
-    },
-    {
-      "id": "221d",
-      "email": "admin1@gmail.com",
-      "senha": "admin123"
-    },
-    {
-      "id": "eb3b",
-      "email": "admin1@gmail.com",
-      "senha": "admin123"
-    },
-    {
-      "id": "cdd4",
-      "email": "admin1@gmail.com",
-      "senha": "123456"
-    },
-    {
-      "id": "f003",
-      "email": "admin1@gmail.com",
-      "senha": "123456"
-    },
-    {
-      "id": "9f97",
-      "email": "admin1@gmaim.com",
-      "senha": "123456"
-    },
-    {
-      "id": "a134",
-      "email": "admin1@gmail.com",
-      "senha": "admin123"
-    },
-    {
-      "id": "8e29",
-      "email": "admin1@gmail.com",
-      "senha": "admin123"
-    },
-    {
-      "id": "a889",
-      "email": "admin1@gmail.com",
-      "senha": "admin123"
-    },
-    {
-      "id": "98cb",
-      "email": "admin1@gmail.com",
-      "senha": "123456"
-    },
-    {
-      "id": "de73",
-      "email": "admin1@gmail.com",
-      "senha": "123456"
-    },
-    {
-      "id": "a249",
-      "email": "admin1@gmail.com",
-      "senha": "123456"
-    },
-    {
-      "id": "da9d",
-      "email": "admin1@outlook.com",
-      "senha": "123456"
-    },
-    {
-      "id": "63f0",
-      "email": "admin1@gmail.com",
-      "senha": "123456"
-    },
-    {
-      "id": "fb60",
-      "email": "admin1@outlook.com",
-      "senha": "123456"
-    },
-    {
-      "id": "de88",
-      "email": "admin1@gmail.com",
-      "senha": "123456"
-    },
-    {
-      "id": "dde3",
-      "email": "admin1@gmail.com",
-      "senha": "123456"
-    },
-    {
-      "id": "9b28",
-      "email": "admin1@gmail.com",
-      "senha": "123456"
-    },
-    {
-      "id": "456b",
-      "email": "admin1@gmail.com",
-      "senha": "123456"
-    },
-    {
-      "id": "0f60",
-      "email": "admin1@gmail.com",
-      "senha": "123456"
-    },
-    {
-      "id": "e4ee",
-      "email": "admin1@gmail.com",
-      "senha": "123456"
-    },
-    {
-      "id": "3021",
-      "email": "admin1@gmail.com",
-      "senha": "admin123"
-    },
-    {
-      "id": "b602",
-      "email": "admin1@gmail.com",
-      "senha": "admin123"
-    },
-    {
-      "id": "6178",
-      "email": "admin1@gmail.com",
-      "senha": "admin123"
-    },
-    {
-      "id": "66ed",
-      "email": "admin1@gmail.com",
-      "senha": "admin123"
-    },
-    {
-      "id": "5bcc",
-      "email": "admin1@gmail.com",
-      "senha": "admin123"
-    },
-    {
-      "id": "ef24",
+      "id": 933,
       "email": "admin1@gmail.com",
       "senha": "admin123"
     }
   ],
   "tasks": [
     {
-      "id": "e4c6",
-      "title": "Limpar impressora ",
-      "description": "Após a limpeza dos dentes endoped 55, limpar a impressora para fazer radiopaco ",
-      "priority": "Baixa",
+      "id": 1,
+      "title": "teste ",
+      "description": "tesete",
+      "priority": "Média",
       "status": "Pendente",
-      "dueDate": "2025-05-14",
-      "responsible": "Maicon "
+      "dueDate": "2025-05-16",
+      "responsible": "teste",
+      "sector": "Produção"
     },
     {
-      "id": "e4df",
-      "title": "teste",
-      "description": "teste",
-      "priority": "Média",
-      "status": "Em andamento",
-      "dueDate": "2025-02-20",
-      "responsible": "maicon"
-    },
-    {
-      "id": "00b6",
-      "title": "teste",
-      "description": "teste",
-      "priority": "Média",
+      "id": 9034,
+      "title": "teste2",
+      "description": "teste2",
+      "priority": "Alta",
       "status": "Concluída",
-      "dueDate": "2025-05-15",
-      "responsible": "teste"
+      "dueDate": "2025-05-16",
+      "responsible": "teste2",
+      "sector": "Manutenção"
     },
     {
-      "id": "cb38",
-      "title": "teste",
-      "description": "teste",
+      "id": "a2cf",
+      "title": "teste1",
+      "description": "teste1",
       "priority": "Alta",
       "status": "Em andamento",
       "dueDate": "2025-05-15",
-      "responsible": "teste"
+      "responsible": "teste1"
     }
   ]
 }

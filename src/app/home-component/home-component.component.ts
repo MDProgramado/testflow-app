@@ -8,7 +8,12 @@ import { TaskDetailComponentComponent } from "../task-detail-component/task-deta
 
 @Component({
   selector: 'app-home-component',
-  imports: [HeaderComponentComponent, TaskFormComponentComponent, TaskListComponentComponent, DashboardComponentComponent, FooterComponentComponent, TaskDetailComponentComponent],
+  imports: [
+    HeaderComponentComponent,
+    TaskListComponentComponent, 
+    DashboardComponentComponent, 
+    FooterComponentComponent, 
+    TaskDetailComponentComponent],
   templateUrl: './home-component.component.html',
   styleUrl: './home-component.component.css'
 })

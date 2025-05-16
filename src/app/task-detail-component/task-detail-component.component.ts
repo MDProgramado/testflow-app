@@ -4,12 +4,12 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TaskServiceService } from '../Services/task-service.service';
 import { Observable, switchMap, take } from 'rxjs';
 import { Task } from '../interfaces/Task';
-import { HeaderComponentComponent } from "../header-component/header-component.component";
+
 
 @Component({
   standalone: true,
   selector: 'app-task-detail-component',
-  imports: [CommonModule, RouterModule, HeaderComponentComponent],
+  imports: [CommonModule, RouterModule,],
   templateUrl: './task-detail-component.component.html',
   styleUrl: './task-detail-component.component.css'
 })
