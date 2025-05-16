@@ -160,18 +160,39 @@
       "id": "e4ee",
       "email": "admin1@gmail.com",
       "senha": "123456"
+    },
+    {
+      "id": "3021",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "b602",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "6178",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "66ed",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "5bcc",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "ef24",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
     }
   ],
   "tasks": [
-    {
-      "id": "1",
-      "title": "Manutenção da esteira A",
-      "description": "Troca de correia",
-      "ptatus": "Pendente",
-      "driority": "Alta",
-      "sueDate": "2025-05-15",
-      "responsible": "João"
-    },
     {
       "id": "e4c6",
       "title": "Limpar impressora ",
@@ -182,22 +203,31 @@
       "responsible": "Maicon "
     },
     {
-      "id": "700e",
-      "title": "Fazer cover dos dentes rx 17 e 15 ",
-      "description": "Após a limpeza e conferencias dos dentes radiopacos, fazer cover ",
-      "priority": "Alta",
-      "status": "Pendente",
-      "dueDate": "2025-05-14",
-      "responsible": "Maicon "
+      "id": "e4df",
+      "title": "teste",
+      "description": "teste",
+      "priority": "Média",
+      "status": "Em andamento",
+      "dueDate": "2025-02-20",
+      "responsible": "maicon"
     },
     {
-      "title": "teste ",
-      "description": "teste ",
-      "priority": "Alta",
+      "id": "00b6",
+      "title": "teste",
+      "description": "teste",
+      "priority": "Média",
       "status": "Concluída",
       "dueDate": "2025-05-15",
-      "responsible": "Maicon ",
-      "id": "4794"
+      "responsible": "teste"
+    },
+    {
+      "id": "cb38",
+      "title": "teste",
+      "description": "teste",
+      "priority": "Alta",
+      "status": "Em andamento",
+      "dueDate": "2025-05-15",
+      "responsible": "teste"
     }
   ]
 }

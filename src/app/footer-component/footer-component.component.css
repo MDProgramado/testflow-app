@@ -1,0 +1,16 @@
+
+.bg-custom {
+  background-color: #062863; 
+}
+
+.icon-link {
+  text-decoration: none;           
+  display: inline-flex;             
+  align-items: center;
+  gap: 0.25rem;                     
+  transition: opacity .2s;
+}
+.icon-link:hover {
+  opacity: 0.75;                  
+}
+

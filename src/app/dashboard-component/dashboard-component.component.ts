@@ -4,9 +4,7 @@ import { RouterModule } from '@angular/router';
 import { Sumary } from '../interfaces/Sumary';
 import { TaskServiceService } from '../Services/task-service.service';
 import { BaseChartDirective } from 'ng2-charts';
-
-import { ChartData, ChartType } from 'chart.js';
-
+import { ChartData, ChartType } from 'chart.js'
 
 @Component({
   selector: 'app-dashboard-component',
@@ -41,7 +39,7 @@ export class DashboardComponentComponent implements OnInit{
         new Date(task.dueDate) < now && task.status !== "Concluída").length;
         
         this.pieChartDataValues = [active, completed, overdue];
-        // …e o ChartData correspondente:
+
         this.pieChartData = {
           labels: this.pieChartLabels,
           datasets: [{ data: this.pieChartDataValues }]

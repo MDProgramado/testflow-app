@@ -1,16 +1,23 @@
-<div style="display: block;">
-  <canvas baseChart
-          [data]="pieChartData"
-          [type]="pieChartType">
-  </canvas>
-</div>
+<!-- Container principal com restrição -->
+<div class="container mt-5">
+  <!-- Gráfico  -->
+  <div class="row mb-4">
+    <div class="col-12 d-flex justify-content-center">
+      <div class="w-25">
+        <canvas baseChart
+                [data]="pieChartData"
+                [type]="pieChartType">
+        </canvas>
+      </div>
+    </div>
+  </div>
 
-<div class="container mt-4">
-  <div class="row g-3">
-    <div class="col-md-4" *ngFor="let s of summaries">
+  <!-- Cards -->
+  <div class="row g-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
+    <div class="col" *ngFor="let s of summaries">
       <a [routerLink]="s.route" class="text-decoration-none">
         <div class="card text-white bg-{{s.color}} h-100">
-          <div class="card-body d-flex flex-column justify-content-center align-items-center">
+          <div class="card-body text-center">
             <h5 class="card-title">{{ s.label }}</h5>
             <p class="display-6">{{ s.count }}</p>
           </div>

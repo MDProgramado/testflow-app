@@ -4,10 +4,11 @@ import { TaskServiceService } from '../Services/task-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponentComponent } from "../header-component/header-component.component";
 
 @Component({
   selector: 'app-task-list-component',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HeaderComponentComponent],
   templateUrl: './task-list-component.component.html',
   styleUrl: './task-list-component.component.css'
 })

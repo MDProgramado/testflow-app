@@ -3,10 +3,12 @@ import { HeaderComponentComponent } from "../header-component/header-component.c
 import { TaskFormComponentComponent } from "../task-form-component/task-form-component.component";
 import { TaskListComponentComponent } from "../task-list-component/task-list-component.component";
 import { DashboardComponentComponent } from "../dashboard-component/dashboard-component.component";
+import { FooterComponentComponent } from "../footer-component/footer-component.component";
+import { TaskDetailComponentComponent } from "../task-detail-component/task-detail-component.component";
 
 @Component({
   selector: 'app-home-component',
-  imports: [HeaderComponentComponent, TaskFormComponentComponent, TaskListComponentComponent, DashboardComponentComponent],
+  imports: [HeaderComponentComponent, TaskFormComponentComponent, TaskListComponentComponent, DashboardComponentComponent, FooterComponentComponent, TaskDetailComponentComponent],
   templateUrl: './home-component.component.html',
   styleUrl: './home-component.component.css'
 })

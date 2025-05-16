@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TaskServiceService } from '../Services/task-service.service';
 import { Task } from '../interfaces/Task';
 import {  ToastrService } from 'ngx-toastr';
+import { HeaderComponentComponent } from "../header-component/header-component.component";
 
 
 
@@ -13,10 +14,11 @@ import {  ToastrService } from 'ngx-toastr';
   standalone: true, 
   selector: 'app-task-form-component',
   imports: [
-    CommonModule, 
-    ReactiveFormsModule, 
+    CommonModule,
+    ReactiveFormsModule,
     RouterModule,
-    ],
+    HeaderComponentComponent
+],
   templateUrl: './task-form-component.component.html',
   styleUrl: './task-form-component.component.css'
 })
