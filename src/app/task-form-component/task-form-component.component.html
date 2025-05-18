@@ -1,107 +1,61 @@
-<app-header-component></app-header-component>
+<app-header-component> </app-header-component>
 
+<div class=" container mb-5"> 
 <div class="container mt-4">
   <h3 class="mb-4">{{ isEdit ? 'Editar Tarefa' : 'Nova Tarefa' }}</h3>
-
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <!-- Título -->
-    <div class="mb-3">
-      <label for="title" class="form-label">Título</label>
-      <input
-        id="title"
-        type="text"
-        class="form-control"
-        formControlName="title"
-        [ngClass]="{
-          'is-invalid': form.get('title')?.invalid && form.get('title')?.touched
-        }"
-      />
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-floating mb-3">
+      <input id="title" type="text" class="form-control" formControlName="title" placeholder="Título">
+      <label for="title">Título</label>
       <div class="invalid-feedback">O título é obrigatório.</div>
     </div>
 
-    <!-- Descrição -->
-    <div class="mb-3">
-      <label for="description" class="form-label">Descrição</label>
-      <textarea
-        id="description"
-        rows="3"
-        class="form-control"
-        formControlName="description"
-        [ngClass]="{
-          'is-invalid':
-            form.get('description')?.invalid && form.get('description')?.touched
-        }"
-      ></textarea>
+    <div class="form-floating mb-3">
+      <textarea id="description" class="form-control" formControlName="description" placeholder="Descrição" style="height: 100px"></textarea>
+      <label for="description">Descrição</label>
       <div class="invalid-feedback">A descrição é obrigatória.</div>
     </div>
 
-    <!-- Setor, Prioridade, Status -->
-    <div class="row">
-      <div class="col-md-4 mb-3">
+    <div class="row g-3">
+      <div class="col-sm-6 col-md-4">
         <label for="sector" class="form-label">Setor</label>
         <select id="sector" class="form-select" formControlName="sector">
-          <option value="Produção">Produção</option>
-          <option value="Manutenção">Manutenção</option>
+          <option>Produção</option><option>Manutenção</option>
         </select>
       </div>
-      <div class="col-md-4 mb-3">
+      <div class="col-sm-6 col-md-4">
         <label for="priority" class="form-label">Prioridade</label>
         <select id="priority" class="form-select" formControlName="priority">
-          <option value="Baixa">Baixa</option>
-          <option value="Média">Média</option>
-          <option value="Alta">Alta</option>
+          <option>Baixa</option><option>Média</option><option>Alta</option>
         </select>
       </div>
-      <div class="col-md-4 mb-3">
+      <div class="col-sm-12 col-md-4">
         <label for="status" class="form-label">Status</label>
         <select id="status" class="form-select" formControlName="status">
-          <option value="Pendente">Pendente</option>
-          <option value="Em andamento">Em andamento</option>
-          <option value="Concluída">Concluída</option>
+          <option>Pendente</option><option>Em andamento</option><option>Concluída</option>
         </select>
       </div>
     </div>
 
-    <!-- Prazo e Responsável -->
-    <div class="row">
-      <div class="col-md-6 mb-3">
+    <div class="row g-3 mt-3">
+      <div class="col-sm-6">
         <label for="dueDate" class="form-label">Prazo</label>
-        <input
-          id="dueDate"
-          type="date"
-          class="form-control"
-          formControlName="dueDate"
-          [ngClass]="{
-            'is-invalid':
-              form.get('dueDate')?.invalid &&
-              form.get('dueDate')?.touched
-          }"
-        />
+        <input id="dueDate" type="date" class="form-control" formControlName="dueDate">
         <div class="invalid-feedback">O prazo é obrigatório.</div>
       </div>
-      <div class="col-md-6 mb-3">
+      <div class="col-sm-6">
         <label for="responsible" class="form-label">Responsável</label>
-        <input
-          id="responsible"
-          type="text"
-          class="form-control"
-          formControlName="responsible"
-          [ngClass]="{
-            'is-invalid':
-              form.get('responsible')?.invalid &&
-              form.get('responsible')?.touched
-          }"
-        />
+        <input id="responsible" type="text" class="form-control" formControlName="responsible">
         <div class="invalid-feedback">O responsável é obrigatório.</div>
       </div>
     </div>
 
-    <!-- Botões -->
-    <div class="mt-4">
-      <button type="submit" class="btn btn-success">
-        {{ isEdit ? 'Atualizar' : 'Salvar' }}
-      </button>
+    <div class="mt-4 sticky-bottom bg-white py-3 text-end">
+      <button type="submit" class="btn btn-success">{{ isEdit ? 'Atualizar' : 'Salvar' }}</button>
       <a routerLink="/tasks" class="btn btn-secondary ms-2">Cancelar</a>
     </div>
   </form>
 </div>
+</div> 
+
+ <app-footer-component class="footer mt-auto"></app-footer-component>

@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Task } from '../interfaces/Task';
 import { TaskServiceService } from '../Services/task-service.service';
+import { DashboardComponentComponent } from "../dashboard-component/dashboard-component.component";
+import { FooterComponentComponent } from "../footer-component/footer-component.component";
 
 @Component({
   standalone: true,
   selector: 'app-task-list-component',
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, DashboardComponentComponent, FooterComponentComponent],
   templateUrl: './task-list-component.component.html',
   styleUrls: ['./task-list-component.component.css']
 })

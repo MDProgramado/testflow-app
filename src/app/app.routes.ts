@@ -21,10 +21,22 @@ export const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponentComponent
   },
-  { path: 'tasks', component: TaskListComponentComponent },
-  { path: 'tasks/new', component: TaskFormComponentComponent },
-  { path: 'tasks/edit/:id', component: TaskFormComponentComponent },
-  { path: 'tasks/:id', component: TaskDetailComponentComponent },
+  { 
+    path: 'tasks', 
+    component: TaskListComponentComponent 
+  },
+  { 
+    path: 'tasks/new', 
+    component: TaskFormComponentComponent 
+  },
+  {
+     path: 'tasks/edit/:id', 
+     component: TaskFormComponentComponent 
+    },
+  { 
+    path: 'tasks/:id', 
+    component: TaskDetailComponentComponent 
+  },
   {
     path: '',
     redirectTo: 'login',

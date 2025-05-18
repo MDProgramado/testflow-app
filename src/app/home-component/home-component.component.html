@@ -1,12 +1,19 @@
-<app-header-component> </app-header-component>
+<app-header-component></app-header-component>
+
+<main class="home-main container my-5">
+  <!-- Seção de Resumo -->
+  <section class="home-summary mb-5">
+    <app-sumary></app-sumary>
+  </section>
+
+  <hr class="my-5">
+
+  <!-- Seção de Lista de Tarefas -->
+  <section class="home-task-list mb-5">
+    <app-task-list-component></app-task-list-component>
+  </section>
+
   
+</main>
 
-<app-dashboard-component> </app-dashboard-component>
-<hr>
-<app-task-list-component></app-task-list-component>
-
-<app-task-detail-component> </app-task-detail-component>
-
- <!-- <app-task-form-component> </app-task-form-component> -->
-
-<app-footer-component> </app-footer-component>
+ <app-footer-component class="footer"></app-footer-component>

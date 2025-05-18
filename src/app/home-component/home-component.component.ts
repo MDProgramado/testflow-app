@@ -5,13 +5,15 @@ import { TaskListComponentComponent } from "../task-list-component/task-list-com
 import { DashboardComponentComponent } from "../dashboard-component/dashboard-component.component";
 import { FooterComponentComponent } from "../footer-component/footer-component.component";
 import { TaskDetailComponentComponent } from "../task-detail-component/task-detail-component.component";
+import { SumaryComponent } from '../sumary/sumary.component';
 
 @Component({
   selector: 'app-home-component',
   imports: [
     HeaderComponentComponent,
     TaskListComponentComponent, 
-    DashboardComponentComponent, 
+    // DashboardComponentComponent, 
+    SumaryComponent,
     FooterComponentComponent, 
     TaskDetailComponentComponent],
   templateUrl: './home-component.component.html',

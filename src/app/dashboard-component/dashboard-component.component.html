@@ -1,28 +1,43 @@
-<!-- Container principal com restrição -->
-<div class="container mt-5">
-  <!-- Gráfico  -->
-  <div class="row mb-4">
-    <div class="col-12 d-flex justify-content-center">
-      <div class="w-25">
-        <canvas baseChart
-                [data]="pieChartData"
-                [type]="pieChartType">
-        </canvas>
+<app-header-component> </app-header-component>
+
+<div class="container-fluid mb-5 ">
+
+  <div class="container-fluid mb-4"> 
+  <app-sumary></app-sumary>
+</div>
+
+
+  <div class="row g-4">
+    <div class="col-lg-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Distribuição por Status</h5>
+          <div class="position-relative" style="height:300px">
+            <canvas baseChart
+                    [data]="pieChartData"
+                    [labels]="pieChartData.labels"
+                    [type]="pieChartType">
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Prioridade das Tarefas</h5>
+          <div class="position-relative" style="height:300px">
+            <canvas baseChart
+                    [data]="barChartData"
+                    [labels]="barChartData.labels"
+                    [type]="barChartType">
+            </canvas>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
-  <!-- Cards -->
-  <div class="row g-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
-    <div class="col" *ngFor="let s of summaries">
-      <a [routerLink]="s.route" class="text-decoration-none">
-        <div class="card text-white bg-{{s.color}} h-100">
-          <div class="card-body text-center">
-            <h5 class="card-title">{{ s.label }}</h5>
-            <p class="display-6">{{ s.count }}</p>
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
 </div>
+
+ <app-footer-component class="footer mt-auto"></app-footer-component>

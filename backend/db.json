@@ -56,28 +56,118 @@
       "id": "72bb",
       "email": "admin1@gmail.com",
       "senha": "admin123"
+    },
+    {
+      "id": "e17a",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "e5a2",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "5201",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "de62",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "ad99",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "9447",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
     }
   ],
   "tasks": [
     {
-      "id": "6c7b",
       "title": "primeiro teste ",
       "description": "teste 1 ",
       "sector": "Manutenção",
       "priority": "Baixa",
-      "status": "Em andamento",
+      "status": "Concluída",
       "dueDate": "2025-05-16",
-      "responsible": "maicon"
+      "responsible": "maicon",
+      "id": "6c7b"
     },
     {
-      "id": "5937",
       "title": "segundo 2 ",
       "description": "teste 2",
       "sector": "Manutenção",
       "priority": "Alta",
-      "status": "Concluída",
+      "status": "Pendente",
       "dueDate": "2025-05-16",
-      "responsible": "maicon "
+      "responsible": "maicon ",
+      "id": "5937"
+    },
+    {
+      "title": "terceiro ",
+      "description": "terceiro teste ",
+      "sector": "Produção",
+      "priority": "Média",
+      "status": "Pendente",
+      "dueDate": "2025-05-18",
+      "responsible": "maicon ",
+      "id": "e35f"
+    },
+    {
+      "title": "teste de dashboard",
+      "description": "testando a prioridade ",
+      "sector": "Manutenção",
+      "priority": "Alta",
+      "status": "Pendente",
+      "dueDate": "2025-05-18",
+      "responsible": "maicon ",
+      "id": "7cb0"
+    },
+    {
+      "title": "teste de dashboard",
+      "description": "teste de dashboard",
+      "sector": "Manutenção",
+      "priority": "Alta",
+      "status": "Pendente",
+      "dueDate": "2025-05-18",
+      "responsible": "maicon",
+      "id": "60ec"
+    },
+    {
+      "id": "882e",
+      "title": "teste de dashboard",
+      "description": "testando prioridade ",
+      "sector": "Produção",
+      "priority": "Média",
+      "status": "Concluída",
+      "dueDate": "2025-05-18",
+      "responsible": "maicon"
+    },
+    {
+      "title": "teste de dashboard",
+      "description": "casc",
+      "sector": "Manutenção",
+      "priority": "Alta",
+      "status": "Concluída",
+      "dueDate": "2025-05-18",
+      "responsible": "macsdv",
+      "id": "a048"
+    },
+    {
+      "title": "teste de dashboard",
+      "description": "svsvd",
+      "sector": "Manutenção",
+      "priority": "Média",
+      "status": "Em andamento",
+      "dueDate": "2025-05-18",
+      "responsible": "svsv",
+      "id": "6f39"
     }
   ]
 }

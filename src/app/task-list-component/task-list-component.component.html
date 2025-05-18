@@ -5,30 +5,36 @@
     <a class="btn btn-primary" routerLink="/tasks/new">+ Nova Tarefa</a>
   </div>
 
-  <div class="row mb-3">
-    <div class="col-md-4">
-      <label>Status</label>
-      <select class="form-select" [(ngModel)]="statusFilter" (change)="applyFilters()">
-        <option value="">Todos</option>
-        <option>Pendente</option>
-        <option>Em andamento</option>
-        <option>Concluída</option>
-      </select>
-    </div>
-    <div class="col-md-4">
-      <label>Setor</label>
-      <select class="form-select" [(ngModel)]="sectorFilter" (change)="applyFilters()">
-        <option value="">Todos</option>
-        <option>Produção</option>
-        <option>Manutenção</option>
-      </select>
-    </div>
+<div class="row g-3 mb-4 align-items-end">
+  <div class="col-12 col-md-4">
+    <label for="filterStatus" class="form-label">Status</label>
+    <select id="filterStatus" class="form-select" [(ngModel)]="statusFilter" (change)="applyFilters()">
+      <option value="">Todos</option>
+      <option>Pendente</option>
+      <option>Em andamento</option>
+      <option>Concluída</option>
+    </select>
   </div>
+  <div class="col-12 col-md-4">
+    <label for="filterSector" class="form-label">Setor</label>
+    <select id="filterSector" class="form-select" [(ngModel)]="sectorFilter" (change)="applyFilters()">
+      <option value="">Todos</option>
+      <option>Produção</option>
+      <option>Manutenção</option>
+    </select>
+  </div>
+</div>
 
-  <table class="table table-striped">
-    <thead>
+
+ <div class="table-responsive table-responsive-md">
+  <table class="table table-striped align-middle mb-0">
+    <thead class="table-light">
       <tr>
-        <th>Título</th><th>Setor</th><th>Status</th><th>Prazo</th><th>Ações</th>
+        <th scope="col">Título</th>
+        <th scope="col">Setor</th>
+        <th scope="col">Status</th>
+        <th scope="col">Prazo</th>
+        <th scope="col">Ações</th>
       </tr>
     </thead>
     <tbody>
@@ -38,10 +44,15 @@
         <td>{{ t.status }}</td>
         <td>{{ t.dueDate | date:'shortDate' }}</td>
         <td>
-          <a class="btn btn-sm btn-info" [routerLink]="['/tasks','edit', t.id]">Editar</a>
+            <button class="btn btn-sm btn-success me-2" [routerLink]="['/tasks', t.id]"> Concluir </button>
+          <a class="btn btn-sm btn-info me-2" [routerLink]="['/tasks','edit', t.id]">Editar</a>
           <button class="btn btn-sm btn-danger" (click)="deleteTask(t.id!)">Excluir</button>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
+
+</div>
+<!-- 
+<app-footer-component> </app-footer-component> -->
