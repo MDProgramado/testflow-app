@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.img-fundo {
+    width: 50%;
+    height: 100vh;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.img-fundo img{
+    width: 100%;
+    opacity: 0.8;
+    
+    
+}
+
+
+form {
+    border: #0d6efd;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: rgba(185, 185, 185, 0.377);
+}
+
+
+.input {
+    width: 100%;
+    padding: 0.625rem 1rem;
+    margin: 0.5rem 0;
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: #333;
+    border: 2px solid #ccc;
+    border-radius: 0.5rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .form-control:focus {
+    border-color: #0d6efd; 
+    outline: none;
+    box-shadow: 0 0 5px rgba(13, 110, 253, 0.5);
+  }
+
+  .form-control.ng-invalid.ng-touched{
+    border-color: red;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  }
+
+  .butao {
+    width: 100%;
+    background-color: #0d6efd;
+    color: white;
+    padding: 0.625rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+  }
+  .butao-desabitado {
+    width: 100%;
+    background-color: #292121cb;
+    opacity: 0.5;
+    color: white;
+    padding: 0.625rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+  }
+.mensagem-validacao {
+    color: red;
+    font-size: 0.875rem;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  margin-left: 2.6rem;
+  gap: 0.5rem;
+}
+
+
+
+
+
+.login-section {
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
+}
+
+.object-fit-cover {
+  object-fit: cover;
+  height: 100%;
+}
+

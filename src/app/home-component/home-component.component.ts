@@ -12,10 +12,8 @@ import { SumaryComponent } from '../sumary/sumary.component';
   imports: [
     HeaderComponentComponent,
     TaskListComponentComponent, 
-    // DashboardComponentComponent, 
     SumaryComponent,
-    FooterComponentComponent, 
-    TaskDetailComponentComponent],
+    FooterComponentComponent, ],
   templateUrl: './home-component.component.html',
   styleUrl: './home-component.component.css'
 })

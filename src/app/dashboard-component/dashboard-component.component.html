@@ -1,18 +1,17 @@
-<app-header-component> </app-header-component>
+<app-header-component class="bg-custom text-white"></app-header-component>
 
-<div class="container-fluid mb-5 ">
+<main class="home-main container my-5">
 
-  <div class="container-fluid mb-4"> 
-  <app-sumary></app-sumary>
-</div>
+  <section class="home-summary mb-5">
+    <app-sumary></app-sumary>
+   </section>
 
-
-  <div class="row g-4">
+  <div class="row g-4 justify-content-center">
     <div class="col-lg-6">
       <div class="card h-100">
         <div class="card-body">
           <h5 class="card-title">Distribuição por Status</h5>
-          <div class="position-relative" style="height:300px">
+          <div class="d-flex justify-content-center" style="height:300px">
             <canvas baseChart
                     [data]="pieChartData"
                     [labels]="pieChartData.labels"
@@ -38,6 +37,6 @@
       </div>
     </div>
   </div>
-</div>
+</main>
 
- <app-footer-component class="footer mt-auto"></app-footer-component>
+ <app-footer-component class="footer"></app-footer-component>

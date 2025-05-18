@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Sumary } from '../interfaces/Sumary';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { BaseChartDirective } from 'ng2-charts';
+
 import { TaskServiceService } from '../Services/task-service.service';
 
 @Component({
   standalone: true,
   selector: 'app-sumary',
-  imports: [CommonModule, RouterModule, BaseChartDirective],
+  imports: [CommonModule, RouterModule, ],
   templateUrl: './sumary.component.html',
   styleUrl: './sumary.component.css'
 })

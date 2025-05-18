@@ -1,0 +1,19 @@
+
+
+.home-main {
+  max-width: 75rem;
+
+  .home-summary,
+  .home-task-list,
+  .home-task-detail {
+
+    padding: 1rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  hr {
+    border-color: lighten(gray-600, 20%);
+  }
+}

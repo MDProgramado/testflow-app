@@ -1,34 +1,23 @@
 :root {
     --bs-primary: #0056b3;
     --bs-success: #28a745;
-    --bs-danger:  #dc3545;
+    --bs-danger:  #a50010;
 }
 
 :root {
     padding: 0;
     margin: 0;
+    border: 0;
     box-sizing: border-box;
     height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-
-html, body {
-  height: 100%; 
+main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
 }
 
-body.site {
-  display: flex;          
-  flex-direction: column;   
-  margin: 0;
-}
-
-.content {
-  flex: 1 0 auto;          
-}
-
-.footer {
-  flex-shrink: 0;  
-  bottom: 0;         
-}

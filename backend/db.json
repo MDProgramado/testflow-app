@@ -86,6 +86,31 @@
       "id": "9447",
       "email": "admin1@gmail.com",
       "senha": "admin123"
+    },
+    {
+      "id": "26b2",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "57ac",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "e0d1",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "69e4",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "e0dc",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
     }
   ],
   "tasks": [
@@ -104,7 +129,7 @@
       "description": "teste 2",
       "sector": "Manutenção",
       "priority": "Alta",
-      "status": "Pendente",
+      "status": "Concluída",
       "dueDate": "2025-05-16",
       "responsible": "maicon ",
       "id": "5937"
@@ -114,7 +139,7 @@
       "description": "terceiro teste ",
       "sector": "Produção",
       "priority": "Média",
-      "status": "Pendente",
+      "status": "Concluída",
       "dueDate": "2025-05-18",
       "responsible": "maicon ",
       "id": "e35f"
@@ -124,7 +149,7 @@
       "description": "testando a prioridade ",
       "sector": "Manutenção",
       "priority": "Alta",
-      "status": "Pendente",
+      "status": "Concluída",
       "dueDate": "2025-05-18",
       "responsible": "maicon ",
       "id": "7cb0"
@@ -134,7 +159,7 @@
       "description": "teste de dashboard",
       "sector": "Manutenção",
       "priority": "Alta",
-      "status": "Pendente",
+      "status": "Concluída",
       "dueDate": "2025-05-18",
       "responsible": "maicon",
       "id": "60ec"
@@ -164,10 +189,30 @@
       "description": "svsvd",
       "sector": "Manutenção",
       "priority": "Média",
-      "status": "Em andamento",
+      "status": "Concluída",
       "dueDate": "2025-05-18",
       "responsible": "svsv",
       "id": "6f39"
+    },
+    {
+      "id": "be43",
+      "title": "ultimo teste ",
+      "description": "tente final ",
+      "sector": "Produção",
+      "priority": "Baixa",
+      "status": "Concluída",
+      "dueDate": "2025-05-18",
+      "responsible": "maicon "
+    },
+    {
+      "id": "f906",
+      "title": "teste ",
+      "description": "ecwc",
+      "sector": "Manutenção",
+      "priority": "Média",
+      "status": "Em andamento",
+      "dueDate": "2025-05-18",
+      "responsible": "wecwcwc"
     }
   ]
 }

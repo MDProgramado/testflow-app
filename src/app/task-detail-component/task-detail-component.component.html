@@ -1,42 +1,65 @@
-<app-header-component> </app-header-component>
-<div class="container mt-4" *ngIf="task$ | async as task">
-  <div class="card shadow-sm">
-    <div class="card-body">
-      <h3 class="card-title mb-4">{{ task.title }}</h3>
-      <div class="row">
-        <div class="col-12 col-md-6 mb-3">
-          <p><span class="fw-semibold">Descrição:</span> {{ task.description }}</p>
-        </div>
-        <div class="col-6 col-md-3 mb-3">
-          <p><span class="fw-semibold">Setor:</span> {{ task.sector }}</p>
-        </div>
-        <div class="col-6 col-md-3 mb-3">
-          <p><span class="fw-semibold">Prioridade:</span> {{ task.priority }}</p>
-        </div>
-        <div class="col-6 col-md-3 mb-3">
-          <p><span class="fw-semibold">Status:</span> {{ task.status }}</p>
-        </div>
-        <div class="col-6 col-md-3 mb-3">
-          <p><span class="fw-semibold">Prazo:</span> {{ task.dueDate | date:'shortDate' }}</p>
-        </div>
-        <div class="col-12 col-md-6 mb-3">
-          <p><span class="fw-semibold">Responsável:</span> {{ task.responsible }}</p>
-        </div>
+<app-header-component class="bg-custom text-white"></app-header-component>
+
+<main class="home-main container my-5">
+  <div class="container mt-4" *ngIf="task$ | async as task">
+    <div class="card task-detail-card">
+      
+      <!-- Cabeçalho do Card -->
+      <header class=" card-header d-flex align-items-center justify-content-between">
+        <h3 class="card-title mb-0">{{ task.title }}</h3>
+        <span class="badge priority-badge"
+              [ngClass]="{
+                'bg-danger': task.priority==='Alta',
+                'bg-warning text-dark': task.priority==='Média',
+                'bg-success': task.priority==='Baixa'
+              }">
+          <i class="bi bi-flag-fill me-1"></i>{{ task.priority }}
+        </span>
+      </header>
+
+      <!-- Corpo do Card -->
+      <div class="card-body">
+        <dl class="row mb-0">
+          <dt class="col-4">Descrição</dt>
+          <dd class="col-8">{{ task.description }}</dd>
+
+          <dt class="col-4">Setor</dt>
+          <dd class="col-8">{{ task.sector }}</dd>
+
+          <dt class="col-4">Status</dt>
+          <dd class="col-8">
+            <span class="badge status-badge"
+                  [ngClass]="{
+                    'bg-secondary': task.status==='Pendente',
+                    'bg-info text-dark': task.status==='Em andamento',
+                    'bg-success': task.status==='Concluída'
+                  }">
+              <i class="bi bi-info-circle-fill me-1"></i>{{ task.status }}
+            </span>
+          </dd>
+
+          <dt class="col-4">Prazo</dt>
+          <dd class="col-8">{{ task.dueDate | date:'shortDate' }}</dd>
+
+          <dt class="col-4">Responsável</dt>
+          <dd class="col-8">{{ task.responsible }}</dd>
+        </dl>
       </div>
-      <div class="mt-4">
-        
-        <button *ngIf="task.status !== 'Concluída'"
-                class="btn btn-success me-2"
+
+      <!-- Rodapé do Card: Ações -->
+      <footer class="card-footer d-flex gap-2 bt">
+        <button *ngIf="task.status!=='Concluída'"
+                class="btn btn-success btn-action"
                 (click)="markComplete(task.id!)">
-          Marcar como Concluída
+          <i class="bi bi-check-lg me-1"></i> Concluir
         </button>
-        <a routerLink="/tasks" class="btn btn-secondary">Voltar</a>
-      </div>
+        <a routerLink="/tasks" class="btn btn-outline-primary btn-action">
+          <i class="bi bi-arrow-left me-1"></i> Voltar
+        </a>
+      </footer>
+
     </div>
   </div>
+</main>
 
-</div>
-
-<app-footer-component> </app-footer-component>
-
-
+<app-footer-component class="app-footer mt-auto"></app-footer-component>

@@ -1,54 +1,55 @@
-<section class="vh-100 login-section d-flex align-items-center">
-  <div class="container-fluid">
-    <div class="row g-0">
-      <!-- Coluna do formulário -->
-      <div class="col-12 col-md-6 login-panel bg-light text-dark d-flex flex-column">
-        <div class="logo-wrapper p-4">
-          <img src="images/logo-task.png"
-               alt="Logo TaskFlow"
-               class="img-fluid logo">
-        </div>
-        <div class="form-wrapper flex-grow-1 d-flex align-items-center justify-content-center px-4">
-          <form *ngIf="formulario"
-                [formGroup]="formulario"
-                (ngSubmit)="onSubmit()"
-                class="w-100" 
-                novalidate>
-            <h3 class="fw-semibold mb-4">Faça login para acessar o sistema</h3>
+<section class="vh-100 d-flex align-items-center justify-content-center login-section">
+  <div class="container">
+    <div class="row g-0 shadow-lg rounded-4 overflow-hidden">
+     
 
-            <div class="mb-3 form-floating">
-              <input type="email"
-                     id="email"
-                     formControlName="email"
-                     class="form-control form-control-lg"
-                     placeholder="nome@exemplo.com"
-                     required>
-              <label for="email">Digite seu e-mail</label>
+
+      <div class="col-12 col-md-6 bg-white p-5 d-flex flex-column justify-content-center">
+        <div class="text-center mb-4">
+          <img src="./images/logo-taskFLow.png" alt="Logo TaskFlow" class="img-fluid" style="max-width: 150px;">
+        </div>
+
+        
+        <form *ngIf="formulario" [formGroup]="formulario" (ngSubmit)="onSubmit()">
+          <h3 class="fw-bold text-primary mb-4 text-center">Acesse sua conta</h3>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
+            <input type="email" class="form-control" placeholder="Digite seu email" formControlName="email">
+          </div>
+
+          <div *ngIf="formulario.get('email')?.hasError('required') && formulario.get('email')?.touched"
+                class="mensagem-validacao">
+            Campo obrigatório
+            </div>
+            <div *ngIf="formulario.get('email')?.hasError('email') && formulario.get('email')?.touched"
+                class="mensagem-validacao">
+            Formato de e-mail errado
             </div>
 
-            <div class="mb-4 form-floating">
-              <input type="password"
-                     id="senha"
-                     formControlName="senha"
-                     class="form-control form-control-lg"
-                     placeholder="••••••••"
-                     required>
-              <label for="senha">Digite sua senha</label>
-            </div>
 
-            <button type="submit"
-                    class="btn btn-info btn-lg w-100">
-              Entrar
-            </button>
-          </form>
-        </div>
+
+          <div class="input-group mb-4">
+            <span class="input-group-text bg-light"><i class="bi bi-lock"></i></span>
+            <input type="password" class="form-control" placeholder="Digite sua senha" formControlName="senha">
+          </div>
+
+          <div *ngIf="formulario.get('senha')?.hasError('required') && formulario.get('senha')?.touched"
+                class="mensagem-validacao">
+            Campo obrigatório
+            </div>
+            <div *ngIf="formulario.get('senha')?.hasError('senha') && formulario.get('email')?.touched"
+                class="mensagem-validacao">
+            Sua senha deve ter no minino 6 caracteres
+            </div> 
+
+          <button type="submit" class="btn btn-primary btn-lg w-100 shadow-sm">Entrar</button>
+        </form>
       </div>
 
-
-      <div class="col-md-6 d-none d-md-block login-bg">
-        <img src="images/imagemDeFundo-login.png"
-             alt="Imagem de Fundo Login"
-             class="w-100 h-100 object-cover">
+    
+      <div class="col-md-6 d-none d-md-block">
+        <img src="images/imagemDeFundo-login.png" alt="Imagem de Fundo Login" class="w-100 h-100 object-fit-cover">
       </div>
     </div>
   </div>
