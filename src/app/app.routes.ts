@@ -6,8 +6,13 @@ import { TaskFormComponentComponent } from './task-form-component/task-form-comp
 import { TaskListComponentComponent } from './task-list-component/task-list-component.component';
 import { DashboardComponentComponent } from './dashboard-component/dashboard-component.component';
 import { TaskDetailComponentComponent } from './task-detail-component/task-detail-component.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 export const routes: Routes = [
+  {
+    path: 'homePage',
+    component: HomePageComponent
+  },
   {
     path: 'login',
     component: LoginUserComponentComponent

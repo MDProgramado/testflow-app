@@ -22,11 +22,18 @@ export class SumaryComponent implements OnInit{
       this.taskService.getAll().subscribe(
         tasks => {
           const now = new Date();
+          now.setHours(0, 0, 0, 0);
           const active = tasks.filter( task => task.status === 'Em andamento').length;
           const completed = tasks.filter( task => task.status === "Concluída").length;
-          const overdue = tasks.filter( task => 
-          new Date(task.dueDate) < now && task.status === 'Pendente').length;
           
+          const overdue = tasks.filter(t => {
+            if (!t.dueDate || t.status !== 'Pendente') return false;
+            
+            const taskDueDate = new Date(t.dueDate);
+            taskDueDate.setHours(0, 0, 0, 0); 
+            
+            return taskDueDate < now;
+          }).length;
          
   
             this.summaries = [

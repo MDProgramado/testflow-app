@@ -1,12 +1,18 @@
-:root {
-    --primary-color: #062863;
+.app-header {
+  position: relative;
+  overflow: hidden;
+  padding: 1.5rem 0;
+  color: #fff;
+
+  background: linear-gradient(155deg, #0800f4 0%, #2f3767 50%, #021f58 100%);
+  background-size: 300% 300%;
+  animation: gradientShift 12s ease-in-out infinite;
 }
 
-.bg-primary-custom {
-    background-color: #062863 !important;
-  }
-
-  .costumizado {
-    width: 6rem;
-    height: auto;
+@keyframes gradientShift {
+  0%   { background-position:   0% 50%; }
+  25%  { background-position:  50% 100%; }
+  50%  { background-position: 100% 50%; }
+  75%  { background-position:  50%   0%; }
+  100% { background-position:    0% 50%; }
 }

@@ -38,9 +38,19 @@ export class DashboardComponentComponent implements OnInit {
   ngOnInit(): void {
     this.taskService.getAll().subscribe(tasks => {
       const now = new Date();
+      now.setHours(0, 0, 0, 0);
       const activeCount = tasks.filter(t => t.status === 'Em andamento').length;
       const completedCount = tasks.filter(t => t.status === 'Concluída').length;
-      const overdueCount = tasks.filter(t => new Date(t.dueDate) < now && t.status === 'Pendente').length;
+
+      const overdueCount = tasks.filter(t => {
+        if (!t.dueDate || t.status !== 'Pendente') return false;
+        
+        const taskDueDate = new Date(t.dueDate);
+        taskDueDate.setHours(0, 0, 0, 0); 
+        
+        return taskDueDate < now;
+      }).length;
+      
       this.pieChartData.datasets[0].data = [activeCount, completedCount, overdueCount];
 
       const low = tasks.filter(t => t.priority === 'Baixa').length;

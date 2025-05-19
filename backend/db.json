@@ -226,7 +226,83 @@
       "id": "4376",
       "email": "admin1@gmail.com",
       "senha": "123456"
+    },
+    {
+      "id": "3fc5",
+      "email": "admin1@gmail.com",
+      "senha": "123456"
+    },
+    {
+      "id": "5c65",
+      "email": "admin1@gmail.com",
+      "senha": "123456"
+    },
+    {
+      "id": "1878",
+      "email": "admin1@gmail.com",
+      "senha": "123456"
     }
   ],
-  "tasks": []
+  "tasks": [
+    {
+      "id": "01e5",
+      "title": "teste 1.1 criar por manutenção ",
+      "description": "ascacs",
+      "sector": "Manutenção",
+      "priority": "Alta",
+      "status": "Em andamento",
+      "dueDate": "2025-05-19",
+      "responsible": "maicon "
+    },
+    {
+      "id": "b508",
+      "title": "tdte",
+      "description": "dsc",
+      "sector": "Manutenção",
+      "priority": "Média",
+      "status": "Em andamento",
+      "dueDate": "2025-05-12",
+      "responsible": "maicon "
+    },
+    {
+      "id": "579a",
+      "title": "tdte",
+      "description": "teste",
+      "sector": "Manutenção",
+      "priority": "Baixa",
+      "status": "Pendente",
+      "dueDate": "2025-05-12",
+      "responsible": "maicon "
+    },
+    {
+      "id": "938b",
+      "title": "teste",
+      "description": "teste",
+      "sector": "Produção",
+      "priority": "Alta",
+      "status": "Pendente",
+      "dueDate": "2025-05-24",
+      "responsible": "maicon "
+    },
+    {
+      "id": "b5f2",
+      "title": "teste",
+      "description": "testr",
+      "sector": "Manutenção",
+      "priority": "Alta",
+      "status": "Pendente",
+      "dueDate": "2025-05-12",
+      "responsible": "maicon "
+    },
+    {
+      "id": "ab5d",
+      "title": "teste",
+      "description": "teste",
+      "sector": "Manutenção",
+      "priority": "Alta",
+      "status": "Pendente",
+      "dueDate": "2025-05-09",
+      "responsible": "maicon "
+    }
+  ]
 }
