@@ -22,10 +22,10 @@ export class SumaryComponent implements OnInit{
       this.taskService.getAll().subscribe(
         tasks => {
           const now = new Date();
-          const active = tasks.filter( task => task.status !== "Em andamento").length;
+          const active = tasks.filter( task => task.status === 'Em andamento').length;
           const completed = tasks.filter( task => task.status === "Concluída").length;
           const overdue = tasks.filter( task => 
-          new Date(task.dueDate) < now && task.status !== "Pendente").length;
+          new Date(task.dueDate) < now && task.status === 'Pendente').length;
           
          
   

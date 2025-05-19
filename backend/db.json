@@ -206,6 +206,16 @@
       "id": "0a65",
       "email": "admin1@gmail.com",
       "senha": "admin123"
+    },
+    {
+      "id": "aedc",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "6b86",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
     }
   ],
   "tasks": [
@@ -295,6 +305,16 @@
       "description": "teste ",
       "sector": "Produção",
       "priority": "Alta",
+      "status": "Pendente",
+      "dueDate": "2025-05-19",
+      "responsible": "maicon"
+    },
+    {
+      "id": "1c7c",
+      "title": "teste de dashboard",
+      "description": "teste",
+      "sector": "Produção",
+      "priority": "Baixa",
       "status": "Pendente",
       "dueDate": "2025-05-19",
       "responsible": "maicon"

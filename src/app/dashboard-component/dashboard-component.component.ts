@@ -17,13 +17,11 @@ import { HeaderComponentComponent } from "../header-component/header-component.c
   styleUrls: ['./dashboard-component.component.css']
 })
 export class DashboardComponentComponent implements OnInit {
-  public activeCount = 0;
-  public completedCount = 0;
-  public overdueCount = 0;
+ 
 
   public pieChartLabels: string[] = ['Ativas', 'Concluídas', 'Atrasadas'];
   public pieChartData: ChartData<'pie', number[], string> = {
-  labels: ['Ativas', 'Concluídas', 'Atrasadas'],
+  labels: this.pieChartLabels,
   datasets: [{ data: [1, 2, 3], label: 'Tarefas' }]
 };
   public pieChartType: ChartType = 'pie';
@@ -40,10 +38,10 @@ export class DashboardComponentComponent implements OnInit {
   ngOnInit(): void {
     this.taskService.getAll().subscribe(tasks => {
       const now = new Date();
-      this.activeCount = tasks.filter(t => t.status !== "Em andamento").length;
-      this.completedCount = tasks.filter(t => t.status === 'Concluída').length;
-      this.overdueCount = tasks.filter(t => new Date(t.dueDate) < now && t.status !== "Pendente").length;
-      this.pieChartData.datasets[0].data = [this.activeCount, this.completedCount, this.overdueCount];
+      const activeCount = tasks.filter(t => t.status === 'Em andamento').length;
+      const completedCount = tasks.filter(t => t.status === 'Concluída').length;
+      const overdueCount = tasks.filter(t => new Date(t.dueDate) < now && t.status === 'Pendente').length;
+      this.pieChartData.datasets[0].data = [activeCount, completedCount, overdueCount];
 
       const low = tasks.filter(t => t.priority === 'Baixa').length;
       const mid = tasks.filter(t => t.priority === 'Média').length;

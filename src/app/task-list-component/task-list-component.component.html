@@ -49,29 +49,34 @@
   <!-- Listagem em Cards -->
   <div class="row g-4">
     <!-- Card Individual -->
-    <div *ngFor="let t of filteredTasks" class="col-12 col-md-6 col-xl-4">
+    <div *ngFor="let t of filteredTasks" class="col-12 col-md-6 col-xl-4 " >
       <div  [routerLink]="['/tasks', t.id]" class=" card shadow-sm h-100 hover-shadow border-start border-4 p 
                   {{ t.status === 'Pendente' ? 'border-warning' : '' }}
                   {{ t.status === 'Em andamento' ? 'border-primary' : '' }}
                   {{ t.status === 'Concluída' ? 'border-success' : '' }}">
         <div class="card-body">
           <!-- Header do Card -->
-          <div class="d-flex justify-content-between align-items-start mb-3">
-            <div>
-              <h5 class="card-title mb-0 fw-semibold text-truncate text-primary">
-                {{ t.title }}
-              </h5>
-              <small class="badge bg-primary-subtle text-primary-emphasis">ID: {{ t.id }}</small>
-            </div>
-            <span class="badge {{ t.status === 'Pendente' ? 'bg-warning-subtle text-warning-emphasis' : '' }} 
-                          {{ t.status === 'Em andamento' ? 'bg-info-subtle text-info-emphasis' : '' }} 
-                          {{ t.status === 'Concluída' ? 'bg-success-subtle text-success-emphasis' : '' }} 
-                          rounded-pill d-flex align-items-center gap-1">
-              <i class="bi {{ t.status === 'Concluída' ? 'bi-check-circle' : 'bi-circle-fill' }}"></i>
-              {{ t.status }}
-            </span>
-          </div>
-
+         <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2 gap-md-3 mb-3">
+  <div class="flex-grow-1 me-md-2">
+    <h5 class="card-title mb-1 mb-md-0 fw-semibold text-truncate fs-5 fs-md-6 text-primary">
+      {{ t.title }}
+    </h5>
+    <small class="badge bg-primary-subtle text-primary-emphasis d-inline-block text-truncate">
+      ID: {{ t.id }}
+    </small>
+  </div>
+  
+  <span class="badge {{ t.status === 'Pendente' ? 'bg-warning-subtle text-warning-emphasis' : '' }} 
+              {{ t.status === 'Em andamento' ? 'bg-info-subtle text-info-emphasis' : '' }} 
+              {{ t.status === 'Concluída' ? 'bg-success-subtle text-success-emphasis' : '' }} 
+              rounded-pill d-inline-flex align-items-center py-1 py-md-1 px-2 px-md-3 
+              fs-6 text-truncate">
+    <i class="bi {{ t.status === 'Concluída' ? 'bi-check-circle' : 'bi-circle-fill' }} 
+       d-none d-md-inline-block me-md-1 fs-7"></i>
+    <span class="d-md-none">{{ t.status | slice:0:3 }}</span>
+    <span class="d-none d-md-inline">{{ t.status }}</span>
+  </span>
+</div>
           <!-- Detalhes -->
           <div class="mb-3">
             <div class="d-flex align-items-center gap-2 mb-2 bg-info-subtle p-2 rounded">
