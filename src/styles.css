@@ -9,14 +9,16 @@
     margin: 0;
     border: 0;
     box-sizing: border-box;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+    
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
-  display: flex;
-  flex-direction: column;
   flex: 1;
   height: 100%;
 }

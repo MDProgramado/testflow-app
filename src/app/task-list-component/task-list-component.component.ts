@@ -56,7 +56,8 @@ export class TaskListComponentComponent implements OnInit {
 
   deleteTask(id: string): void {
     if (!confirm('Confirmar exclusão?')) return;
-    this.taskService.delete(id).subscribe(() => this.loadTasks());
+    this.taskService.delete(id).subscribe(() => this.router.navigateByUrl('/home'));
+    
   }
 
 

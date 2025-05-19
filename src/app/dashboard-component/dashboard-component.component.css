@@ -1,4 +1,6 @@
-
+body {
+  height: 100vh;
+}
 
 .home-main {
   max-width: 75rem;
