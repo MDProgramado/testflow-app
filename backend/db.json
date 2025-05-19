@@ -111,6 +111,101 @@
       "id": "e0dc",
       "email": "admin1@gmail.com",
       "senha": "admin123"
+    },
+    {
+      "id": "377d",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "fec4",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "f74a",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "e908",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "18bf",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "fa4e",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "dc10",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "25f4",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "cb50",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "2711",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "ba45",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "9806",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "209c",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "291d",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "c945",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "9d3a",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "7480",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "243c",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
+    },
+    {
+      "id": "0a65",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
     }
   ],
   "tasks": [
@@ -186,33 +281,23 @@
     },
     {
       "title": "teste de dashboard",
-      "description": "svsvd",
-      "sector": "Manutenção",
-      "priority": "Média",
-      "status": "Concluída",
-      "dueDate": "2025-05-18",
-      "responsible": "svsv",
-      "id": "6f39"
-    },
-    {
-      "id": "be43",
-      "title": "ultimo teste ",
-      "description": "tente final ",
-      "sector": "Produção",
-      "priority": "Baixa",
-      "status": "Concluída",
-      "dueDate": "2025-05-18",
-      "responsible": "maicon "
-    },
-    {
-      "id": "f906",
-      "title": "teste ",
-      "description": "ecwc",
+      "description": "sdvdsv",
       "sector": "Manutenção",
       "priority": "Média",
       "status": "Em andamento",
       "dueDate": "2025-05-18",
-      "responsible": "wecwcwc"
+      "responsible": "maicon",
+      "id": "cbef"
+    },
+    {
+      "id": "d6b9",
+      "title": "testando taskList ",
+      "description": "teste ",
+      "sector": "Produção",
+      "priority": "Alta",
+      "status": "Pendente",
+      "dueDate": "2025-05-19",
+      "responsible": "maicon"
     }
   ]
 }

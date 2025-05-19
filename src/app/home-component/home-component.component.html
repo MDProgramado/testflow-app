@@ -10,10 +10,12 @@
 
   <!-- Seção de Lista de Tarefas -->
   <section class="home-task-list mb-5">
-    <app-task-list-component></app-task-list-component>
+    <app-task-list-component 
+      [exibirHeader]="false" 
+      [exibirFooter]="false">
+    </app-task-list-component>
   </section>
-
   
 </main>
 
- <app-footer-component class="footer"></app-footer-component>
+ <app-footer-component   class="footer"></app-footer-component>

@@ -30,9 +30,28 @@ export class SumaryComponent implements OnInit{
          
   
             this.summaries = [
-          { label: 'Ativas', count: active, color: 'primary', route: '/tasks?status=Em%20andamento' },
-          { label: 'Concluídas', count: completed, color: 'success', route: '/tasks?status=Concluída' },
-          { label: 'Atrasadas', count: overdue, color: 'danger', route: '/tasks?status=Pendente' }
+          { 
+            label: 'Em Andamento', 
+            count: active, 
+            color: 'primary', 
+            icon: 'bi-arrow-repeat',
+            route: '/tasks?status=Em%20andamento' 
+          },
+
+          { 
+            label: 'Concluídas', 
+            count: completed,
+             color: 'success', 
+             icon: 'bi-check2-circle',
+             route: '/tasks?status=Concluída'
+            },
+          { 
+            label: 'Atrasadas', 
+            count: overdue, 
+            color: 'warning',
+            icon: 'bi-exclamation-circle',
+             route: '/tasks?status=Pendente' 
+          }
         ];
         }
       )

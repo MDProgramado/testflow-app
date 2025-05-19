@@ -17,3 +17,62 @@
     border-color: lighten(gray-600, 20%);
   }
 }
+
+:root {
+  --header-gradient: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  --chart-card-border: rgba(0, 0, 0, 0.1);
+}
+
+.bg-custom {
+  background: var(--header-gradient) !important;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.home-main {
+  background-color: #f8f9fa;
+  padding-bottom: 2rem;
+}
+
+.home-summary {
+  padding: 1.5rem;
+  background: transparent;
+}
+
+.card {
+  border: 1px solid var(--chart-card-border);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e9ecef;
+  margin-bottom: 1.5rem;
+}
+
+.chart-container {
+  position: relative;
+  margin: auto;
+  width: 100%;
+}
+
+.bg-primary-subtle {
+  background-color: #e8f4fd !important;
+}
+
+.bg-success-subtle {
+  background-color: #e6faf0 !important;
+}
+
+.bi {
+  vertical-align: middle;
+}

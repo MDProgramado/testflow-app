@@ -1,36 +1,68 @@
-<app-header-component class="bg-custom text-white"></app-header-component>
+<app-header-component class="bg-custom text-white py-3"></app-header-component>
 
-<main class="home-main container my-5">
-
+<main class="container-fluid home-main px-lg-5 py-4">
+  <!-- Seção de Sumário -->
   <section class="home-summary mb-5">
-    <app-sumary></app-sumary>
-   </section>
+    <div class="container-fluid">
+      <app-sumary class="col"></app-sumary>
+    </div>
+  </section>
 
+  <!-- Gráficos -->
   <div class="row g-4 justify-content-center">
+    <!-- Gráfico Pizza -->
     <div class="col-lg-6">
       <div class="card h-100">
-        <div class="card-body">
-          <h5 class="card-title">Distribuição por Status</h5>
-          <div class="d-flex justify-content-center" style="height:300px">
+        <div class="card-header bg-transparent border-0 pb-0">
+          <h5 class="card-title d-flex align-items-center gap-2">
+            <i class="bi bi-pie-chart-fill text-primary fs-4"></i>
+            Distribuição por Status
+            <small class="text-muted fs-6 ms-auto">Atualizado agora</small>
+          </h5>
+        </div>
+        <div class="card-body pt-0 justify-content-center ">
+          <div class="chart-container d-flex justify-content-center " style="height: 300px">
             <canvas baseChart
                     [data]="pieChartData"
                     [labels]="pieChartData.labels"
-                    [type]="pieChartType">
+                    [type]="pieChartType"
+                    [options]="{
+                      plugins: {
+                        legend: {
+                          position: 'right',
+                          labels: { color: '#6c757d' }
+                        }
+                      }
+                    }">
             </canvas>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Gráfico Barras -->
     <div class="col-lg-6">
       <div class="card h-100">
-        <div class="card-body">
-          <h5 class="card-title">Prioridade das Tarefas</h5>
-          <div class="position-relative" style="height:300px">
+        <div class="card-header bg-transparent border-0 pb-0">
+          <h5 class="card-title d-flex align-items-center gap-2">
+            <i class="bi bi-bar-chart-line-fill text-success fs-4"></i>
+            Prioridade das Tarefas
+            <small class="text-muted fs-6 ms-auto">Últimos 30 dias</small>
+          </h5>
+        </div>
+        <div class="card-body pt-0">
+          <div class="chart-container" style="height: 300px">
             <canvas baseChart
                     [data]="barChartData"
                     [labels]="barChartData.labels"
-                    [type]="barChartType">
+                    [type]="barChartType"
+                    [options]="{
+                      responsive: true,
+                      scales: {
+                        y: { beginAtZero: true, grid: { color: '#e9ecef' } },
+                        x: { grid: { display: false } }
+                      }
+                    }">
             </canvas>
           </div>
         </div>

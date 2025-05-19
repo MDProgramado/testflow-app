@@ -1,0 +1,29 @@
+.hover-scale {
+  transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: translateY(-5px);
+}
+
+.tracking-wide {
+  letter-spacing: 0.05em;
+}
+
+.border-dashed {
+  border: 2px dashed rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-border::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--bs-primary-bg-subtle), transparent);
+}
+
+.transition-all {
+  transition: all 0.3s ease;
+}

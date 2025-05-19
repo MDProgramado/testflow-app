@@ -1,14 +1,19 @@
- <div class="container mt-4">
+
+<app-header-component *ngIf="exibirHeader"> </app-header-component>
+
+<main class="container-fluid home-main my-5"> 
+<section class="container-fluid home-summary mb-5 ">
+<div class="container-fluid mt-4 ">
       <!-- Header -->
-      <div class="d-flex justify-content-between align-items-center mb-4">
+      <div class=" container-fluid d-flex justify-content-between align-items-center mb-4">
         <h3 class="mb-0">Tarefas</h3>
         <a class="btn btn-primary" routerLink="/tasks/new" aria-label="Nova Tarefa">
-          <i class="bi bi-plus-lg me-2" aria-hidden="true"></i>Nova Tarefa
+          <i class="bi bi-plus-lg me-2" aria-hidden="true"></i> NovaTarefa
         </a>
       </div>
 
       <!-- Filtros -->
-      <div class="row g-3 mb-4">
+      <div class=" container-fluid row g-3 mb-4">
         <div class="col-12 col-md-4">
           <label for="filterStatus" class="form-label">Status</label>
           <select
@@ -38,73 +43,92 @@
         </div>
       </div>
 
-      <!-- Tabela de Tarefas -->
-      <div class="table-responsive">
-        <table class="table table-striped align-middle mb-0">
-          <thead class="table-light">
-            <tr>
-              <th scope="col">Título</th>
-              <th scope="col">Setor</th>
-              <th scope="col">Status</th>
-              <th scope="col">Prazo</th>
-              <th scope="col">Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              *ngFor="let t of filteredTasks"
-              [ngClass]="{
-                'table-warning': t.status === 'Pendente',
-                'table-info': t.status === 'Em andamento',
-                'table-success': t.status === 'Concluída'
-              }"
-            >
-              <td>{{ t.id }} – {{ t.title }}</td>
-              <td>{{ t.sector }}</td>
-              <td>
-                <span
-                  class="badge
-                    {{ t.status === 'Pendente' ? 'bg-warning text-dark' : '' }}
-                    {{ t.status === 'Em andamento' ? 'bg-info text-dark' : '' }}
-                    {{ t.status === 'Concluída' ? 'bg-success' : '' }}"
-                  >{{ t.status }}</span
-                >
-              </td>
-              <td>{{ t.dueDate | date: 'shortDate' }}</td>
-              <td>
-                <button
-                  class="btn btn-success btn-sm me-2"
-                  [routerLink]="['/tasks', t.id]"
-                  aria-label="Concluir Tarefa"
-                >
-                  <i class="bi bi-check-lg"></i>
-                </button>
+      <!-- Card de Tarefas -->
 
-                <button
-                  class="btn btn-info btn-sm me-2"
-                  [routerLink]="['/tasks', t.id]"
-                  [attr.aria-label]="'Visualizar tarefa ' + t.id"
-                >
-                  <i class="bi bi-eye" aria-hidden="true"></i>
-                </button>
+<div class="container-fluid">
+  <!-- Listagem em Cards -->
+  <div class="row g-4">
+    <!-- Card Individual -->
+    <div *ngFor="let t of filteredTasks" class="col-12 col-md-6 col-xl-4">
+      <div  [routerLink]="['/tasks', t.id]" class=" card shadow-sm h-100 hover-shadow border-start border-4 p 
+                  {{ t.status === 'Pendente' ? 'border-warning' : '' }}
+                  {{ t.status === 'Em andamento' ? 'border-primary' : '' }}
+                  {{ t.status === 'Concluída' ? 'border-success' : '' }}">
+        <div class="card-body">
+          <!-- Header do Card -->
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <div>
+              <h5 class="card-title mb-0 fw-semibold text-truncate text-primary">
+                {{ t.title }}
+              </h5>
+              <small class="badge bg-primary-subtle text-primary-emphasis">ID: {{ t.id }}</small>
+            </div>
+            <span class="badge {{ t.status === 'Pendente' ? 'bg-warning-subtle text-warning-emphasis' : '' }} 
+                          {{ t.status === 'Em andamento' ? 'bg-info-subtle text-info-emphasis' : '' }} 
+                          {{ t.status === 'Concluída' ? 'bg-success-subtle text-success-emphasis' : '' }} 
+                          rounded-pill d-flex align-items-center gap-1">
+              <i class="bi {{ t.status === 'Concluída' ? 'bi-check-circle' : 'bi-circle-fill' }}"></i>
+              {{ t.status }}
+            </span>
+          </div>
 
-                <a
-                  class="btn btn-info btn-sm me-2"
-                  [routerLink]="['/tasks','edit', t.id]"
-                  aria-label="Editar Tarefa"
-                >
-                  <i class="bi bi-pencil-fill"></i>
-                </a>
-                <button
-                  class="btn btn-danger btn-sm"
-                  (click)="deleteTask(t.id!)"
-                  aria-label="Excluir Tarefa"
-                >
-                  <i class="bi bi-trash-fill"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+          <!-- Detalhes -->
+          <div class="mb-3">
+            <div class="d-flex align-items-center gap-2 mb-2 bg-info-subtle p-2 rounded">
+              <i class="bi bi-building fs-5 text-info"></i>
+              <span class="badge bg-white text-info border border-info">{{ t.sector }}</span>
+            </div>
+            <div class="d-flex align-items-center gap-2 bg-success-subtle p-2 rounded">
+              <i class="bi bi-calendar-check fs-5 text-success"></i>
+              <span class="text-nowrap text-success-emphasis fw-medium">
+                {{ t.dueDate | date: 'shortDate' }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Ações -->
+          <div class="d-flex justify-content-between border-top pt-3">
+            <button class="btn btn-success btn-sm rounded-pill px-3 d-flex align-items-center gap-1" 
+                    [routerLink]="['/tasks', t.id]">
+              <i class="bi bi-check-lg"></i>
+              <span>Concluir</span>
+            </button>
+            <div class="d-flex gap-2">
+              <button class="btn btn-primary btn-sm rounded-circle p-2"
+                      [routerLink]="['/tasks', t.id]">
+                <i class="bi bi-eye"></i>
+              </button>
+              <a class="btn btn-info btn-sm rounded-circle p-2"
+                 [routerLink]="['/tasks','edit', t.id]">
+                <i class="bi bi-pencil"></i>
+              </a>
+              <button class="btn btn-danger btn-sm rounded-circle p-2"
+                      (click)="deleteTask(t.id!)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="filteredTasks.length === 0" class="col-12">
+      <div class="text-center py-5 bg-primary-subtle rounded-3">
+        <i class="bi bi-inbox fs-1 text-primary mb-3"></i>
+        <h5 class="text-primary">Nenhuma tarefa encontrada</h5>
+        <p class="text-muted mb-0">Tente ajustar os filtros ou criar uma nova tarefa</p>
+        <button class="btn btn-primary mt-3 rounded-pill px-4"  routerLink="/tasks/new">
+          <i class="bi bi-plus-lg me-2"></i>Criar Tarefa
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
+</div>
+ </section> 
+
+ </main>
+<section> 
+<app-footer-component class="footer " *ngIf="exibirFooter"> </app-footer-component>
+</section>
