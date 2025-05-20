@@ -8,7 +8,7 @@ import { Usuario } from '../interfaces/Usuario';
 })
 export class AutentificarLoginService {
 
-  private apiUrl = 'https://backend-3-8sqc.onrender.com/'
+  private apiUrl = 'https://backendd-01jm.onrender.com/users'
   constructor(private http: HttpClient) { }
 
   BuscarDadosDaAPi(usario: Usuario): Observable<Usuario> {

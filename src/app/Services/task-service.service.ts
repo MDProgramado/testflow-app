@@ -8,7 +8,7 @@ import { Task } from '../interfaces/Task';
 })
 export class TaskServiceService {
 
-  private API = 'https://backend-3-8sqc.onrender.com/';
+  private API = 'https://backendd-01jm.onrender.com/tasks';
 
   constructor(private htpp: HttpClient) { }
 
