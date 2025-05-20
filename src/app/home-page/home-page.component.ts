@@ -2,29 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Feature } from '../interfaces/Feature';
+import { Testimonial } from '../interfaces/Testimontial';
+import { Plan } from '../interfaces/Plan';
 
-interface Feature {
-  icon: string;
-  title: string;
-  description: string;
-}
-
-interface Testimonial {
-  stars: number;
-  text: string;
-  author: string;
-  role: string;
-  initials: string;
-}
-
-interface Plan {
-  name: string;
-  price: string;
-  description: string;
-  features: string[];
-  popular?: boolean;
-  cta: string;
-}
 
 @Component({
   selector: 'app-home-page',
@@ -42,7 +23,8 @@ export class HomePageComponent {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       company: [''],
-      message: ['']
+      message: [''],
+       acceptTerms: [false, Validators.requiredTrue]
     });
   }
 

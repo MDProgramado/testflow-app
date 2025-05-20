@@ -7,11 +7,21 @@ import { TaskListComponentComponent } from './task-list-component/task-list-comp
 import { DashboardComponentComponent } from './dashboard-component/dashboard-component.component';
 import { TaskDetailComponentComponent } from './task-detail-component/task-detail-component.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { PolitcaPrivacidadeComponent } from './LGPD/politca-privacidade/politca-privacidade.component';
+import { TermoDeUsoComponent } from './LGPD/termo-de-uso/termo-de-uso.component';
 
 export const routes: Routes = [
   {
     path: 'homePage',
     component: HomePageComponent
+  },
+  {
+    path: 'politicaprivacidade',
+    component: PolitcaPrivacidadeComponent
+  },
+  {
+    path: 'termoUso',
+    component: TermoDeUsoComponent,
   },
   {
     path: 'login',
@@ -44,7 +54,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'homePage',
     pathMatch: 'full'
   },
   {

@@ -241,6 +241,11 @@
       "id": "1878",
       "email": "admin1@gmail.com",
       "senha": "123456"
+    },
+    {
+      "id": "fac2",
+      "email": "admin1@gmail.com",
+      "senha": "admin123"
     }
   ],
   "tasks": [
@@ -260,7 +265,7 @@
       "description": "dsc",
       "sector": "Manutenção",
       "priority": "Média",
-      "status": "Em andamento",
+      "status": "Concluída",
       "dueDate": "2025-05-12",
       "responsible": "maicon "
     },
@@ -303,6 +308,16 @@
       "status": "Pendente",
       "dueDate": "2025-05-09",
       "responsible": "maicon "
+    },
+    {
+      "id": "43d3",
+      "title": "teste de dashboard",
+      "description": "dsc",
+      "sector": "Manutenção",
+      "priority": "Alta",
+      "status": "Em andamento",
+      "dueDate": "2025-05-19",
+      "responsible": "maicon"
     }
   ]
 }

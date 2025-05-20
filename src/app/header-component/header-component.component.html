@@ -13,18 +13,7 @@
   <!-- Logo/Título -->
   <h1 class="app-logo h5 m-0 d-none d-md-block">TaskFlow</h1>
 
-  <!-- Botão Notificações -->
-  <button class="btn btn-outline-light position-relative focus-ring" 
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#appOffcanvasNotifications"
-          aria-controls="appOffcanvasNotifications"
-          aria-label="Ver notificações">
-    <i class="bi bi-bell fs-4" aria-hidden="true"></i>
-    <span class="badge bg-danger position-absolute top-0 start-100 translate-middle rounded-pill">
-      8 <span class="visually-hidden">novas notificações</span>
-    </span>
-  </button>
+
 </header>
 
 <!-- Offcanvas Menu -->
@@ -37,10 +26,9 @@
   <div class="offcanvas-body">
     <nav aria-label="Menu principal">
       <ul class="list-unstyled mb-0">
-        <li><a class="d-block py-2 text-white focus-ring" routerLink="/home"><i class="bi bi-house-door me-2"></i>Início</a></li>
-        <li><a class="d-block py-2 text-white focus-ring" routerLink="/tasks"><i class="bi bi-kanban me-2"></i>Tarefas</a></li>
-        <li><a class="d-block py-2 text-white focus-ring" routerLink="/dashboard"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
-        <li><a class="d-block py-2 text-white focus-ring" routerLink="/config"><i class="bi bi-gear me-2"></i>Configurações</a></li>
+        <li><a class="d-block py-2 text-white focus-ring" [routerLink]="['/home']"><i class="bi bi-house-door me-2"></i>Início</a></li>
+        <li><a class="d-block py-2 text-white focus-ring" [routerLink]="['/tasks']"><i class="bi bi-kanban me-2"></i>Tarefas</a></li>
+        <li><a class="d-block py-2 text-white focus-ring" [routerLink]="['/dashboard']"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
         <li><hr class="border-light"></li>
         <li><a class="d-block py-2 text-white focus-ring" href="#"><i class="bi bi-box-arrow-right me-2"></i>Sair</a></li>
       </ul>
@@ -48,16 +36,4 @@
   </div>
 </div>
 
-<!-- Offcanvas Notificações -->
-<div class="offcanvas offcanvas-end text-bg-light" tabindex="-1"
-     id="appOffcanvasNotifications" aria-labelledby="offcanvasNotificationsLabel" aria-modal="true" role="dialog">
-  <div class="offcanvas-header">
-    <h5 id="offcanvasNotificationsLabel" class="offcanvas-title">Notificações</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
-  </div>
-  <div class="offcanvas-body">
-    <ul class="list-group">
-      <!-- Itens de notificação... -->
-    </ul>
-  </div>
-</div>
+

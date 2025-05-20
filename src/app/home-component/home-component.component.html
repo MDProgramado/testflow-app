@@ -1,21 +1,20 @@
 <app-header-component></app-header-component>
 
-<main class="home-main flex-grow-1 container my-5">
+
   <!-- Seção de Resumo -->
-  <section class="home- summary mb-5">
+
     <app-sumary></app-sumary>
-  </section>
+
 
   <hr class="my-5">
 
   <!-- Seção de Lista de Tarefas -->
-  <section class="home-task-list mb-5">
     <app-task-list-component 
       [exibirHeader]="false" 
       [exibirFooter]="false">
     </app-task-list-component>
-  </section>
-  
-</main>
 
- <app-footer-component   class="footer"></app-footer-component>
+  
+
+
+ <app-footer-component></app-footer-component>
