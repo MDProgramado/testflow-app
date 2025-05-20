@@ -116,7 +116,6 @@ A aplicação pode ter:
 │   │   ├── sumary/
 │   │   ├── services/services/
 │   │   ├── app.routes.ts
-│   ├── assets/api/
 │   ├── main.ts
 ├── angular.json
 ├── package.json
