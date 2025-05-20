@@ -1,8 +1,19 @@
-# TestflowApp
+
+ # TestflowApp
 
 O *TaskFlow – Gerenciador de Tarefas de Produção e Manutenção* é um sistema simples de gerenciamento de tarefas que visa otimizar e organizar a execução de tarefas diárias em uma fábrica ou ambiente industrial. Ele facilita a visualização e o acompanhamento de tarefas, tanto para operadores quanto para técnicos de manutenção, com o objetivo de *aumentar a eficiência e minimizar falhas ou atrasos* no processo de produção.
 
-### Funcionalidades do TestflowApp
+---
+
+## 📸 Capturas de Tela
+
+*()*
+
+---
+
+
+
+## 🚀 Funcionalidades do TestflowApp
 
 #### 1. *Cadastro e Acompanhamento de Tarefas*
 
@@ -22,69 +33,102 @@ A aplicação pode ter:
 * *Lista de Tarefas*: Exibição de todas as tarefas programadas, com filtros por status, operador ou prazo.
 * *Formulário de Tarefa*: Para criar ou editar tarefas, permitindo adicionar descrições detalhadas e definir o status e responsável.
 
-#### 3. *Notificações e Alertas*
 
-* *Notificações* para lembrar os operadores sobre tarefas pendentes ou quando o prazo está se aproximando.
-* *Alertas* quando o número de tarefas ou o tempo de atraso ultrapassar um limite crítico.
-
-#### 4. *Relatórios e Performance*
+#### 3. *Relatórios e Performance*
 
 * *Relatório de Tarefas Concluídas*: Para que supervisores possam monitorar a produtividade de cada operador e o tempo médio de execução das tarefas.
 * *Gráficos de Desempenho: Gráficos simples usando **Chart.js* ou *ngx-charts*, como total de tarefas concluídas por dia, tempo médio de execução, etc.
 
+---
 
-## Development server
+## 🛠️ Tecnologias Utilizadas
 
-To start a local development server, run:
+- **Angular 19 (Standalone Components)**
+- **Bootstrap 5.3**
+- **TypeScript**
+- **Node.js (API interna)**
+- **SCSS/CSS modularizado**
+- **Angular Material (em partes)**
+- **Chart.js (para gráficos)**
+- **ngx-charts**
 
-```bash
-ng serve
+
+---
+
+## ▶️ Como Rodar o Projeto
+
+### 🔧 API (Mock interna)
+1. Acesse a pasta do projeto
+2. Inicie a API mock (caso ativada via script):
+   ```bash
+   npm start
+   ```
+
+### 🖥️ Frontend
+1. Instale as dependências:
+   ```bash
+   npm install, npm install @angular, npm install bootstrap, npm install chart.js, npm install ngx-charts, 
+   ```
+2. Rode o servidor de desenvolvimento:
+   ```bash
+   ng serve
+   ```
+3. Acesse em: `http://localhost:4200`
+
+---
+
+## 🧠 Requisitos de Login
+
+- **Usuário:** admin1@gmail.com 
+- **Senha:** admin123
+
+---
+
+## 📁 Estrutura de Pastas (resumo)
+
+```
+📦 backend
+├── db.json
+├── api
+│   ├── index.js
+📦 projeto-angular
+├── src
+│   ├── app
+│   │   ├── home=page/
+│   │   ├── login/
+│   │   ├── home/
+│   │   ├── header/
+│   │   ├── task-list/
+│   │   ├── task-detail/
+│   │   ├── task-form/
+│   │   ├── sumary/
+│   │   ├── services/services/
+│   │   ├── app.routes.ts
+│   ├── assets/api/
+│   ├── main.ts
+├── angular.json
+├── package.json
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 👨‍💻 Autor
 
-```bash
-ng generate --help
-```
+**Maicon Douglas Alves De Oliveira**  
+Estudante de engenharia da computação pela UFBA - Ciência e Tecnologia  
+[GitHub - @MMDProgramado](https://github.com/MDProgramado/)
 
-## Building
 
-To build the project run:
 
-```bash
-ng build
-```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
-```bash
-ng test
-```
 
-## Running end-to-end tests
 
-For end-to-end (e2e) testing, run:
 
-```bash
-ng e2e
-```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
