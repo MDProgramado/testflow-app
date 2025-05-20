@@ -24,6 +24,7 @@
     "bootstrap": "^5.3.6",
     "bootstrap-icons": "^1.13.1",
     "chart.js": "^4.4.9",
+    "cors": "^2.8.5",
     "firebase": "^11.7.3",
     "json-server": "^1.0.0-beta.3",
     "ng2-charts": "^8.0.0",

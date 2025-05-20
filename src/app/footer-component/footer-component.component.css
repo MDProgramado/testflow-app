@@ -4,17 +4,21 @@
   padding: 1.5rem 0;
   color: #fff;
 
-  background: linear-gradient(155deg, #0088ff 0%, #0c2ccb 50%, #021f58 100%);
+  background: linear-gradient(135deg, #0badc2 0%, #0011fe 50%, #0044ff 100%);
   background-size: 300% 300%;
   animation: gradientShift 12s ease-in-out infinite;
 }
 
-@keyframes gradientShift {
-  0%   { background-position:   0% 50%; }
-  25%  { background-position:  50% 100%; }
-  50%  { background-position: 100% 50%; }
-  75%  { background-position:  50%   0%; }
-  100% { background-position:    0% 50%; }
+@keyframes gradientBG {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
 }
 
 .app-footer::before {

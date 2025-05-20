@@ -1,18 +1,16 @@
 .app-header {
-  position: relative;
-  overflow: hidden;
-  padding: 1.5rem 0;
-  color: #fff;
-
-  background: linear-gradient(155deg, hsl(224, 100%, 51%) 0%, hsl(239, 100%, 49%) 50%, #021f58 100%);
-  background-size: 300% 300%;
-  animation: gradientShift 12s ease-in-out infinite;
+  background: linear-gradient(135deg, #07175c 0%, #0077fe 50%, #1900ff 100%);
+  background-size: 200% 200%;
+  animation: gradientBG 15s ease infinite;
 }
-
-@keyframes gradientShift {
-  0%   { background-position:   0% 50%; }
-  25%  { background-position:  50% 100%; }
-  50%  { background-position: 100% 50%; }
-  75%  { background-position:  50%   0%; }
-  100% { background-position:    0% 50%; }
+@keyframes gradientBG {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
 }
