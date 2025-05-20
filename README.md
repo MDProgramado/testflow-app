@@ -12,15 +12,15 @@ O *TaskFlow – Gerenciador de Tarefas de Produção e Manutenção* é um siste
 ![Tela de HomePage](./sreenshort/print-homePage.png)
 ---
 ### Login
-![Tela Login](./sreenshort/print%20loginPage.png)
+![Tela Login](./sreenshort/print-loginPage.png)
 
 ---
 ### Tarefas
-!![Tela de Tarefas](./sreenshort/print%20taskPage.png)
+!![Tela de Tarefas](./sreenshort/print-taskPage.png)
 ---
 
 ### Dashboard
-![Tela de Dashboard](./sreenshort/print%20dashboardPage.png)
+![Tela de Dashboard](./sreenshort/print-dashboard.png)
 ---
 
 
