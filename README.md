@@ -49,7 +49,7 @@ A aplicação pode ter:
 #### 3. *Relatórios e Performance*
 
 * *Relatório de Tarefas Concluídas*: Para que supervisores possam monitorar a produtividade de cada operador e o tempo médio de execução das tarefas.
-* *Gráficos de Desempenho: Gráficos simples usando **Chart.js* ou *ngx-charts*, como total de tarefas concluídas por dia, tempo médio de execução, etc.
+* *Gráficos de Desempenho: Gráficos simples usando **Chart.js* e *ngx-charts*, como total de tarefas concluídas por dia, tempo médio de execução, etc.
 
 ---
 
