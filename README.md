@@ -5,10 +5,22 @@ O *TaskFlow – Gerenciador de Tarefas de Produção e Manutenção* é um siste
 
 ---
 
-## 📸 Capturas de Tela
+## 📸 Capturas de Tela do projeto
 
-*()*
+### Tela de HomePage
 
+![Tela de HomePage](./sreenshort/print-homePage.png)
+---
+### Login
+![Tela Login](./sreenshort/print%20loginPage.png)
+
+---
+### Tarefas
+!![Tela de Tarefas](./sreenshort/print%20taskPage.png)
+---
+
+### Dashboard
+![Tela de Dashboard](./sreenshort/print%20dashboardPage.png)
 ---
 
 
@@ -52,7 +64,6 @@ A aplicação pode ter:
 - **Chart.js (para gráficos)**
 - **ngx-charts**
 
-
 ---
 
 ## ▶️ Como Rodar o Projeto
@@ -91,6 +102,7 @@ A aplicação pode ter:
 ├── db.json
 ├── api
 │   ├── index.js
+
 📦 projeto-angular
 ├── src
 │   ├── app
