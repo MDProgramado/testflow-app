@@ -131,7 +131,7 @@ A aplicação pode ter:
 
 **Maicon Douglas Alves De Oliveira**  
 Estudante de engenharia da computação pela UFBA - Ciência e Tecnologia  
-[GitHub - @MDProgramado](https://github.com/MDProgramado/)
+[GitHub - @MMDProgramado](https://github.com/MDProgramado/)
 
 
 
