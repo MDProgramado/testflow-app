@@ -1,10 +1,9 @@
 .app-footer {
-  position: relative;
   overflow: hidden;
   padding: 1.5rem 0;
   color: #fff;
 
-  background: linear-gradient(135deg, #0badc2 0%, #0011fe 50%, #0044ff 100%);
+  background: linear-gradient(135deg, #0bc29a 0%, #0011fe 50%, #071847 100%);
   background-size: 300% 300%;
   animation: gradientShift 12s ease-in-out infinite;
 }
@@ -21,43 +20,3 @@
   }
 }
 
-.app-footer::before {
-  content: '';
-  position: absolute;
-  top: -40%;
-  right: -40%;
-  width: 180%;
-  height: 180%;
-  background: radial-gradient(circle at top right, rgba(255,255,255,0.08), transparent 70%);
-  pointer-events: none;
-}
-
-.app-footer .footer-text {
-  font-size: 0.9rem;
-}
-
-.app-footer .social-links span {
-  font-weight: 500;
-}
-
-.app-footer .icon-link {
-  color: rgba(255,255,255,0.75);
-  transition: color 0.3s ease;
-}
-.app-footer .icon-link:hover {
-  color: #ffffff;
-}
-
-.app-footer .back-to-top {
-  position: absolute;
-  right: 1rem;
-  bottom: 1rem;
-  font-size: 1.75rem;
-  color: rgba(255,255,255,0.6);
-  cursor: pointer;
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-.app-footer .back-to-top:hover {
-  color: #ffffff;
-  transform: scale(1.1);
-}
