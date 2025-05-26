@@ -53,9 +53,9 @@ export class SumaryComponent implements OnInit{
              route: '/tasks?status=Concluída'
             },
           { 
-            label: 'Atrasadas', 
+            label: 'Pendente', 
             count: overdue, 
-            color: 'warning',
+            color: 'danger',
             icon: 'bi-exclamation-circle',
              route: '/tasks?status=Pendente' 
           }

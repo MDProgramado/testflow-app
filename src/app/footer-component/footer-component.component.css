@@ -3,7 +3,7 @@
   padding: 1.5rem 0;
   color: #fff;
 
-  background: linear-gradient(135deg, #0bc29a 0%, #0011fe 50%, #071847 100%);
+  background: linear-gradient(135deg, #020011 0%, #020266 50%, #011a1f 100%);
   background-size: 300% 300%;
   animation: gradientShift 12s ease-in-out infinite;
 }

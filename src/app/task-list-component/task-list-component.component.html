@@ -53,7 +53,7 @@
     <!-- Card Individual -->
     <div *ngFor="let t of filteredTasks" class="col-12 col-md-6 col-xl-4 " >
       <div  [routerLink]="['/tasks', t.id]" class=" card shadow-sm h-100 hover-shadow border-start border-4 p 
-                  {{ t.status === 'Pendente' ? 'border-warning' : '' }}
+                  {{ t.status === 'Pendente' ? 'border-danger' : '' }}
                   {{ t.status === 'Em andamento' ? 'border-primary' : '' }}
                   {{ t.status === 'Concluída' ? 'border-success' : '' }}">
         <div class="card-body">
@@ -68,7 +68,7 @@
     </small>
   </div>
   
-  <span class="badge {{ t.status === 'Pendente' ? 'bg-warning-subtle text-warning-emphasis' : '' }} 
+  <span class="badge {{ t.status === 'Pendente' ? 'bg-danger-subtle text-danger-emphasis' : '' }} 
               {{ t.status === 'Em andamento' ? 'bg-info-subtle text-info-emphasis' : '' }} 
               {{ t.status === 'Concluída' ? 'bg-success-subtle text-success-emphasis' : '' }} 
               rounded-pill d-inline-flex align-items-center py-1 py-md-1 px-2 px-md-3 
