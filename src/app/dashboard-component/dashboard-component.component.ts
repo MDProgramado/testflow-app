@@ -29,13 +29,14 @@ export class DashboardComponentComponent implements OnInit {
   public barChartLabels: string[] = ['Baixa', 'Média', 'Alta'];
   public barChartData: ChartData<'bar', number[], string> = {
     labels: this.barChartLabels,
-    datasets: [{ data: [], label: 'Prioridade' }]
+    datasets: [{ data: [1, 2, 3], label: 'Click nessa barra para filtrar as trarefas por prioridade' }]
   };
   public barChartType: ChartType = 'bar';
 
   constructor(private taskService: TaskServiceService) {}
 
   ngOnInit(): void {
+    
     this.taskService.getAll().subscribe(tasks => {
       const now = new Date();
           now.setHours(0, 0, 0, 0);

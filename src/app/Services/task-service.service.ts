@@ -10,25 +10,25 @@ export class TaskServiceService {
 
   private API = 'https://backendd-01jm.onrender.com/tasks';
 
-  constructor(private htpp: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   getAll(): Observable<Task[]> {
-    return this.htpp.get<Task[]>(this.API);
+    return this.http.get<Task[]>(this.API);
   }
 
   getById(id: string): Observable<Task> {
-    return this.htpp.get<Task>(`${this.API}/${id}`);
+    return this.http.get<Task>(`${this.API}/${id}`);
   }
 
   create(task: Task): Observable<Task> {
-    return this.htpp.post<Task>(this.API, task);
+    return this.http.post<Task>(this.API, task);
   }
 
   update(task: Task): Observable<Task> {
-    return this.htpp.put<Task>(`${this.API}/${task.id}`, task);
+    return this.http.put<Task>(`${this.API}/${task.id}`, task);
   }
 
   delete(id:string): Observable<void> {
-    return this.htpp.delete<void>(`${this.API}/${id}`);
+    return this.http.delete<void>(`${this.API}/${id}`);
   }
 }
