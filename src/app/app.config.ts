@@ -6,7 +6,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
-import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+
 
 
 
@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
      provideClientHydration(withEventReplay()),
      provideHttpClient(withFetch()),
     provideAnimations(),  
-    provideToastr(), provideCharts(withDefaultRegisterables()),
+    provideToastr(),
      
 
   ]

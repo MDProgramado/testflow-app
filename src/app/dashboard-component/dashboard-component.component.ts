@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { TaskServiceService } from '../Services/task-service.service';
 import { ChartData, ChartType } from 'chart.js';
 import { SumaryComponent } from "../sumary/sumary.component";
-import { BaseChartDirective } from 'ng2-charts';
+
 import { FooterComponentComponent } from "../footer-component/footer-component.component";
 import { HeaderComponentComponent } from "../header-component/header-component.component";
 
@@ -12,7 +12,7 @@ import { HeaderComponentComponent } from "../header-component/header-component.c
 @Component({
   standalone: true,
   selector: 'app-dashboard',
-  imports: [CommonModule, RouterModule, SumaryComponent, BaseChartDirective, FooterComponentComponent, HeaderComponentComponent],
+  imports: [CommonModule, RouterModule, SumaryComponent, FooterComponentComponent, HeaderComponentComponent],
   templateUrl: './dashboard-component.component.html',
   styleUrls: ['./dashboard-component.component.css']
 })

@@ -1,36 +1,102 @@
-<div class="container mt-4">
-  <!-- Barra de Navegação -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">TaskFlow</a>
-    <button class="btn btn-primary" (click)="markAllAsRead()">Marcar tudo como lido</button>
-    <div class="notifications-container">
-      <span class="badge badge-danger">{{ unreadCount }}</span> Notificações
-      <ul class="notification-list">
-        <li *ngFor="let notification of notifications" class="notification-item alert" [ngClass]="{
-          'alert-info': notification.type === 'info',
-          'alert-warning': notification.type === 'warning',
-          'alert-danger': notification.type === 'error'
-        }">
-          {{ notification.message }}
-        </li>
-      </ul>
-    </div>
-  </nav>
+<div class="notification-wrapper">
+  <div class="dropdown">
+    <button
+      id="notificationDropdown"
+      class="btn btn-icon bg-light position-relative"
+      type="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+      aria-label="Abrir notificações"
+    >
+      <i class="bi bi-bell fs-5"></i>
+      <span
+        *ngIf="unreadCount > 0"
+        class="position-absolute top-0 start-75 translate-middle badge rounded-pill bg-danger border border-light"
+      >
+        {{ unreadCount }}
+      </span>
+    </button>
 
-  <!-- Modal de Notificação -->
-  <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true" #modal>
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="notificationModalLabel">Notificação</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>{{ notificationMessage }}</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-        </div>
+    <ul
+      class="dropdown-menu dropdown-menu-end shadow-lg notification-list-container"
+      aria-labelledby="notificationDropdown"
+    >
+      <li>
+        <h6 class="dropdown-header">Notificações</h6>
+      </li>
+
+      <li *ngIf="notifications.length === 0">
+        <button type="button" class="dropdown-item text-muted" disabled>
+          <i class="bi bi-check2-circle me-2"></i>
+          Você está em dia!
+        </button>
+      </li>
+
+      <li *ngFor="let notification of notifications">
+        <button
+          type="button"
+          class="dropdown-item d-flex align-items-center notification-item"
+          [attr.aria-label]="'Notificação: ' + notification.message"
+        >
+          <i
+            class="bi me-3 fs-5"
+            [ngClass]="{
+              'bi-info-circle-fill text-primary': notification.type === 'info',
+              'bi-exclamation-triangle-fill text-warning': notification.type === 'warning',
+              'bi-x-octagon-fill text-danger': notification.type === 'error'
+            }"
+          ></i>
+          <span>{{ notification.message }}</span>
+        </button>
+      </li>
+
+      <ng-container *ngIf="notifications.length > 0">
+        <li>
+          <hr class="dropdown-divider" />
+        </li>
+        <li>
+          <button
+            type="button"
+            class="dropdown-item text-center text-primary"
+            (click)="markAllAsRead()"
+          >
+            <i class="bi bi-check2-all me-2"></i>
+            Marcar todas como lidas
+          </button>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="notificationModal"
+  tabindex="-1"
+  aria-labelledby="notificationModalLabel"
+  aria-hidden="true"
+  #modal
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notificationModalLabel">
+          <i class="bi bi-bell-fill me-2"></i> Nova Notificação
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>{{ notificationMessage }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+          OK
+        </button>
       </div>
     </div>
   </div>

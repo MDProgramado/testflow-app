@@ -28,7 +28,6 @@ export class TaskListComponentComponent implements OnInit {
     private taskService: TaskServiceService,
     private router: Router,
     private route: ActivatedRoute,
-    private notificationService: NotificationService
   ) {}
   
   @Input() exibirHeader = true;
