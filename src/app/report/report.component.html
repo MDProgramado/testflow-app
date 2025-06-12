@@ -1,0 +1,18 @@
+<h3 class="text-center mb-4">Relatório de Tarefas Concluídas</h3>
+
+<table class="table table-bordered table-striped table-hover shadow-sm">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" class="text-center">Título</th>
+      <th scope="col" class="text-center">Responsável</th>
+      <th scope="col" class="text-center">Data de Conclusão</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of completedTasks" class="align-middle">
+      <td class="text-center">{{ task.title }}</td>
+      <td class="text-center">{{ task.responsible }}</td>
+      <td class="text-center">{{ task.dueDate | date:'dd/MM/yyyy' }}</td>
+    </tr>
+  </tbody>
+</table>

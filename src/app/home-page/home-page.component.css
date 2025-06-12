@@ -1,5 +1,5 @@
 .hero-section {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, #0771eb 0%, #06c4f3 100%);
   color: white;
 }
 
@@ -23,10 +23,11 @@
 }
 
 .hero-section {
-  background: linear-gradient(135deg, #020011 0%, #020266 50%, #011a1f 100%);
+  background: linear-gradient(120deg, #0a125c 0%, #010ec2 50%, #04eafa 100%);
   background-size: 200% 200%;
-  animation: gradientBG 15s ease infinite;
+  animation: gradientBG 30s ease infinite;
 }
+
 @keyframes gradientBG {
   0% {
       background-position: 0% 50%;

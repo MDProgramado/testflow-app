@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Task } from '../interfaces/Task';
 import { TaskServiceService } from '../Services/task-service.service';
 import { HeaderComponentComponent } from "../header-component/header-component.component";
 import { FooterComponentComponent } from "../footer-component/footer-component.component";
+import { NotificationService } from '../Services/notification.service';
 
 
 @Component({
@@ -21,10 +22,13 @@ export class TaskListComponentComponent implements OnInit {
   statusFilter = '';
   sectorFilter = '';
   headerAtivo: Boolean = false;
+
+  
   constructor(
     private taskService: TaskServiceService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private notificationService: NotificationService
   ) {}
   
   @Input() exibirHeader = true;
@@ -39,12 +43,12 @@ export class TaskListComponentComponent implements OnInit {
     });
   }
 
-
   loadTasks(): void {
     this.taskService.getAll().subscribe(tasks => {
       this.tasks = tasks;
       this.applyFilters();
-    });
+      this.taskService.checkTaskDeadLines(tasks);
+    })
   }
 
   applyFilters(): void {

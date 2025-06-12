@@ -9,6 +9,7 @@ import { TaskDetailComponentComponent } from './task-detail-component/task-detai
 import { HomePageComponent } from './home-page/home-page.component';
 import { PolitcaPrivacidadeComponent } from './LGPD/politca-privacidade/politca-privacidade.component';
 import { TermoDeUsoComponent } from './LGPD/termo-de-uso/termo-de-uso.component';
+import { ReportComponent } from './report/report.component';
 
 export const routes: Routes = [
   {
@@ -51,6 +52,10 @@ export const routes: Routes = [
   { 
     path: 'tasks/:id', 
     component: TaskDetailComponentComponent 
+  },
+  {
+    path: 'report',
+    component: ReportComponent
   },
   {
     path: '',
