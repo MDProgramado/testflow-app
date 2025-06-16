@@ -6,15 +6,15 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class NotificationService {
 
-  private notificationSubject = new BehaviorSubject< {message: string, type: string}[]>([])
+  private notificationSubject = new BehaviorSubject< {message: string, type: string, dismissed: boolean}[]>([])
   notification$ = this.notificationSubject.asObservable();
   constructor() { 
     const savedNotificationSubject = JSON.parse(localStorage.getItem('notification') || '[]');
     this.notificationSubject.next(savedNotificationSubject);
   }
 
-  showNotification(message: string, type: string = 'info', duration: number = 5000) {
-    const notification = { message, type };
+  showNotification(message: string, type: string = 'info', duration: number = 5000, dismissed: boolean = false) {
+    const notification = { message, type,  dismissed};
     const currentNotification = this.notificationSubject.value;
     const updatedNotification = [...currentNotification, notification];
 
@@ -24,18 +24,23 @@ export class NotificationService {
     setTimeout(() => this.clearNotification(notification), duration)
   }
 
-  clearNotification(notificationToRemove: {message: string; type: string}) {
-    const currentNotifications = this.notificationSubject.value;
-    const updatedNotifications = currentNotifications.filter(notification => notification !== notificationToRemove);
+  clearNotification(notificationToRemove: {message: string; type: string, dismissed: boolean, read?: boolean}) {
+    if(!notificationToRemove.dismissed || notificationToRemove.read){
 
-    this.notificationSubject.next(updatedNotifications);
-    localStorage.setItem('notidications', JSON.stringify(updatedNotifications));
+      const currentNotifications = this.notificationSubject.value;
+      const updatedNotifications = currentNotifications.filter(notification => notification !== notificationToRemove);
+  
+      this.notificationSubject.next(updatedNotifications);
+      localStorage.setItem('notifications', JSON.stringify(updatedNotifications));
+    }
   }
 
   markAllsRead() {
-    const clearedNotifications = this.notificationSubject.value.map(notification => ({ ...notification, read: true}));
-    this.notificationSubject.next(clearedNotifications);
-    localStorage.setItem('notifications', JSON.stringify(clearedNotifications));
-    localStorage.setItem('notification', JSON.stringify(clearedNotifications));
+    const clearNotifications = this.notificationSubject.value.map(notification => ({
+      ...notification,
+      read: true
+    }));
+    this.notificationSubject.next(clearNotifications);
+    localStorage.setItem('notifications', JSON.stringify(clearNotifications));
   }
 }

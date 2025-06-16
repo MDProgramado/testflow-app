@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { Task } from '../interfaces/Task';
 import { NotificationService } from './notification.service';
 
@@ -8,7 +8,7 @@ import { NotificationService } from './notification.service';
   providedIn: 'root'
 })
 export class TaskServiceService {
-  private tasksSubject = new BehaviorSubject<any[]>([]);
+  private tasksSubject = new BehaviorSubject<Task[]>([]);
   tasks$: Observable<any[]> = this.tasksSubject.asObservable();
   private API = 'https://backendd-01jm.onrender.com/tasks';
 
@@ -23,12 +23,11 @@ export class TaskServiceService {
   }
 
   create(task: Task): Observable<Task> {
-    const currentTasks = this.tasksSubject.value;
-    this.tasksSubject.next([...currentTasks, task]);
-
-    this.notificationService.showNotification(`Tarefa '${task.title}' foi criada!`, 'info');
-
-     return of(task)
+    return this.http.post<Task>(this.API, task).pipe(
+      tap(() => {
+        this.notificationService.showNotification(`Tarefa '${task.title} com prioridade ${task.priority}' foi criada com sucesso!`, 'info');
+      })
+    )
   }
 
   checkTaskDeadLines(tasks: Task[]):void {
@@ -48,6 +47,17 @@ export class TaskServiceService {
         }
       }
     });
+  }
+
+  getAllFiltered(status: string, sector: string): Observable<Task[]>{
+    let params = new HttpParams();
+    if(status) {
+      params = params.set('status', status);
+    }
+    if(sector) {
+      params = params.set('sector', sector);
+    }
+    return this.http.get<Task[]>(this.API, { params});
   }
 
   update(task: Task): Observable<Task> {

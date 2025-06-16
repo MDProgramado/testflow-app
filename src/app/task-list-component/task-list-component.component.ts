@@ -34,27 +34,24 @@ export class TaskListComponentComponent implements OnInit {
   @Input() exibirFooter = true;
 
   ngOnInit(): void {
-    
     this.route.queryParamMap.subscribe(params => {
       this.statusFilter = params.get('status') || '';
       this.sectorFilter = params.get('sector') || '';
       this.loadTasks();
     });
+    
   }
 
   loadTasks(): void {
     this.taskService.getAll().subscribe(tasks => {
       this.tasks = tasks;
-      this.applyFilters();
-      this.taskService.checkTaskDeadLines(tasks);
-    })
-  }
+      this.filteredTasks = tasks;
 
-  applyFilters(): void {
-    this.filteredTasks = this.tasks.filter(t =>
-      (!this.statusFilter || t.status === this.statusFilter) &&
-      (!this.sectorFilter || t.sector === this.sectorFilter)
-    );
+      setInterval(() => {
+
+        this.taskService.checkTaskDeadLines(this.tasks);
+      }, 3600000);
+    });
   }
 
   deleteTask(id: string): void {
