@@ -19,7 +19,7 @@ import { HeaderComponentComponent } from "../header-component/header-component.c
 export class TaskDetailComponentComponent implements OnInit{
 
   task$!: Observable<Task>; 
-
+  
   constructor(
     private route: ActivatedRoute,
     private taskService: TaskServiceService,
@@ -28,9 +28,9 @@ export class TaskDetailComponentComponent implements OnInit{
   ) {}
 
  ngOnInit(): void {
-  this.task$ = this.route.paramMap.pipe(
-    switchMap(params => this.taskService.getById(params.get('id')!))
-  );
+ this.task$ = this.route.paramMap.pipe(
+      switchMap(params => this.taskService.getById(params.get('id')!))
+    );
  }
 
 markComplete(id: string) {

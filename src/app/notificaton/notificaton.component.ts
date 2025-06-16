@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild,  ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { NotificationService } from '../Services/notification.service';
-import { TaskServiceService } from '../Services/task-service.service';
 import { CommonModule } from '@angular/common';
 import { Modal } from 'bootstrap';
-import { RouterModule } from '@angular/router';
-import { Task } from '../interfaces/Task';
+import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { INotification } from '../interfaces/Notification';
 
 @Component({
   selector: 'app-notificaton',
@@ -15,73 +14,89 @@ import { Subscription } from 'rxjs';
 })
 export class NotificatonComponent  implements OnInit, AfterViewInit, OnDestroy {
 
-  notifications: any[] = [];
+  notifications: INotification[] = [];
   unreadCount: number = 0;
   notificationMessage: string = '';
+  modalNotification: INotification | null = null;
 
   @ViewChild('modal') modalElement!: ElementRef;
   private bsModal!: Modal;
-  private notificationsSubscription!: Subscription;
+  private listSubscription!: Subscription;
+  private modalSubscription!: Subscription;
 
   constructor(
     private notificationService: NotificationService, 
-    private taskService: TaskServiceService
+   private router: Router,
+   
   ) {}
 
   ngOnInit(): void {
-    // Assinatura para as notificações
-    this.notificationsSubscription = this.notificationService.notification$.subscribe(notifications => {
+     console.log('[DEBUG] ngOnInit: Criando as inscrições (subscriptions)...');
+    // 1. ATUALIZAR A LISTA (ESTADO)
+    this.listSubscription = this.notificationService.notification$.subscribe(notifications => {
       this.notifications = notifications;
-      this.unreadCount = notifications.length;
+      this.unreadCount = notifications.filter(n => !n.isRead).length;
+    });
 
-      // Lógica para mostrar o modal se houver notificações
-      if (this.notifications.length > 0) {
-        this.notificationMessage = this.notifications[this.notifications.length - 1].message;
+    // 2. Assinatura para MOSTRAR O MODAL (EVENTO)
+    this.modalSubscription = this.notificationService.modalNotification$.subscribe(notification => {
+      if (notification && this.bsModal) {
+        console.log('[DEBUG] EVENTO DE MODAL RECEBIDO!', notification);
+      console.log('[DEBUG] O modal `bsModal` já está inicializado? Resposta:', this.bsModal);
+        this.modalNotification = notification;
+        this.bsModal.show();
+      } else {
+        console.error('[DEBUG] FALHA AO MOSTRAR O MODAL: A condição (notification && this.bsModal) não foi atendida.');
       }
     });
   }
-
   ngAfterViewInit(): void {
-    // Inicializa o modal após a visualização ser totalmente carregada
+
     if (this.modalElement) {
       this.bsModal = new Modal(this.modalElement.nativeElement);
-      
-      // Se houver notificações, mostra o modal
-      if (this.notifications.length > 0) {
-        this.showNotificationModal();
-      }
+        console.log('[DEBUG] Instância do Modal criada:', this.bsModal);
+    } else {
+      console.error('[DEBUG] Elemento do Modal não foi encontrado!');
     }
   }
 
-  showNotificationModal(): void {
-    if (this.bsModal) {
-      this.bsModal.show();
-    }
+  onNotificationClick(notification: INotification): void {
+   
+    this.notificationService.markAsRead(notification.id);
+    this.router.navigate(['/tasks', notification.id]); 
+  }
+  dismissNotification(notification: INotification, event: MouseEvent): void {
+    event.stopPropagation(); 
+    this.notificationService.clearNotification(notification);
   }
 
-  markAllAsRead(): void {
-    this.unreadCount = 0;
-    this.notifications = [];
-    this.notificationService.markAllsRead();
+   markAllAsRead(): void {
+    this.notificationService.markAllAsRead(); 
   }
 
   getNotificationClass(type: string): string {
+  
     switch (type) {
-      case 'info':
-        return 'bi-info-circle-fill text-primary';
-      case 'warning':
-        return 'bi-exclamation-triangle-fill text-warning';
-      case 'error':
-        return 'bi-x-octagon-fill text-danger';
-      default:
-        return '';
+      case 'info': return 'text-primary';
+      case 'warning': return 'text-warning';
+      case 'error': return 'text-danger';
+      default: return 'text-secondary';
     }
   }
 
-  // Cancelando a assinatura quando o componente for destruído
   ngOnDestroy(): void {
-    if (this.notificationsSubscription) {
-      this.notificationsSubscription.unsubscribe();
+
+    if (this.listSubscription) {
+      this.listSubscription.unsubscribe();
+    }
+    if (this.modalSubscription) {
+      this.modalSubscription.unsubscribe();
     }
   }
+  onModalOkClick(): void {
+ 
+  if (this.modalNotification) {
+    this.notificationService.clearNotification(this.modalNotification);
+  }
+}
 }

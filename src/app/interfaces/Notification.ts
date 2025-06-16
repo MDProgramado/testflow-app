@@ -1,7 +1,10 @@
-export type NotificationType = 
-'success' | 'error' | 'warning' | 'info';
 
 export interface INotification {
+ id: number;
   message: string;
-  type: NotificationType;
+  type: 'info' | 'warning' | 'error';
+  isRead: boolean;     
+  timestamp: Date;      
+  link?: string;        
+
 }

@@ -1,46 +1,90 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { INotification } from '../interfaces/Notification';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotificationService {
-
-  private notificationSubject = new BehaviorSubject< {message: string, type: string, dismissed: boolean}[]>([])
+  //BehaviorSubject  para gerar a lista de notificações
+  private notificationSubject = new BehaviorSubject<INotification[]>([]);
   notification$ = this.notificationSubject.asObservable();
-  constructor() { 
-    const savedNotificationSubject = JSON.parse(localStorage.getItem('notification') || '[]');
-    this.notificationSubject.next(savedNotificationSubject);
-  }
+  // Subject para gerar notificações de modal
+  private modalNotificationSubject = new Subject<INotification>();
+  modalNotification$ = this.modalNotificationSubject.asObservable();
 
-  showNotification(message: string, type: string = 'info', duration: number = 5000, dismissed: boolean = false) {
-    const notification = { message, type,  dismissed};
-    const currentNotification = this.notificationSubject.value;
-    const updatedNotification = [...currentNotification, notification];
-
-    this.notificationSubject.next(updatedNotification);
-    localStorage.setItem('notifications', JSON.stringify(updatedNotification))
-    
-    setTimeout(() => this.clearNotification(notification), duration)
-  }
-
-  clearNotification(notificationToRemove: {message: string; type: string, dismissed: boolean, read?: boolean}) {
-    if(!notificationToRemove.dismissed || notificationToRemove.read){
-
-      const currentNotifications = this.notificationSubject.value;
-      const updatedNotifications = currentNotifications.filter(notification => notification !== notificationToRemove);
-  
-      this.notificationSubject.next(updatedNotifications);
-      localStorage.setItem('notifications', JSON.stringify(updatedNotifications));
-    }
-  }
-
-  markAllsRead() {
-    const clearNotifications = this.notificationSubject.value.map(notification => ({
-      ...notification,
-      read: true
+  constructor() {
+    const rawNotifications = JSON.parse(localStorage.getItem('notifications') || '[]');
+    const savedNotifications = rawNotifications.map((n: INotification) => ({
+      ...n,
+      timestamp: new Date(n.timestamp)
     }));
-    this.notificationSubject.next(clearNotifications);
-    localStorage.setItem('notifications', JSON.stringify(clearNotifications));
+    this.notificationSubject.next(savedNotifications);
+  }
+
+  showNotification(
+    message: string,
+    type: 'info' | 'warning' | 'error' = 'info',
+    options?: { duration?: number; silent?: boolean; link?: string }
+  ): void {
+    const notification: INotification = {
+      id: Date.now() + Math.random(),
+      message,
+      type,
+      isRead: false,
+      timestamp: new Date(),
+      link: options?.link,
+    };
+
+    const currentNotifications = this.notificationSubject.value;
+    const updatedNotifications = [...currentNotifications, notification];
+    this.notificationSubject.next(updatedNotifications);
+    this.saveToLocalStorage(updatedNotifications);
+
+    if (!options?.silent) {
+      this.modalNotificationSubject.next(notification);
+    }
+
+  }
+
+  clearNotification(notificationToRemove: INotification): void {
+    const currentNotifications = this.notificationSubject.value;
+    const updatedNotifications = currentNotifications.filter(
+      (notification) => notification.id !== notificationToRemove.id
+    );
+
+    this.notificationSubject.next(updatedNotifications);
+    this.saveToLocalStorage(updatedNotifications);
+  }
+
+  clearAll(): void {
+    this.notificationSubject.next([]);
+    this.saveToLocalStorage([]);
+  }
+
+  markAsRead(notificationId: number): void {
+    const currentNotifications = this.notificationSubject.value;
+    const updatedNotifications = currentNotifications.map((n) => {
+      if (n.id === notificationId) {
+        return { ...n, isRead: true };
+      }
+      return n;
+    });
+    this.notificationSubject.next(updatedNotifications);
+    this.saveToLocalStorage(updatedNotifications);
+  }
+
+  markAllAsRead(): void {
+    const currentNotifications = this.notificationSubject.value;
+    const updatedNotifications = currentNotifications.map((n) => ({
+      ...n,
+      isRead: true,
+    }));
+    this.notificationSubject.next(updatedNotifications);
+    this.saveToLocalStorage(updatedNotifications);
+  }
+
+  private saveToLocalStorage(notifications: any[]): void {
+    localStorage.setItem('notifications', JSON.stringify(notifications));
   }
 }

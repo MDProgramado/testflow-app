@@ -1,34 +1,45 @@
-/* Garante que o dropdown de notificações tenha uma largura mínima e máxima e seja rolável */
-.dropdown-menu {
-  width: 350px;
-  max-width: 90vw;
-  padding-top: 0;
-  padding-bottom: 0;
+/* Estilo base das notificações */
+.notification-item {
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.notification-list-container {
-  max-height: 400px; /* Altura máxima antes de a barra de rolagem aparecer */
-  overflow-y: auto;
+/* Notificação não lida */
+.notification-item.unread {
+  background-color: #f8d7da; /* Cor de fundo para notificações não lidas */
+  border-left: 4px solid #dc3545; /* Borda vermelha à esquerda */
+  transform: scale(1.05); /* Efeito de aumento para notificações não lidas */
 }
 
-/* Estilo para o botão do ícone */
-.btn-icon {
-  background: transparent;
-  border: none;
-  color: var(--bs-body-color); /* Usa a cor de texto padrão do corpo */
+/* Notificação lida */
+.notification-item.read {
+  background-color: #e2e3e5; /* Cor de fundo mais clara para notificações lidas */
+  border-left: 4px solid #6c757d; /* Borda cinza */
 }
 
-.btn-icon:hover {
-  background-color: var(--bs-gray-200); /* Um fundo sutil ao passar o mouse */
+/* Animação ao passar o mouse sobre as notificações */
+.notification-item:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
 }
 
-/* Melhorando a aparência do item de notificação */
-.notification-item span {
-  white-space: normal; /* Permite que o texto da notificação quebre a linha */
-  line-height: 1.4;
+/* Ícones das notificações */
+.notification-item i {
+  transition: color 0.3s ease;
 }
 
-/* Estilo de hover para os itens na lista */
-.dropdown-item:hover {
-  background-color: #f8f9fa;
+/* Alterar cor do ícone quando a notificação for lida */
+.notification-item.read i {
+  color: #6c757d; /* Cor do ícone para notificações lidas */
+}
+
+/* Efeito de transição para o botão de fechar */
+.btn-close {
+  transition: opacity 0.2s ease;
+}
+
+.btn-close:hover {
+  opacity: 0.7;
 }

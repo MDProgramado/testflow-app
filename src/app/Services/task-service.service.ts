@@ -25,29 +25,50 @@ export class TaskServiceService {
   create(task: Task): Observable<Task> {
     return this.http.post<Task>(this.API, task).pipe(
       tap(() => {
-        this.notificationService.showNotification(`Tarefa '${task.title} com prioridade ${task.priority}' foi criada com sucesso!`, 'info');
+        this.notificationService.showNotification(`Tarefa '${task.title}' com prioridade ${task.priority} foi criada com sucesso!`, 'info');
       })
     )
   }
 
-  checkTaskDeadLines(tasks: Task[]):void {
-    const currentDate = new Date();
-    tasks.forEach(task => {
-      if(task.status !== "Concluída") {
-        const deadLineDate = new Date(task.dueDate);
-        const timeDiff = deadLineDate.getTime() - currentDate.getTime();
-        const dayDiff = timeDiff / (1000 * 3600 * 24);
+  checkTaskDeadLines(tasks: Task[]): void {
+  const currentDate = new Date();
+  tasks.forEach(task => {
+    if (task.status !== "Concluída") {
+      const deadLineDate = new Date(task.dueDate);
+      const timeDiff = deadLineDate.getTime() - currentDate.getTime();
+      const dayDiff = timeDiff / (1000 * 3600 * 24);
 
-        if(dayDiff <= 2 && dayDiff >= 0) {
-          this.notificationService.showNotification(`Tarefa '${task.title}' está perto do prazo de conclusão!`, 'warning');
-        }
-        else if (dayDiff < 0) {
-          this.notificationService.showNotification(`Tarefa '${task.title}' ultrapassou o prazo!`, 'error');
-
-        }
+      const notificationKey = `notified_${task.id}`;
+      if (sessionStorage.getItem(notificationKey)) {
+        return;
       }
-    });
-  }
+
+     
+      if (dayDiff <= 2 && dayDiff >= 0) {
+        this.notificationService.showNotification(
+          `Tarefa '${task.title}' está perto do prazo!`,
+          'warning',
+          {
+            silent: true,
+            link: `/tasks/edit/${task.id}`
+          }
+        );
+        sessionStorage.setItem(notificationKey, 'true');
+      }
+      else if (dayDiff < 0) {
+        this.notificationService.showNotification(
+          `Tarefa '${task.title}' ultrapassou o prazo!`,
+          'error',
+          {
+            silent: true,
+            link: `/tasks/edit/${task.id}`
+          }
+        );
+        sessionStorage.setItem(notificationKey, 'true');
+      }
+    }
+  });
+}
 
   getAllFiltered(status: string, sector: string): Observable<Task[]>{
     let params = new HttpParams();
