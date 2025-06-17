@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild,  ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { NotificationService } from '../Services/notification.service';
 import { CommonModule } from '@angular/common';
-import { Modal } from 'bootstrap';
+import { Dropdown, Modal } from 'bootstrap';
 import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { INotification } from '../interfaces/Notification';
@@ -16,10 +16,11 @@ export class NotificatonComponent  implements OnInit, AfterViewInit, OnDestroy {
 
   notifications: INotification[] = [];
   unreadCount: number = 0;
-  notificationMessage: string = '';
   modalNotification: INotification | null = null;
 
   @ViewChild('modal') modalElement!: ElementRef;
+  @ViewChild('notificationDropdown') dropdownButtonElement!: ElementRef;
+  private bsDropdown!: Dropdown;
   private bsModal!: Modal;
   private listSubscription!: Subscription;
   private modalSubscription!: Subscription;
@@ -51,31 +52,41 @@ export class NotificatonComponent  implements OnInit, AfterViewInit, OnDestroy {
     });
   }
   ngAfterViewInit(): void {
-
     if (this.modalElement) {
-      this.bsModal = new Modal(this.modalElement.nativeElement);
-        console.log('[DEBUG] Instância do Modal criada:', this.bsModal);
-    } else {
-      console.error('[DEBUG] Elemento do Modal não foi encontrado!');
+      // @ts-ignore
+      this.bsModal = new bootstrap.Modal(this.modalElement.nativeElement);
+    }
+    
+    // 4. RE-ADICIONE a inicialização manual do Dropdown
+    if (this.dropdownButtonElement) {
+      // @ts-ignore
+      this.bsDropdown = new bootstrap.Dropdown(this.dropdownButtonElement.nativeElement);
     }
   }
 
-  onNotificationClick(notification: INotification): void {
-   
-    this.notificationService.markAsRead(notification.id);
-    this.router.navigate(['/tasks', notification.id]); 
+  // 5. ADICIONE a nova função que será chamada pelo clique
+  toggleDropdown(): void {
+    if (this.bsDropdown) {
+      this.bsDropdown.toggle();
+    }
   }
+
+  // ... (o resto dos seus métodos: markAsReadAndClear, dismissNotification, etc. continuam iguais)
+  markAsReadAndClear(notification: INotification): void {
+    this.notificationService.markAsRead(notification.id);
+    this.notificationService.clearNotification(notification);
+  }
+
   dismissNotification(notification: INotification, event: MouseEvent): void {
     event.stopPropagation(); 
     this.notificationService.clearNotification(notification);
   }
 
-   markAllAsRead(): void {
+  markAllAsRead(): void {
     this.notificationService.markAllAsRead(); 
   }
 
   getNotificationClass(type: string): string {
-  
     switch (type) {
       case 'info': return 'text-primary';
       case 'warning': return 'text-warning';
@@ -84,19 +95,14 @@ export class NotificatonComponent  implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-
-    if (this.listSubscription) {
-      this.listSubscription.unsubscribe();
-    }
-    if (this.modalSubscription) {
-      this.modalSubscription.unsubscribe();
-    }
-  }
   onModalOkClick(): void {
- 
-  if (this.modalNotification) {
-    this.notificationService.clearNotification(this.modalNotification);
+    if (this.modalNotification) {
+      this.notificationService.clearNotification(this.modalNotification);
+    }
   }
-}
+  
+  ngOnDestroy(): void {
+    if (this.listSubscription) this.listSubscription.unsubscribe();
+    if (this.modalSubscription) this.modalSubscription.unsubscribe();
+  }
 }

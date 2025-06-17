@@ -5,14 +5,13 @@ import { TaskServiceService } from '../Services/task-service.service';
 import { Observable, switchMap, take } from 'rxjs';
 import { Task } from '../interfaces/Task';
 import { ToastrService } from 'ngx-toastr';
-import { FooterComponentComponent } from "../footer-component/footer-component.component";
-import { HeaderComponentComponent } from "../header-component/header-component.component";
+
 
 
 @Component({
   standalone: true,
   selector: 'app-task-detail-component',
-  imports: [CommonModule, RouterModule, FooterComponentComponent, HeaderComponentComponent],
+  imports: [CommonModule, RouterModule],
   templateUrl: './task-detail-component.component.html',
   styleUrls: ['./task-detail-component.component.css']
 })

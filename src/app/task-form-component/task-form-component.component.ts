@@ -10,8 +10,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TaskServiceService } from '../Services/task-service.service';
 import { Task } from '../interfaces/Task';
-import { HeaderComponentComponent } from '../header-component/header-component.component';
-import { FooterComponentComponent } from "../footer-component/footer-component.component";
+
 
 @Component({
   standalone: true,
@@ -20,8 +19,7 @@ import { FooterComponentComponent } from "../footer-component/footer-component.c
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
-    HeaderComponentComponent,
-    FooterComponentComponent
+
 ],
   templateUrl: './task-form-component.component.html',
   styleUrls: ['./task-form-component.component.css']

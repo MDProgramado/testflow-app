@@ -6,13 +6,14 @@ import { Task } from '../interfaces/Task';
 import { TaskServiceService } from '../Services/task-service.service';
 import { HeaderComponentComponent } from "../header-component/header-component.component";
 import { FooterComponentComponent } from "../footer-component/footer-component.component";
-import { NotificationService } from '../Services/notification.service';
+
+
 
 
 @Component({
   standalone: true,
   selector: 'app-task-list-component',
-  imports: [CommonModule, FormsModule, RouterModule, HeaderComponentComponent, FooterComponentComponent],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './task-list-component.component.html',
   styleUrls: ['./task-list-component.component.css']
 })
@@ -46,11 +47,8 @@ export class TaskListComponentComponent implements OnInit {
     this.taskService.getAll().subscribe(tasks => {
       this.tasks = tasks;
       this.filteredTasks = tasks;
-
-      setInterval(() => {
-
-        this.taskService.checkTaskDeadLines(this.tasks);
-      }, 3600000);
+        this.taskService.checkTaskDeadLines(tasks);
+  
     });
   }
 
