@@ -7,7 +7,19 @@ O *TaskFlow – Gerenciador de Tarefas de Produção e Manutenção* é um siste
 
 
 
+
 ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg) ![GitHub last commit](https://img.shields.io/github/last-commit/MDProgramado/testflow-app) ![Status](https://img.shields.io/badge/status-conclu%C3%ADdo-green)
+
+# Motivação / O Problema:
+
+ "Este projeto foi desenvolvido como o Trabalho de Conclusão de Curso do projeto Ford Enter, com o objetivo de aplicar na prática os conceitos de desenvolvimento Front-end com Angular em um cenário próximo da realidade industrial."
+# Desafios e Aprendizados:
+
+Adoção de Standalone Components no Angular 19: O maior desafio foi estruturar todo o projeto utilizando a arquitetura de componentes standalone, abandonando os NgModules. Isso me forçou a entender mais a fundo o sistema de injeção de dependências e o roteamento do Angular.
+
+Integração de Gráficos Dinâmicos: Integrar o Chart.js com o ciclo de vida dos componentes Angular para exibir dados em tempo real do dashboard foi complexo. Aprendi a gerenciar o estado dos gráficos e a atualizá-los eficientemente quando os dados da API mudavam.
+
+Criação de uma API Mock: Para ter um ambiente de desenvolvimento robusto, precisei criar uma API mock com Node.js e json-server. Foi meu primeiro contato com a criação de um backend simples, o que me deu uma melhor compreensão da comunicação cliente-servidor.
 
 ### 🚀 [Acesse a demonstração ao vivo aqui!](https://testflow-app-seven.vercel.app/) 🚀
 
@@ -28,7 +40,6 @@ O *TaskFlow – Gerenciador de Tarefas de Produção e Manutenção* é um siste
 ### Dashboard
 ![Tela de Dashboard](./sreenshort/print-dashboard.png)
 ---
-
 
 
 ## 🚀 Funcionalidades do TestflowApp
