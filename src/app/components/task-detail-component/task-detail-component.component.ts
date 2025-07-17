@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { TaskServiceService } from '../../Services/task-service.service';
+
 import { Observable, switchMap, take } from 'rxjs';
 import { Task } from '../../interfaces/Task';
 import { ToastrService } from 'ngx-toastr';
+import { TaskServiceService } from '../../Services/task-service.service';
 
 
 
@@ -18,7 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 export class TaskDetailComponentComponent implements OnInit{
 
   task$!: Observable<Task>; 
-  
+
   constructor(
     private route: ActivatedRoute,
     private taskService: TaskServiceService,
