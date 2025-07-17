@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Task } from '../interfaces/Task';
 import { TaskServiceService } from '../Services/task-service.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-report',

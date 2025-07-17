@@ -1,17 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ReportComponent } from './report.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ActivatedRoute } from '@angular/router';
+import { HeaderComponentComponent } from './header-component.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 
-describe('ReportComponent', () => {
-  let component: ReportComponent;
-  let fixture: ComponentFixture<ReportComponent>;
+describe('HeaderComponentComponent', () => {
+  let component: HeaderComponentComponent;
+  let fixture: ComponentFixture<HeaderComponentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReportComponent, HttpClientTestingModule],
+      imports: [HeaderComponentComponent, HttpClientTestingModule],
       providers: [
         {
           provide: ActivatedRoute,
@@ -24,7 +23,7 @@ describe('ReportComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ReportComponent);
+    fixture = TestBed.createComponent(HeaderComponentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ReportComponent } from './report.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ActivatedRoute } from '@angular/router';
+import { TaskDetailComponentComponent } from './task-detail-component.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
+import { ToastrModule } from 'ngx-toastr';
 
-describe('ReportComponent', () => {
-  let component: ReportComponent;
-  let fixture: ComponentFixture<ReportComponent>;
+describe('TaskDetailComponentComponent', () => {
+  let component: TaskDetailComponentComponent;
+  let fixture: ComponentFixture<TaskDetailComponentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReportComponent, HttpClientTestingModule],
+      imports: [TaskDetailComponentComponent, HttpClientTestingModule, ToastrModule.forRoot()],
       providers: [
         {
           provide: ActivatedRoute,
@@ -24,7 +24,7 @@ describe('ReportComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ReportComponent);
+    fixture = TestBed.createComponent(TaskDetailComponentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
