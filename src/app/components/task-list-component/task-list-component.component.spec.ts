@@ -6,6 +6,7 @@ import { TaskListComponentComponent } from './task-list-component.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TaskServiceService } from '../../Services/task-service.service';
 import { Task } from '../../interfaces/Task'; 
+import { provideToastr } from 'ngx-toastr';
 
 describe('TaskListComponentComponent', () => {
   let component: TaskListComponentComponent;
@@ -24,6 +25,7 @@ describe('TaskListComponentComponent', () => {
      
       imports: [TaskListComponentComponent, HttpClientTestingModule],
       providers: [
+        provideToastr(),
       
         { provide: ActivatedRoute, useValue: activatedRouteMock },
       ]

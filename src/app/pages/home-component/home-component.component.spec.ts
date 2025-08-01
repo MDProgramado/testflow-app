@@ -6,6 +6,7 @@ import { of } from 'rxjs';
 
 
 import { TaskServiceService } from '../../Services/task-service.service'; 
+import { provideToastr } from 'ngx-toastr';
 
 describe('HomeComponentComponent', () => {
   let component: HomeComponentComponent;
@@ -21,6 +22,7 @@ describe('HomeComponentComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HomeComponentComponent, HttpClientTestingModule],
       providers: [
+        provideToastr(),
         { provide: ActivatedRoute, useValue: activatedRouteMock }
       
       ]

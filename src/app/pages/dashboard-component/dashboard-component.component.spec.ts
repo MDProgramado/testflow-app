@@ -4,6 +4,7 @@ import { DashboardComponentComponent } from './dashboard-component.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { provideToastr } from 'ngx-toastr';
 
 describe('DashboardComponentComponent', () => {
   let component: DashboardComponentComponent;
@@ -13,6 +14,7 @@ describe('DashboardComponentComponent', () => {
     await TestBed.configureTestingModule({
       imports: [DashboardComponentComponent, HttpClientTestingModule],
       providers: [
+        provideToastr(),
         {
           provide: ActivatedRoute,
           useValue: {
