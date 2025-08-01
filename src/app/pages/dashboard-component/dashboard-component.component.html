@@ -5,7 +5,15 @@
   <div class="container py-4"> 
 
   <app-sumary></app-sumary>
-
+<div class="row mt-4">
+    <div class="col-12 text-center">
+      <button class="btn btn-success btn-lg" (click)="generateReport()">
+        <i class="bi bi-file-earmark-pdf"></i> Gerar Relatório PDF
+      </button>
+    </div>
+  </div>
+  </div>
+  
   <hr class="my-4"> 
   
   <div class="row">
@@ -41,17 +49,37 @@
   </div>
 
   
+<hr class="my-5"> <div class="row">
+  <div class="col-12 text-center mb-4">
+    <h2 class="text-primary">Dashboard - Status por Setor</h2>
+  </div>
+</div>
 
+<div class="row">
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-header bg-warning text-dark">
+        <h5 class="mb-0">Tarefas por Setor (Barras)</h5>
+      </div>
+      <div class="card-body">
+        <canvas id="sectorBarCanvas"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-header bg-info text-white">
+        <h5 class="mb-0">Distribuição por Setor (Pizza)</h5>
+      </div>
+      <div class="card-body">
+        <canvas id="sectorPieCanvas"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
   <!-- Botão para Gerar Relatório -->
-  <div class="row mt-4">
-    <div class="col-12 text-center">
-      <button class="btn btn-success btn-lg" (click)="generateReport()">
-        <i class="bi bi-file-earmark-pdf"></i> Gerar Relatório PDF
-      </button>
-    </div>
-  </div>
-  </div>
+  
 </main>
