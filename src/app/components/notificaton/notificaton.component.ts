@@ -86,6 +86,9 @@ export class NotificatonComponent  implements OnInit, AfterViewInit, OnDestroy {
     this.notificationService.markAllAsRead(); 
   }
 
+  clearAllNotifications(): void {
+    this.notificationService.clearAll();
+  }
   getNotificationClass(type: string): string {
     switch (type) {
       case 'info': return 'text-primary';

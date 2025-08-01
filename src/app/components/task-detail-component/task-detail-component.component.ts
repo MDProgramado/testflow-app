@@ -6,7 +6,7 @@ import { Observable, switchMap, take } from 'rxjs';
 import { Task } from '../../interfaces/Task';
 import { ToastrService } from 'ngx-toastr';
 import { TaskServiceService } from '../../Services/task-service.service';
-
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -19,7 +19,7 @@ import { TaskServiceService } from '../../Services/task-service.service';
 export class TaskDetailComponentComponent implements OnInit{
 
   task$!: Observable<Task>; 
-
+tasks: Task[] = [];
   constructor(
     private route: ActivatedRoute,
     private taskService: TaskServiceService,
@@ -33,32 +33,52 @@ export class TaskDetailComponentComponent implements OnInit{
     );
  }
 
-markComplete(id: string) {
-  this.taskService.getById(id).pipe(
-    take(1),
-    switchMap(task => {
-    
-      task.status = 'Concluída';
+public markComplete(id: string): void {
+ 
+  Swal.fire({
+    title: 'Concluir Tarefa?',
+    text: "Você deseja marcar esta tarefa como 'Concluída'?",
+    icon: 'question', 
+    showCancelButton: true,
+    confirmButtonColor: '#28a745',
+    cancelButtonColor: '#6c757d',  
+    confirmButtonText: 'Sim, concluir!',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+  
+    if (result.isConfirmed) {
       
-     
-      return this.taskService.update(task.id!, task); 
-    })
-  ).subscribe({
-    next: (updatedTask) => {
    
-   
-      this.toastr.success('Tarefa concluída com sucesso!');
+      this.taskService.getById(id).pipe(
+        take(1), 
+        switchMap(task => {
+       
+          task.status = 'Concluída';
+          
       
-     
-      // this.loadTasks(); 
-      this.router.navigateByUrl('/tasks');
-    },
-    error: (err) => {
+          return this.taskService.update(id, task); 
+        })
+      ).subscribe({
+        next: (updatedTask) => {
       
-      console.error('Erro ao atualizar a tarefa:', err);
-      this.toastr.error('Ocorreu um erro ao concluir a tarefa.');
+          const index = this.tasks.findIndex(t => t.id === id);
+          if (index !== -1) {
+ 
+            this.tasks[index] = updatedTask;
+        
+
+          }
+          
+          this.toastr.success('Tarefa concluída com sucesso!');
+        },
+        error: (err) => {
+          this.toastr.error('Ocorreu um erro ao concluir a tarefa.');
+          console.error(err);
+        }
+      });
     }
   });
 }
+
 
 }

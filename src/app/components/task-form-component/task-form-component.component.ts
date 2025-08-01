@@ -24,6 +24,7 @@ import { take } from 'rxjs'; // Importe o operador 'take' do RxJS
   styleUrls: ['./task-form-component.component.css']
 })
 export class TaskFormComponentComponent implements OnInit {
+  
   form!: FormGroup;
   isEditMode = false;
   currentTaskId: string | null = null; // Mais seguro iniciar com null

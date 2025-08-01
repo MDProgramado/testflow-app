@@ -8,6 +8,7 @@ import { SumaryComponent } from "../sumary/sumary.component";
 
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
+import { switchMap, take } from 'rxjs';
 
 
 
@@ -55,6 +56,53 @@ export class TaskListComponentComponent implements OnInit {
     });
   }
 
+public markComplete(id: string): void {
+ 
+  Swal.fire({
+    title: 'Concluir Tarefa?',
+    text: "Você deseja marcar esta tarefa como 'Concluída'?",
+    icon: 'question', 
+    showCancelButton: true,
+    confirmButtonColor: '#28a745',
+    cancelButtonColor: '#6c757d',  
+    confirmButtonText: 'Sim, concluir!',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+  
+    if (result.isConfirmed) {
+      
+   
+      this.taskService.getById(id).pipe(
+        take(1), 
+        switchMap(task => {
+       
+          task.status = 'Concluída';
+          
+      
+          return this.taskService.update(id, task); 
+        })
+      ).subscribe({
+        next: (updatedTask) => {
+      
+          const index = this.tasks.findIndex(t => t.id === id);
+          if (index !== -1) {
+ 
+            this.tasks[index] = updatedTask;
+        
+
+          }
+          
+          this.toastr.success('Tarefa concluída com sucesso!');
+        },
+        error: (err) => {
+          this.toastr.error('Ocorreu um erro ao concluir a tarefa.');
+          console.error(err);
+        }
+      });
+    }
+  });
+}
+
 public deleteTask(id: string): void {
   Swal.fire({
     title: 'Você tem certeza?',
@@ -95,7 +143,7 @@ public deleteTask(id: string): void {
 
 
 editTask(id: string, event: MouseEvent): void {
-  // Esta linha é a correção: impede que o clique "vaze" para o card
+ 
   event.stopPropagation();
   
   console.log('Botão de editar clicado! ID da tarefa:', id);
