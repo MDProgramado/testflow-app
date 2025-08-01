@@ -1,0 +1,17 @@
+/* styles.css ou styles.scss */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* O componente raiz da sua aplicação */
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Garante que o app ocupe no mínimo a altura toda da tela */
+}
+
+/* A área de conteúdo principal */
+.main-content {
+  flex: 1; /* Faz com que este elemento cresça e ocupe todo o espaço disponível, empurrando o footer para baixo */
+}

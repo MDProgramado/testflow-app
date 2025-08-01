@@ -1,40 +1,18 @@
-
+/* Personalizações para o Dashboard */
 .card {
-  border: 1px solid var(--chart-card-border);
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
-  transition: transform 0.2s, box-shadow 0.2s;
-  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+.card-header {
+  border-bottom: 2px solid #ddd;
 }
 
-.card-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #2c3e50;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid #e9ecef;
-  margin-bottom: 1.5rem;
+.card-body {
+  padding: 20px;
 }
 
-.chart-container {
-  position: relative;
-  margin: auto;
-  width: 100%;
-}
-
-.bg-primary-subtle {
-  background-color: #e8f4fd !important;
-}
-
-.bg-success-subtle {
-  background-color: #e6faf0 !important;
-}
-
-.bi {
-  vertical-align: middle;
+canvas {
+  width: 100% !important;
+  height: 400px !important;
 }

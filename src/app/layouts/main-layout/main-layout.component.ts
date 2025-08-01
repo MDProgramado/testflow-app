@@ -9,7 +9,7 @@ import { SumaryComponent } from "../../components/sumary/sumary.component";
 
 @Component({
   selector: 'app-main-layout',
-  imports: [CommonModule, FooterComponentComponent, HeaderComponentComponent, RouterModule, SumaryComponent],
+  imports: [CommonModule, FooterComponentComponent, HeaderComponentComponent, RouterModule],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.css'
 })

@@ -11,7 +11,7 @@ import { SumaryComponent } from '../../components/sumary/sumary.component';
   selector: 'app-home-component',
   imports: [
     TaskListComponentComponent,
-
+    SumaryComponent
 ],
   templateUrl: './home-component.component.html',
   styleUrl: './home-component.component.css'

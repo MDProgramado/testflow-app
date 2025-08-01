@@ -6,6 +6,7 @@ import { Task } from '../../interfaces/Task';
 import { TaskServiceService } from '../../Services/task-service.service';
 import { HeaderComponentComponent } from "../header-component/header-component.component";
 import { FooterComponentComponent } from "../footer-component/footer-component.component";
+import { SumaryComponent } from "../sumary/sumary.component";
 
 
 
@@ -13,7 +14,7 @@ import { FooterComponentComponent } from "../footer-component/footer-component.c
 @Component({
   standalone: true,
   selector: 'app-task-list-component',
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, SumaryComponent],
   templateUrl: './task-list-component.component.html',
   styleUrls: ['./task-list-component.component.css']
 })

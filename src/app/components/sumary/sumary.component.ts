@@ -44,7 +44,7 @@ export class SumaryComponent implements OnInit{
             count: active, 
             color: 'primary', 
             icon: 'bi-arrow-repeat',
-            route: '/tasks?status=Em%20andamento' 
+            route: '/tasks' 
           },
 
           { 
@@ -52,14 +52,14 @@ export class SumaryComponent implements OnInit{
             count: completed,
              color: 'success', 
              icon: 'bi-check2-circle',
-             route: '/tasks?status=Concluída'
+             route: '/tasks'
             },
           { 
             label: 'Pendente', 
             count: overdue, 
             color: 'danger',
             icon: 'bi-exclamation-circle',
-             route: '/tasks?status=Pendente' 
+            route: '/tasks' 
           }
         ];
         }
