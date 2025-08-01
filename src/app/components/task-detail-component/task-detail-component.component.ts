@@ -37,16 +37,28 @@ markComplete(id: string) {
   this.taskService.getById(id).pipe(
     take(1),
     switchMap(task => {
+    
       task.status = 'Concluída';
-      return this.taskService.update(task);
+      
+     
+      return this.taskService.update(task.id!, task); 
     })
   ).subscribe({
-    next: () => {
+    next: (updatedTask) => {
+   
+   
       this.toastr.success('Tarefa concluída com sucesso!');
-      this.router.navigateByUrl('/tasks')
+      
+     
+      // this.loadTasks(); 
+      this.router.navigateByUrl('/tasks');
     },
-    
-  })
+    error: (err) => {
+      
+      console.error('Erro ao atualizar a tarefa:', err);
+      this.toastr.error('Ocorreu um erro ao concluir a tarefa.');
+    }
+  });
 }
 
 }

@@ -12,6 +12,15 @@ export class TaskServiceService {
   tasks$: Observable<Task[]> = this.tasksSubject.asObservable(); 
   private API = 'https://backendd-01jm.onrender.com/tasks';
 
+  
+  /**
+   * ATUALIZE ESTE MÉTODO
+   * Agora ele aceita o ID e os dados da tarefa como argumentos separados.
+   * @param id O ID da tarefa a ser atualizada.
+   * @param taskData Os novos dados da tarefa vindos do formulário.
+   * @returns Um Observable com a tarefa atualizada.
+   */
+
   constructor(private http: HttpClient, private notificationService: NotificationService) { }
 
   getAll(): Observable<Task[]> {
@@ -90,8 +99,8 @@ export class TaskServiceService {
     return this.http.get<Task[]>(this.API, { params });
   }
 
-  update(task: Task): Observable<Task> {
-    return this.http.put<Task>(`${this.API}/${task.id}`, task);
+  public update(id: string, taskData: Partial<Task>): Observable<Task> {
+    return this.http.put<Task>(`${this.API}/tasks/${id}`, taskData);
   }
 
   delete(id: string): Observable<void> {

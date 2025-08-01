@@ -10,7 +10,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TaskServiceService } from '../../Services/task-service.service';
 import { Task } from '../../interfaces/Task';
-
+import { take } from 'rxjs'; // Importe o operador 'take' do RxJS
 
 @Component({
   standalone: true,
@@ -19,15 +19,14 @@ import { Task } from '../../interfaces/Task';
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
-
-],
+  ],
   templateUrl: './task-form-component.component.html',
   styleUrls: ['./task-form-component.component.css']
 })
 export class TaskFormComponentComponent implements OnInit {
   form!: FormGroup;
-  isEdit = false;
-  private taskId!: string;            
+  isEditMode = false;
+  currentTaskId: string | null = null; // Mais seguro iniciar com null
 
   constructor(
     private fb: FormBuilder,
@@ -39,21 +38,28 @@ export class TaskFormComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      title:       ['', Validators.required],
+      title: ['', Validators.required],
       description: ['', Validators.required],
-      sector:      ['Produção', Validators.required],
-      priority:    ['Média', Validators.required],
-      status:      ['Pendente', Validators.required],
-      dueDate:     ['', Validators.required],
+      sector: ['Produção', Validators.required],
+      priority: ['Média', Validators.required],
+      status: ['Pendente', Validators.required],
+      dueDate: ['', Validators.required],
       responsible: ['', Validators.required]
     });
 
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.pipe(
+      take(1) 
+    ).subscribe(params => {
       const idParam = params.get('id');
-      if (idParam) {                    
-        this.isEdit = true;
-        this.taskId = idParam;
-        this.taskService.getById(this.taskId).subscribe(task => {
+      if (idParam) {
+        this.isEditMode = true;
+        this.currentTaskId = idParam;
+        
+        this.taskService.getById(this.currentTaskId).subscribe(task => {
+        
+          if (task.dueDate) {
+            task.dueDate = new Date(task.dueDate).toISOString().split('T')[0];
+          }
           this.form.patchValue(task);
         });
       }
@@ -66,28 +72,34 @@ export class TaskFormComponentComponent implements OnInit {
       return;
     }
 
-    const payload: Task = {
-      ...this.form.value,
-      id: this.isEdit ? this.taskId : undefined
-    };
-
-    const action$ = this.isEdit
-      ? this.taskService.update(payload)
-      : this.taskService.create(payload);
-
-    action$.subscribe({
-      next: () => {
-        this.toastr.success(
-          this.isEdit
-            ? 'Tarefa atualizada com sucesso!'
-            : 'Tarefa criada com sucesso!'
-        );
-        this.router.navigateByUrl('/tasks');
-      },
-      error: err => {
-        console.error('Erro ao salvar tarefa:', err);
-        this.toastr.error('Ocorreu um erro ao salvar a tarefa.');
-      }
-    });
+    if (this.isEditMode && this.currentTaskId) {
+  
+      this.taskService.update(this.currentTaskId, this.form.value).subscribe({
+        next: () => {
+          this.toastr.success('Tarefa atualizada com sucesso!');
+          this.router.navigateByUrl('/tasks');
+        },
+        error: err => {
+          console.error('Erro ao atualizar tarefa:', err);
+          this.toastr.error('Ocorreu um erro ao atualizar a tarefa.');
+        }
+      });
+    } else {
+    
+      this.taskService.create(this.form.value).subscribe({
+        next: () => {
+          this.toastr.success('Tarefa criada com sucesso!');
+          this.router.navigateByUrl('/tasks');
+        },
+        error: err => {
+          console.error('Erro ao criar tarefa:', err);
+          this.toastr.error('Ocorreu um erro ao criar a tarefa.');
+        }
+      });
+    }
   }
+  public isInvalid(controlName: string): boolean {
+  const control = this.form.get(controlName);
+  return control ? control.invalid && (control.dirty || control.touched) : false;
+}
 }

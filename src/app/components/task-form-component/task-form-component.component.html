@@ -1,62 +1,85 @@
+<div class="container py-4 d-flex flex-column" style="min-height: calc(100vh - 120px);"> <h3 class="mb-4">{{ isEditMode ? 'Editar Tarefa' : 'Nova Tarefa' }}</h3>
 
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="d-flex flex-column flex-grow-1">
 
-<main class="  flex-grow-1 home-main container my-5">
-<div class=" container mb-5"> 
-<div class="container mt-4">
-  <h3 class="mb-4">{{ isEdit ? 'Editar Tarefa' : 'Nova Tarefa' }}</h3>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-    <div class="form-floating mb-3">
-      <input id="title" type="text" class="form-control" formControlName="title" placeholder="Título">
-      <label for="title">Título</label>
-      <div class="invalid-feedback">O título é obrigatório.</div>
+    <div>
+      <div class="form-floating mb-3">
+        <input id="title" type="text" class="form-control" formControlName="title" placeholder="Título" [class.is-invalid]="isInvalid('title')">
+        <label for="title">Título</label>
+        <div *ngIf="isInvalid('title')" class="invalid-feedback">
+          O título é um campo obrigatório.
+        </div>
+      </div>
+
+      <div class="form-floating mb-3">
+        <textarea id="description" class="form-control" formControlName="description" placeholder="Descrição" style="height: 100px" [class.is-invalid]="isInvalid('description')"></textarea>
+        <label for="description">Descrição</label>
+        <div *ngIf="isInvalid('description')" class="invalid-feedback">
+          A descrição é um campo obrigatório.
+        </div>
+      </div>
+
+      <div class="row g-3 mb-3">
+        <div class="col-md-4">
+          <div class="form-floating">
+            <select id="sector" class="form-select" formControlName="sector" [class.is-invalid]="isInvalid('sector')">
+              <option>Produção</option>
+              <option>Manutenção</option>
+              <option>Administrativo</option>
+            </select>
+            <label for="sector">Setor</label>
+            <div *ngIf="isInvalid('sector')" class="invalid-feedback">Selecione um setor.</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-floating">
+            <select id="priority" class="form-select" formControlName="priority" [class.is-invalid]="isInvalid('priority')">
+              <option>Baixa</option>
+              <option>Média</option>
+              <option>Alta</option>
+            </select>
+            <label for="priority">Prioridade</label>
+            <div *ngIf="isInvalid('priority')" class="invalid-feedback">Selecione uma prioridade.</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-floating">
+            <select id="status" class="form-select" formControlName="status" [class.is-invalid]="isInvalid('status')">
+              <option>Pendente</option>
+              <option>Em andamento</option>
+              <option>Concluída</option>
+            </select>
+            <label for="status">Status</label>
+            <div *ngIf="isInvalid('status')" class="invalid-feedback">Selecione um status.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-sm-6">
+          <div class="form-floating">
+            <input id="dueDate" type="date" class="form-control" formControlName="dueDate" [class.is-invalid]="isInvalid('dueDate')">
+            <label for="dueDate">Prazo</label>
+            <div *ngIf="isInvalid('dueDate')" class="invalid-feedback">O prazo é obrigatório.</div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-floating">
+            <input id="responsible" type="text" class="form-control" formControlName="responsible" placeholder="Responsável" [class.is-invalid]="isInvalid('responsible')">
+            <label for="responsible">Responsável</label>
+            <div *ngIf="isInvalid('responsible')" class="invalid-feedback">O responsável é obrigatório.</div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="form-floating mb-3">
-      <textarea id="description" class="form-control" formControlName="description" placeholder="Descrição" style="height: 100px"></textarea>
-      <label for="description">Descrição</label>
-      <div class="invalid-feedback">A descrição é obrigatória.</div>
-    </div>
-
-    <div class="row g-3">
-      <div class="col-sm-6 col-md-4">
-        <label for="sector" class="form-label">Setor</label>
-        <select id="sector" class="form-select" formControlName="sector">
-          <option>Produção</option><option>Manutenção</option>
-        </select>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <label for="priority" class="form-label">Prioridade</label>
-        <select id="priority" class="form-select" formControlName="priority">
-          <option>Baixa</option><option>Média</option><option>Alta</option>
-        </select>
-      </div>
-      <div class="col-sm-12 col-md-4">
-        <label for="status" class="form-label">Status</label>
-        <select id="status" class="form-select" formControlName="status">
-          <option>Pendente</option><option>Em andamento</option><option>Concluída</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="row g-3 mt-3">
-      <div class="col-sm-6">
-        <label for="dueDate" class="form-label">Prazo</label>
-        <input id="dueDate" type="date" class="form-control" formControlName="dueDate">
-        <div class="invalid-feedback">O prazo é obrigatório.</div>
-      </div>
-      <div class="col-sm-6">
-        <label for="responsible" class="form-label">Responsável</label>
-        <input id="responsible" type="text" class="form-control" formControlName="responsible">
-        <div class="invalid-feedback">O responsável é obrigatório.</div>
-      </div>
-    </div>
-
-    <div class="mt-4 sticky-bottom bg-white py-3 text-end">
-      <button type="submit" class="btn btn-success">{{ isEdit ? 'Atualizar' : 'Salvar' }}</button>
-      <a routerLink="/tasks" class="btn btn-secondary ms-2">Cancelar</a>
+    <div class="mt-auto bg-white py-3 text-end border-top">
+      <button type="submit" class="btn btn-success" [disabled]="form.invalid">
+        <i class="bi bi-check-lg"></i> {{ isEditMode ? 'Atualizar' : 'Salvar' }}
+      </button>
+      <a routerLink="/tasks" class="btn btn-secondary ms-2">
+        <i class="bi bi-x-lg"></i> Cancelar
+      </a>
     </div>
   </form>
 </div>
-</div> 
-</main>
-  

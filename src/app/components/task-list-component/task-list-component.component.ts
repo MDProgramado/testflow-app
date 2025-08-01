@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Task } from '../../interfaces/Task';
 import { TaskServiceService } from '../../Services/task-service.service';
-import { HeaderComponentComponent } from "../header-component/header-component.component";
-import { FooterComponentComponent } from "../footer-component/footer-component.component";
 import { SumaryComponent } from "../sumary/sumary.component";
+
+import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -30,6 +31,7 @@ export class TaskListComponentComponent implements OnInit {
     private taskService: TaskServiceService,
     private router: Router,
     private route: ActivatedRoute,
+    private toastr: ToastrService
   ) {}
   
   @Input() exibirHeader = true;
@@ -53,16 +55,52 @@ export class TaskListComponentComponent implements OnInit {
     });
   }
 
-  deleteTask(id: string): void {
-    if (!confirm('Confirmar exclusão?')) return;
-    this.taskService.delete(id).subscribe(() => this.router.navigateByUrl('/home'));
+public deleteTask(id: string): void {
+  Swal.fire({
+    title: 'Você tem certeza?',
+    text: "Esta ação não poderá ser revertida!",
+    icon: 'warning', 
+    showCancelButton: true, 
+    confirmButtonColor: '#3085d6', 
+    cancelButtonColor: '#d33', 
+    confirmButtonText: 'Sim, excluir!',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+ 
+    if (result.isConfirmed) {
+      
+      this.taskService.delete(id).subscribe({
+        next: () => {
+         
+          this.tasks = this.tasks.filter(task => task.id !== id);
+          
+          Swal.fire(
+            'Excluído!',
+            'Sua tarefa foi excluída com sucesso.',
+            'success'
+          );
+
+        
     
-  }
+        },
+        error: (err) => {
+  
+          this.toastr.error('Ocorreu um erro ao excluir a tarefa.');
+          console.error(err);
+        }
+      });
+    }
+  });
+}
 
 
-  editTask(id: string): void {
-    this.router.navigate(['/tasks/edit', id]);
-  }
+editTask(id: string, event: MouseEvent): void {
+  // Esta linha é a correção: impede que o clique "vaze" para o card
+  event.stopPropagation();
+  
+  console.log('Botão de editar clicado! ID da tarefa:', id);
+  this.router.navigate(['/tasks/edit', id]);
+}
 
   newTask(): void {
     this.router.navigate(['/tasks/new']);

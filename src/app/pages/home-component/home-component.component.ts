@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TaskListComponentComponent } from '../../components/task-list-component/task-list-component.component';
-import { SumaryComponent } from '../../components/sumary/sumary.component';
+;
 
 
 
@@ -11,7 +11,7 @@ import { SumaryComponent } from '../../components/sumary/sumary.component';
   selector: 'app-home-component',
   imports: [
     TaskListComponentComponent,
-    SumaryComponent
+  
 ],
   templateUrl: './home-component.component.html',
   styleUrl: './home-component.component.css'
