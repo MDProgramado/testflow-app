@@ -33,22 +33,35 @@ export class LoginUserComponentComponent implements OnInit {
 
   onSubmit(): void {
     if (this.formulario.valid) {
-      this.autentificarLogin.BuscarDadosDaAPi(this.formulario.value)
-       .subscribe({ 
-      next: (usuario) => {       
-        console.log('Resposta da API:', usuario);
+      const { email, senha} = this.formulario.value;
 
-        if (usuario?.id) {
-          this.router.navigateByUrl('/home');
-          this.toastr.success('Login realizado com sucesso!');
-        } else {
-          alert('Usuário inválido');
+      this.autentificarLogin.login(email, senha)
+       .subscribe({ 
+
+      next: (response) => {
+          if (response.sector) {
+            // Se o login for bem-sucedido, redireciona o usuário com base no setor
+            if (response.sector === 'solucao financeira') {
+              this.router.navigateByUrl('/home');
+            } else if (response.sector === 'liberdade news') {
+              this.router.navigateByUrl('/home');
+            } else if (response.sector === 'admin') {
+              this.router.navigateByUrl('/home');
+            }
+            this.toastr.success('Login realizado com sucesso!');
+          } else {
+         
+            this.toastr.error('Usuário ou senha inválidos');
+          }
+        },
+        error: (err) => {
+          
+          console.error('Falha no login:', err);
+          this.toastr.error('Erro no login, por favor tente novamente.');
         }
-      },
-      error: (err) => {
-        console.error('Falha no login:', err);
-      }
-    });
+      });
+    } else {
+      this.toastr.warning('Preencha todos os campos corretamente.');
     }
   }
 }

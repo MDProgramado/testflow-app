@@ -1,6 +1,6 @@
 
 export interface INotification {
- id: number;
+ id: string;
   message: string;
   type: 'info' | 'warning' | 'error';
   isRead: boolean;     

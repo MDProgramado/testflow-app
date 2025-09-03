@@ -1,50 +1,95 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, tap } from 'rxjs';
-import {  Task } from '../interfaces/Task';
+import { Injectable, inject } from '@angular/core';
+import { BehaviorSubject, from, map, Observable, tap } from 'rxjs';
+import { Task } from '../interfaces/Task';
 import { NotificationService } from './notification.service';
+import { Firestore, collection, doc, getDoc, getDocs, setDoc, deleteDoc, updateDoc, query, where, QuerySnapshot } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskServiceService {
-  private tasksSubject = new BehaviorSubject<Task[]>([]);
-  tasks$: Observable<Task[]> = this.tasksSubject.asObservable(); 
-  private API = 'https://backendd-01jm.onrender.com/tasks';
 
-  
+  private db: Firestore = inject(Firestore);
+  private notificationService: NotificationService = inject(NotificationService);
+
   /**
-   * ATUALIZE ESTE MÉTODO
-   * Agora ele aceita o ID e os dados da tarefa como argumentos separados.
-   * @param id O ID da tarefa a ser atualizada.
-   * @param taskData Os novos dados da tarefa vindos do formulário.
-   * @returns Um Observable com a tarefa atualizada.
+   * Busca todas as tarefas no Firestore.
+   * @returns Um Observable com um array de tarefas.
    */
-
-  constructor(private http: HttpClient, private notificationService: NotificationService) { }
-
   getAll(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.API);
+    const tasksRef = collection(this.db, 'tasks');
+    return from(getDocs(tasksRef)).pipe(
+      map((querySnapshot: QuerySnapshot) => {
+        return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Task[];
+      })
+    );
   }
 
-  getById(id: string): Observable<Task> {
-    return this.http.get<Task>(`${this.API}/${id}`);
+  /**
+   * Busca uma tarefa específica pelo seu ID no Firestore.
+   * @param id O ID da tarefa a ser buscada.
+   * @returns Um Observable com a tarefa encontrada.
+   */
+  getById(id: string): Observable<Task | null> {
+    const taskRef = doc(this.db, `tasks/${id}`);
+    return from(getDoc(taskRef)).pipe(
+      map((docSnapshot: any) => {
+        if (docSnapshot.exists()) {
+          return { id: docSnapshot.id, ...docSnapshot.data() } as Task;
+        } else {
+          console.error('Tarefa não encontrada');
+          return null;
+        }
+      })
+    );
   }
 
+  /**
+   * Cria uma nova tarefa no Firestore.
+   * @param task A tarefa a ser criada.
+   * @returns Um Observable com a tarefa criada.
+   */
   create(task: Task): Observable<Task> {
-    return this.http.post<Task>(this.API, task).pipe(
-      tap((createdTask: Task) => {
+    const taskRef = doc(collection(this.db, 'tasks'));
+    return from(setDoc(taskRef, task)).pipe(
+      map(() => ({ id: taskRef.id, ...task })),
+      tap(() => {
         this.notificationService.showNotification(
-          `Tarefa '${createdTask.title}' foi criada com sucesso!`,
+          `Tarefa '${task.title}' foi criada com sucesso!`,
           'info',
           {
-            link: `/tasks/${createdTask.id}` // Link para a página de detalhe
+            link: `/tasks/${task.id}`
           }
         );
       })
     );
   }
 
+  /**
+   * Atualiza uma tarefa existente no Firestore.
+   * @param id O ID da tarefa a ser atualizada.
+   * @param taskData Os dados a serem atualizados.
+   * @returns Um Observable com a tarefa atualizada.
+   */
+  update(id: string, taskData: Partial<Task>): Observable<Task> {
+    const taskRef = doc(this.db, `tasks/${id}`);
+    return from(updateDoc(taskRef, taskData));
+  }
+
+  /**
+   * Deleta uma tarefa no Firestore.
+   * @param id O ID da tarefa a ser deletada.
+   * @returns Um Observable sem valor.
+   */
+  delete(id: string): Observable<void> {
+    const taskRef = doc(this.db, `tasks/${id}`);
+    return from(deleteDoc(taskRef));
+  }
+
+  /**
+   * Verifica as tarefas que estão próximas ou ultrapassaram o prazo e notifica os usuários.
+   * @param tasks Lista de tarefas a serem verificadas.
+   */
   checkTaskDeadLines(tasks: Task[]): void {
     const currentDate = new Date();
     tasks.forEach(task => {
@@ -61,7 +106,7 @@ export class TaskServiceService {
         }
 
         // Alerta para tarefas perto do prazo (amarelo)
-        if (dayDiff <= 2 && dayDiff >= 0) {
+        if (dayDiff <= 1 && dayDiff >= 0) {
           this.notificationService.showNotification(
             `A tarefa '${task.title}' está perto do prazo!`,
             'warning',
@@ -88,25 +133,24 @@ export class TaskServiceService {
     });
   }
 
+  /**
+   * Busca todas as tarefas filtradas por status e setor.
+   * @param status O status das tarefas.
+   * @param sector O setor das tarefas.
+   * @returns Um Observable com as tarefas filtradas.
+   */
   getAllFiltered(status: string, sector: string): Observable<Task[]> {
-    let params = new HttpParams();
-    if (status) {
-      params = params.set('status', status);
-    }
-    if (sector) {
-      params = params.set('sector', sector);
-    }
-    return this.http.get<Task[]>(this.API, { params });
+    const tasksRef = collection(this.db, 'tasks');
+    const q = query(
+      tasksRef,
+      where('status', '==', status),
+      where('sector', '==', sector)
+    );
+
+    return from(getDocs(q)).pipe(
+      map((querySnapshot: QuerySnapshot) => {
+        return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Task[];
+      })
+    );
   }
-
-  public update(id: string, taskData: Partial<Task>): Observable<Task> {
-    return this.http.put<Task>(`${this.API}/tasks/${id}`, taskData);
-  }
-
-  delete(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.API}/${id}`);
-  }
-
-  
-
 }

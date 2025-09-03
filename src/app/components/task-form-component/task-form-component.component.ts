@@ -10,7 +10,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TaskServiceService } from '../../Services/task-service.service';
 import { Task } from '../../interfaces/Task';
-import { take } from 'rxjs'; // Importe o operador 'take' do RxJS
+import { take } from 'rxjs'; 
 
 @Component({
   standalone: true,
@@ -27,7 +27,7 @@ export class TaskFormComponentComponent implements OnInit {
   
   form!: FormGroup;
   isEditMode = false;
-  currentTaskId: string | null = null; // Mais seguro iniciar com null
+  currentTaskId: string | null = null; 
 
   constructor(
     private fb: FormBuilder,
