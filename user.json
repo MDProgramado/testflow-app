@@ -1,0 +1,18 @@
+{
+  "users": {
+    "vOEXGgzWNHdQkdQaVhpdBiGDqSj1": {
+      "email": "admin1@gmail.com",
+      "role": "admin"
+    },
+    "0EpFnxbMYJQJuDLz3cNSJJ9D68J2": {
+      "email": "solucaofinanceira@gmail.com",
+      "role": "editor",
+      "sector": "solucao financeira"
+    },
+    "cGSfSlQ5UASHr9IjjLbqJ4AO24t1": {
+      "email": "liberdadenews@gmail.com",
+      "role": "editor",
+      "sector": "liberdade news"
+    }
+  }
+}

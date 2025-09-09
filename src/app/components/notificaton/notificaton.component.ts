@@ -1,94 +1,96 @@
-import { Component, OnInit, ViewChild,  ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { NotificationService } from '../../Services/notification.service';
-import { INotification } from '../../interfaces/Notification';
+
+import { CommonModule } from '@angular/common';
 import { Modal, Dropdown } from 'bootstrap';
+import { Subscription } from 'rxjs';
+import { INotification } from '../../interfaces/Notification';
+import { NotificationService } from '../../Services/notification.service';
+
 
 @Component({
   selector: 'app-notificaton',
+  standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './notificaton.component.html',
   styleUrls: ['./notificaton.component.css']
 })
-export class NotificatonComponent  implements OnInit, AfterViewInit, OnDestroy {
+export class NotificatonComponent implements OnInit, AfterViewInit, OnDestroy {
 
   notifications: INotification[] = [];
   unreadCount: number = 0;
   modalNotification: INotification | null = null;
 
-  @ViewChild('modal') modalElement!: ElementRef;
   @ViewChild('notificationDropdown') dropdownButtonElement!: ElementRef;
+  @ViewChild('modal') modalElement!: ElementRef;
+  
   private bsDropdown!: Dropdown;
   private bsModal!: Modal;
   private listSubscription!: Subscription;
   private modalSubscription!: Subscription;
 
   constructor(
-    private notificationService: NotificationService, 
-   private router: Router,
-   
+    private notificationService: NotificationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-     console.log('[DEBUG] ngOnInit: Criando as inscrições (subscriptions)...');
-    // 1. ATUALIZAR A LISTA (ESTADO)
     this.listSubscription = this.notificationService.notification$.subscribe(notifications => {
-      this.notifications = notifications;
+      const sortedNotifications = notifications.sort((a, b) => b.timestamp - a.timestamp);
+      this.notifications = sortedNotifications;
       this.unreadCount = notifications.filter(n => !n.isRead).length;
     });
 
-    // 2. Assinatura para MOSTRAR O MODAL (EVENTO)
     this.modalSubscription = this.notificationService.modalNotification$.subscribe(notification => {
       if (notification && this.bsModal) {
-        console.log('[DEBUG] EVENTO DE MODAL RECEBIDO!', notification);
-      console.log('[DEBUG] O modal `bsModal` já está inicializado? Resposta:', this.bsModal);
         this.modalNotification = notification;
         this.bsModal.show();
-      } else {
-        console.error('[DEBUG] FALHA AO MOSTRAR O MODAL: A condição (notification && this.bsModal) não foi atendida.');
       }
     });
   }
+
   ngAfterViewInit(): void {
     if (this.modalElement) {
-   
-      this.bsModal = new Modal(this.modalElement.nativeElement);
+      // @ts-ignore
+      this.bsModal = new bootstrap.Modal(this.modalElement.nativeElement);
     }
     
-  
     if (this.dropdownButtonElement) {
-      
-      this.bsDropdown = new Dropdown(this.dropdownButtonElement.nativeElement);
+      // @ts-ignore
+      this.bsDropdown = new bootstrap.Dropdown(this.dropdownButtonElement.nativeElement);
     }
   }
 
- 
+
+  clearAllNotifications(): void {
+   
+    this.notificationService.markAllAsRead();
+  }
+
   toggleDropdown(): void {
     if (this.bsDropdown) {
       this.bsDropdown.toggle();
     }
   }
 
-
   markAsReadAndClear(notification: INotification): void {
+    if (!notification.id) return;
     this.notificationService.markAsRead(notification.id);
-    this.notificationService.clearNotification(notification);
+    // CORREÇÃO 2: Passe apenas o ID (string)
+    this.notificationService.clearNotification(notification.id);
   }
 
   dismissNotification(notification: INotification, event: MouseEvent): void {
-    event.stopPropagation(); 
-    this.notificationService.clearNotification(notification);
+    event.stopPropagation();
+    if (!notification.id) return; 
+   
+    this.notificationService.clearNotification(notification.id);
   }
 
   markAllAsRead(): void {
     this.notificationService.markAllAsRead(); 
   }
 
-  clearAllNotifications(): void {
-    this.notificationService.clearAll();
-  }
   getNotificationClass(type: string): string {
     switch (type) {
       case 'info': return 'text-primary';
@@ -99,8 +101,9 @@ export class NotificatonComponent  implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onModalOkClick(): void {
-    if (this.modalNotification) {
-      this.notificationService.clearNotification(this.modalNotification);
+    if (this.modalNotification && this.modalNotification.id) {
+      // CORREÇÃO 4: Passe apenas o ID (string)
+      this.notificationService.clearNotification(this.modalNotification.id);
     }
   }
   

@@ -1,13 +1,11 @@
-// src/app/interfaces/task.interface.ts
 
-// Sua interface Task, mantida como você enviou
 export interface Task {
     id?: string;
     title?: string;
     description?: string;
     priority: 'Baixa' | 'Média' | 'Alta';
     status?: 'Pendente' | 'Em andamento' | 'Concluída';
-    sector: 'Produção' | 'Manutenção';
+    sector: 'Liberdade News' | 'Solucao Financeira' | 'Manutenção' | 'Administrativo' | 'Produção' ;
     creationDate?: string;
     dueDate: string;
     completionDate?: string;

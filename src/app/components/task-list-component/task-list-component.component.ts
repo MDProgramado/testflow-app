@@ -8,7 +8,7 @@ import { SumaryComponent } from "../sumary/sumary.component";
 
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
-import { switchMap, take } from 'rxjs';
+import { switchMap, take, throwError } from 'rxjs';
 
 
 
@@ -25,132 +25,131 @@ export class TaskListComponentComponent implements OnInit {
   filteredTasks: Task[] = [];
   statusFilter = '';
   sectorFilter = '';
-  headerAtivo: Boolean = false;
+  headerAtivo: boolean = false;
 
-  
+  @Input() exibirHeader = true;
+  @Input() exibirFooter = true;
+
   constructor(
     private taskService: TaskServiceService,
     private router: Router,
     private route: ActivatedRoute,
     private toastr: ToastrService
   ) {}
-  
-  @Input() exibirHeader = true;
-  @Input() exibirFooter = true;
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(params => {
       this.statusFilter = params.get('status') || '';
       this.sectorFilter = params.get('sector') || '';
-      this.loadTasks();
+      this.loadTasks(); 
     });
-    
   }
 
-  loadTasks(): void {
+  private loadTasks(): void {
     this.taskService.getAll().subscribe(tasks => {
       this.tasks = tasks;
-      this.filteredTasks = tasks;
-        this.taskService.checkTaskDeadLines(tasks);
-  
+      this.filteredTasks = this.filterTasks(tasks); 
+      this.taskService.checkTaskDeadLines(tasks); 
     });
   }
 
-public markComplete(id: string): void {
- 
-  Swal.fire({
-    title: 'Concluir Tarefa?',
-    text: "Você deseja marcar esta tarefa como 'Concluída'?",
-    icon: 'question', 
-    showCancelButton: true,
-    confirmButtonColor: '#28a745',
-    cancelButtonColor: '#6c757d',  
-    confirmButtonText: 'Sim, concluir!',
-    cancelButtonText: 'Cancelar'
-  }).then((result) => {
-  
-    if (result.isConfirmed) {
-      
-   
-      this.taskService.getById(id).pipe(
-        take(1), 
-        switchMap(task => {
-       
-          task.status = 'Concluída';
-          
-      
-          return this.taskService.update(id, task); 
-        })
-      ).subscribe({
-        next: (updatedTask) => {
-      
-          const index = this.tasks.findIndex(t => t.id === id);
-          if (index !== -1) {
- 
-            this.tasks[index] = updatedTask;
-        
+  private filterTasks(tasks: Task[]): Task[] {
+    return tasks.filter(task => {
+      const statusMatch = this.statusFilter ? task.status === this.statusFilter : true;
+      const sectorMatch = this.sectorFilter ? task.sector === this.sectorFilter : true;
+      return statusMatch && sectorMatch;
+    });
+  }
 
-          }
-          
-          this.toastr.success('Tarefa concluída com sucesso!');
-        },
-        error: (err) => {
-          this.toastr.error('Ocorreu um erro ao concluir a tarefa.');
-          console.error(err);
-        }
-      });
+  public markComplete(id: string): void {
+    Swal.fire({
+      title: 'Concluir Tarefa?',
+      text: "Você deseja marcar esta tarefa como 'Concluída'?",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#28a745',
+      cancelButtonColor: '#6c757d',
+      confirmButtonText: 'Sim, concluir!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.completeTask(id);
+      }
+    });
+  }
+
+ private completeTask(id: string): void {
+  
+  const dataToUpdate: Partial<Task> = { 
+    status: 'Concluída' 
+  };
+
+  this.taskService.update(id, dataToUpdate).subscribe({
+    next: () => {
+      this.updateTaskInList(id, dataToUpdate);
+      this.toastr.success('Tarefa concluída com sucesso!');
+    },
+    error: (err) => {
+      this.toastr.error('Ocorreu um erro ao concluir a tarefa.');
+      console.error(err);
     }
   });
 }
 
-public deleteTask(id: string): void {
-  Swal.fire({
-    title: 'Você tem certeza?',
-    text: "Esta ação não poderá ser revertida!",
-    icon: 'warning', 
-    showCancelButton: true, 
-    confirmButtonColor: '#3085d6', 
-    cancelButtonColor: '#d33', 
-    confirmButtonText: 'Sim, excluir!',
-    cancelButtonText: 'Cancelar'
-  }).then((result) => {
- 
-    if (result.isConfirmed) {
-      
-      this.taskService.delete(id).subscribe({
-        next: () => {
-         
-          this.tasks = this.tasks.filter(task => task.id !== id);
-          
-          Swal.fire(
-            'Excluído!',
-            'Sua tarefa foi excluída com sucesso.',
-            'success'
-          );
 
-        
+private updateTaskInList(id: string, updatedData: Partial<Task>): void {
+ 
+  const index = this.tasks.findIndex(task => task.id === id);
+  if (index !== -1) {
     
-        },
-        error: (err) => {
-  
-          this.toastr.error('Ocorreu um erro ao excluir a tarefa.');
-          console.error(err);
-        }
-      });
-    }
-  });
-}
-
-
-editTask(id: string, event: MouseEvent): void {
+    this.tasks[index] = { ...this.tasks[index], ...updatedData };
  
-  event.stopPropagation();
-  
-  console.log('Botão de editar clicado! ID da tarefa:', id);
-  this.router.navigate(['/tasks/edit', id]);
+    this.filteredTasks = [...this.tasks];
+  }
 }
 
-  newTask(): void {
+  public deleteTask(id: string): void {
+    Swal.fire({
+      title: 'Você tem certeza?',
+      text: "Esta ação não poderá ser revertida!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, excluir!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.deleteTaskFromService(id);
+      }
+    });
+  }
+
+  private deleteTaskFromService(id: string): void {
+    this.taskService.delete(id).subscribe({
+      next: () => {
+        this.tasks = this.tasks.filter(task => task.id !== id);
+        this.filteredTasks = this.filterTasks(this.tasks); 
+        Swal.fire(
+          'Excluído!',
+          'Sua tarefa foi excluída com sucesso.',
+          'success'
+        );
+      },
+      error: (err) => {
+        this.toastr.error('Ocorreu um erro ao excluir a tarefa.');
+        console.error(err);
+      }
+    });
+  }
+
+  public editTask(id: string, event: MouseEvent): void {
+    event.stopPropagation();
+    console.log('Botão de editar clicado! ID da tarefa:', id);
+    this.router.navigate(['/tasks/edit', id]);
+  }
+
+  public newTask(): void {
     this.router.navigate(['/tasks/new']);
   }
 }

@@ -4,7 +4,7 @@ export interface INotification {
   message: string;
   type: 'info' | 'warning' | 'error';
   isRead: boolean;     
-  timestamp: Date;      
+  timestamp: number;      
   link?: string;        
 
 }

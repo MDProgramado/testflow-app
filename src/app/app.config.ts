@@ -23,7 +23,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes), 
-    provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()),
     provideAnimations(),
     provideToastr({
@@ -39,11 +38,8 @@ export const appConfig: ApplicationConfig = {
     // Fornece o serviço de autenticação
     provideAuth(() => getAuth()),
 
-    // Fornece o serviço Firestore
-    provideFirestore(() => getFirestore()),
-
-    // Fornece o Realtime Database
-    provideDatabase(() => getDatabase()),
+  
+   provideFirestore(() => getFirestore()),
 
     // Fornece Functions
     provideFunctions(() => getFunctions()),

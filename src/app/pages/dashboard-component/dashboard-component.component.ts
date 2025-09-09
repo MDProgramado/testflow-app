@@ -32,7 +32,7 @@ export class DashboardComponentComponent implements OnInit, AfterViewInit {
   'Concluída':   { background: 'rgba(38, 172, 67, 0.5)', border: 'rgba(75, 192, 192, 1)' }    
 };
 
-sectors = { 'Produção': 0, 'Manutenção': 0, "Administrativo": 0 };
+sectors = { 'Liberdade News': 0, 'Solucao Financeira': 0, 'Produção': 0, 'Manutenção': 0, "Administrativo": 0 };
 
   constructor(
     private taskService: TaskServiceService, 
@@ -78,7 +78,7 @@ sectors = { 'Produção': 0, 'Manutenção': 0, "Administrativo": 0 };
       this.pieChart.update();
     }
 
-    this.sectors = { 'Produção': 0, 'Manutenção': 0, 'Administrativo': 0 };
+    this.sectors = { 'Liberdade News': 0, 'Solucao Financeira': 0, 'Produção': 0, 'Manutenção': 0, 'Administrativo': 0 };
   this.tasks.forEach((task) => {
     if (this.sectors[task.sector] !== undefined) {
       this.sectors[task.sector]++;

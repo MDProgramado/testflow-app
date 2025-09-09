@@ -1,13 +1,12 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: 'AIzaSyDVGGS_a-8lOQjq-xhh-YX_bMeqqOBiaHg',
-    authDomain: 'taskflow-app-000.firebaseapp.com',
-    databaseURL: 'https://taskflow-app-000-default-rtdb.firebaseio.com', 
-    projectId: 'taskflow-app-000',
-    storageBucket: 'taskflow-app-000.appspot.com',
-    messagingSenderId: '263250090666',
-    appId: '1:263250090666:web:c74b272d1ca273372f8ed3',
-    measurementId: '' 
+   apiKey: "AIzaSyDM1G1DMgFLgTSFL4w0di9FvplQqOduo_o",
+  authDomain: "task-flow-00.firebaseapp.com",
+  projectId: "task-flow-00",
+  storageBucket: "task-flow-00.firebasestorage.app",
+  messagingSenderId: "750536511636",
+  appId: "1:750536511636:web:986a300c1bdac1b6de6481",
+  measurementId: "G-RB3KP0QD6G" 
   }
 };

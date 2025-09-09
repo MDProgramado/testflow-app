@@ -1,6 +1,13 @@
 import { Routes } from '@angular/router';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { UserControlComponent } from './components/user-control/user-control.component';
+
+import { LoginUserComponentComponent } from './pages/login-user-component/login-user-component.component';
+import { loginGuard } from './guards/login.guard';
+import { authGuard } from './guards/auth.guard';
+import { adminGuard } from './guards/admin.guard';
+
 
 export const routes: Routes = [
   // =======================================================
@@ -48,6 +55,7 @@ export const routes: Routes = [
           import('./pages/home-component/home-component.component').then(
             (m) => m.HomeComponentComponent
           ),
+          canActivate: [authGuard]
       },
       {
         path: 'dashboard',
@@ -55,6 +63,7 @@ export const routes: Routes = [
           import(
             './pages/dashboard-component/dashboard-component.component'
           ).then((m) => m.DashboardComponentComponent),
+          canActivate: [authGuard]
       },
       {
         path: 'tasks',
@@ -62,6 +71,7 @@ export const routes: Routes = [
           import(
             './components/task-list-component/task-list-component.component'
           ).then((m) => m.TaskListComponentComponent),
+          canActivate: [authGuard]
       },
       {
         path: 'tasks/new',
@@ -69,6 +79,7 @@ export const routes: Routes = [
           import(
             './components/task-form-component/task-form-component.component'
           ).then((m) => m.TaskFormComponentComponent),
+          canActivate: [authGuard]
       },
       {
         path: 'tasks/:id',
@@ -76,6 +87,7 @@ export const routes: Routes = [
           import(
             './components/task-detail-component/task-detail-component.component'
           ).then((m) => m.TaskDetailComponentComponent),
+          canActivate: [authGuard]
       },
       {
         path: 'tasks/edit/:id',
@@ -83,7 +95,18 @@ export const routes: Routes = [
           import(
             './components/task-form-component/task-form-component.component'
           ).then((m) => m.TaskFormComponentComponent),
+          canActivate: [authGuard]
       },
+      {
+    path: 'admin-panel',
+    component: UserControlComponent,
+    canActivate: [authGuard, adminGuard] 
+  },
+       { 
+    path: 'login', 
+    component: LoginUserComponentComponent,
+    canActivate: [loginGuard] 
+  },
 
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],

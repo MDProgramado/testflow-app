@@ -16,8 +16,7 @@ import { Sumary } from '../../interfaces/Sumary';
 })
 export class SumaryComponent implements OnInit{
   summaries: Sumary[] = [];
-
-
+ 
   constructor(private taskService: TaskServiceService) { }
   
      ngOnInit(): void {
@@ -25,45 +24,49 @@ export class SumaryComponent implements OnInit{
         tasks => {
           const now = new Date();
           now.setHours(0, 0, 0, 0);
-          const active = tasks.filter( task => task.status === 'Em andamento').length;
-          const completed = tasks.filter( task => task.status === "Concluída").length;
-          
-          const overdue = tasks.filter(t => {
-            if (!t.dueDate || t.status !== 'Pendente') return false;
-            
-            const taskDueDate = new Date(t.dueDate);
-            taskDueDate.setHours(0, 0, 0, 0); 
-            
-            return taskDueDate < now;
-          }).length;
-         
-  
-            this.summaries = [
-          { 
-            label: 'Em Andamento', 
-            count: active, 
-            color: 'primary', 
-            icon: 'bi-arrow-repeat',
-            route: '/tasks' 
-          },
+        let active = 0;
+      let completed = 0;
+      let overdue = 0;
 
-          { 
-            label: 'Concluídas', 
-            count: completed,
-             color: 'success', 
-             icon: 'bi-check2-circle',
-             route: '/tasks'
-            },
-          { 
-            label: 'Pendente', 
-            count: overdue, 
-            color: 'danger',
-            icon: 'bi-exclamation-circle',
-            route: '/tasks' 
+      
+      tasks.forEach(task => {
+        if (task.status === 'Em andamento') {
+          active++;
+        } else if (task.status === 'Concluída') {
+          completed++;
+        } else if (task.status === 'Pendente' && task.dueDate) {
+          const taskDueDate = new Date(task.dueDate);
+          taskDueDate.setHours(0, 0, 0, 0); 
+          if (taskDueDate < now) {
+            overdue++;
           }
-        ];
         }
-      )
-     }
+      });
+
+      
+      this.summaries = [
+        {
+          label: 'Em Andamento',
+          count: active,
+          color: 'primary',
+          icon: 'bi-arrow-repeat',
+          route: '/tasks'
+        },
+        {
+          label: 'Concluídas',
+          count: completed,
+          color: 'success',
+          icon: 'bi-check2-circle',
+          route: '/tasks'
+        },
+        {
+          label: 'Pendente',
+          count: overdue,
+          color: 'danger',
+          icon: 'bi-exclamation-circle',
+          route: '/tasks'
+        }
+      ];
+    });
   }
-  
+}

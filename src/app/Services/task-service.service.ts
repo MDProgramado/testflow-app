@@ -1,156 +1,184 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, from, map, Observable, tap } from 'rxjs';
+import { Observable, from, of, switchMap, tap, map, catchError, throwError, take } from 'rxjs';
 import { Task } from '../interfaces/Task';
 import { NotificationService } from './notification.service';
-import { Firestore, collection, doc, getDoc, getDocs, setDoc, deleteDoc, updateDoc, query, where, QuerySnapshot } from '@angular/fire/firestore';
+import { Auth, user } from '@angular/fire/auth';
+
+
+import { 
+  Firestore, 
+  collection, 
+  collectionData, 
+  doc, 
+  docData,
+  addDoc, 
+  updateDoc, 
+  deleteDoc, 
+  query, 
+  where 
+} from '@angular/fire/firestore';
+import { AutentificarLoginService } from './autentificar-login.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TaskServiceService {
+export class TaskServiceService { // Renomeei para TaskService para simplificar
 
-  private db: Firestore = inject(Firestore);
+  private firestore: Firestore = inject(Firestore);
   private notificationService: NotificationService = inject(NotificationService);
+  private authService: AutentificarLoginService = inject(AutentificarLoginService); // 2. INJETAMOS O AUTHSERVICE
 
-  /**
-   * Busca todas as tarefas no Firestore.
-   * @returns Um Observable com um array de tarefas.
-   */
+  
   getAll(): Observable<Task[]> {
-    const tasksRef = collection(this.db, 'tasks');
-    return from(getDocs(tasksRef)).pipe(
-      map((querySnapshot: QuerySnapshot) => {
-        return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Task[];
-      })
-    );
-  }
-
-  /**
-   * Busca uma tarefa específica pelo seu ID no Firestore.
-   * @param id O ID da tarefa a ser buscada.
-   * @returns Um Observable com a tarefa encontrada.
-   */
-  getById(id: string): Observable<Task | null> {
-    const taskRef = doc(this.db, `tasks/${id}`);
-    return from(getDoc(taskRef)).pipe(
-      map((docSnapshot: any) => {
-        if (docSnapshot.exists()) {
-          return { id: docSnapshot.id, ...docSnapshot.data() } as Task;
-        } else {
-          console.error('Tarefa não encontrada');
-          return null;
+    // Usamos o authService para pegar o perfil completo do usuário (com a 'role')
+    return this.authService.getCurrentUser().pipe(
+      switchMap(user => {
+        if (!user) {
+          return of([]); // Retorna array vazio se não estiver logado
         }
-      })
-    );
-  }
+        
+        const tasksCollection = collection(this.firestore, 'tasks');
+        let q; // Nossa variável de query
 
-  /**
-   * Cria uma nova tarefa no Firestore.
-   * @param task A tarefa a ser criada.
-   * @returns Um Observable com a tarefa criada.
-   */
-  create(task: Task): Observable<Task> {
-    const taskRef = doc(collection(this.db, 'tasks'));
-    return from(setDoc(taskRef, task)).pipe(
-      map(() => ({ id: taskRef.id, ...task })),
-      tap(() => {
-        this.notificationService.showNotification(
-          `Tarefa '${task.title}' foi criada com sucesso!`,
-          'info',
-          {
-            link: `/tasks/${task.id}`
-          }
+        // LÓGICA DE PERMISSÕES
+        if (user.role === 'admin') {
+          // ADMIN: Busca todos os documentos da coleção 'tasks'
+          console.log('Usuário é admin. Buscando todas as tarefas.');
+          q = query(tasksCollection); 
+        } else {
+          // EDITOR: Busca apenas onde o campo 'sector' é igual ao setor do usuário
+          console.log(`Usuário é editor. Buscando tarefas do setor: ${user.sector}`);
+          q = query(tasksCollection, where('sector', '==', user.sector));
+        }
+        
+        // Retornamos os dados e ordenamos no cliente para funcionar no plano Spark
+        return (collectionData(q, { idField: 'id' }) as Observable<Task[]>).pipe(
+          map(tasks => tasks.sort((a, b) => {
+            if (!a.dueDate) return 1;
+            if (!b.dueDate) return -1;
+            return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
+          }))
         );
       })
     );
   }
+ 
+  /**
+   * Cria uma nova tarefa, associando-a ao setor do usuário.
+   */
+ // Dentro de app/Services/task-service.service.ts
+
+// ... (imports e outras funções do serviço)
 
   /**
-   * Atualiza uma tarefa existente no Firestore.
-   * @param id O ID da tarefa a ser atualizada.
-   * @param taskData Os dados a serem atualizados.
-   * @returns Um Observable com a tarefa atualizada.
+   * Cria uma nova tarefa. A lógica muda com base na role do usuário.
+   * - Admin: Pode criar tarefa para qualquer setor (usa o valor do formulário).
+   * - Editor: Só pode criar tarefa para o seu próprio setor (usa o valor do perfil).
    */
-  update(id: string, taskData: Partial<Task>): Observable<Task> {
-    const taskRef = doc(this.db, `tasks/${id}`);
-    return from(updateDoc(taskRef, taskData));
+  create(task: Partial<Task>): Observable<string | null> {
+    return this.authService.getCurrentUser().pipe(
+      take(1), // Pega o primeiro valor e desinscreve, importante para evitar loops.
+      switchMap(user => {
+        if (!user) {
+          throw new Error('Usuário não autenticado para criar tarefa.');
+        }
+        
+        const tasksCollection = collection(this.firestore, 'tasks');
+        
+        // LÓGICA CORRIGIDA AQUI
+        let finalSector: string | undefined;
+
+        if (user.role === 'admin') {
+          // Se for admin, o setor vem do formulário que foi preenchido.
+          finalSector = task.sector; 
+        } else {
+          // Se for editor, o setor vem do perfil do usuário, ignorando o que veio do form.
+          finalSector = user.sector;
+        }
+
+        // Validação para garantir que o setor não seja undefined
+        if (!finalSector) {
+            throw new Error('O setor da tarefa não foi definido. Administradores devem selecionar um setor no formulário.');
+        }
+
+        const taskToCreate = { 
+          ...task, 
+          userId: user.uid, // Guarda o ID de quem criou a tarefa
+          sector: finalSector // Usa o setor final definido pela nossa lógica
+        }; 
+        
+        return from(addDoc(tasksCollection, taskToCreate)); 
+      }),
+      map(docRef => docRef.id), 
+      tap(newId => {
+        this.notificationService.showNotification(
+          `Tarefa '${task.title}' foi criada com sucesso!`, 'info',
+          { link: `/tasks/${newId}` }
+        );
+      }),
+      catchError(err => {
+        // Propaga o erro para o componente que chamou.
+        console.error("Erro detalhado no serviço de tarefas:", err);
+        return throwError(() => new Error(err.message || 'Erro desconhecido ao criar tarefa.'));
+      })
+    );
   }
 
-  /**
-   * Deleta uma tarefa no Firestore.
-   * @param id O ID da tarefa a ser deletada.
-   * @returns Um Observable sem valor.
-   */
+// ... (resto do serviço)
+
+  // Os métodos abaixo não precisam de alteração, pois operam em um
+  // ID específico, e a segurança deles é garantida pelas Regras do Firestore.
+  
+  getById(id: string): Observable<Task | null> {
+    const taskDocRef = doc(this.firestore, `tasks/${id}`);
+    return docData(taskDocRef, { idField: 'id' }) as Observable<Task | null>;
+  }
+
+  update(id: string, taskData: Partial<Task>): Observable<void> {
+    const taskDocRef = doc(this.firestore, `tasks/${id}`);
+    return from(updateDoc(taskDocRef, taskData)).pipe(
+      tap(() => {
+        this.notificationService.showNotification(`Tarefa atualizada com sucesso!`, 'info');
+      })
+    );
+  }
+
   delete(id: string): Observable<void> {
-    const taskRef = doc(this.db, `tasks/${id}`);
-    return from(deleteDoc(taskRef));
+    const taskDocRef = doc(this.firestore, `tasks/${id}`);
+    return from(deleteDoc(taskDocRef)).pipe(
+      tap(() => {
+        this.notificationService.showNotification(`Tarefa removida com sucesso.`, 'warning');
+      })
+    );
   }
 
-  /**
-   * Verifica as tarefas que estão próximas ou ultrapassaram o prazo e notifica os usuários.
-   * @param tasks Lista de tarefas a serem verificadas.
-   */
   checkTaskDeadLines(tasks: Task[]): void {
     const currentDate = new Date();
     tasks.forEach(task => {
-      if (task.status !== "Concluída") {
+      if (task.status !== "Concluída" && task.id) {
         const deadLineDate = new Date(task.dueDate);
         if (isNaN(deadLineDate.getTime())) return;
-
+        
         const timeDiff = deadLineDate.getTime() - currentDate.getTime();
         const dayDiff = timeDiff / (1000 * 3600 * 24);
 
         const notificationKey = `notified_${task.id}`;
-        if (sessionStorage.getItem(notificationKey)) {
-          return;
-        }
+        if (sessionStorage.getItem(notificationKey)) return;
 
-        // Alerta para tarefas perto do prazo (amarelo)
-        if (dayDiff <= 1 && dayDiff >= 0) {
+        if (dayDiff < 0) {
           this.notificationService.showNotification(
-            `A tarefa '${task.title}' está perto do prazo!`,
-            'warning',
-            {
-              silent: false, 
-              link: `/tasks/${task.id}`
-            }
+            `A tarefa '${task.title}' ultrapassou o prazo!`, 'error',
+            { silent: false, link: `/tasks/${task.id}` }
           );
           sessionStorage.setItem(notificationKey, 'true');
-        }
-        // Alerta para tarefas com prazo vencido (vermelho)
-        else if (dayDiff < 0) {
-          this.notificationService.showNotification(
-            `A tarefa '${task.title}' ultrapassou o prazo!`,
-            'error',
-            {
-              silent: false, 
-              link: `/tasks/${task.id}` 
-            }
+        } else if (dayDiff >= 0 && dayDiff <= 2) {
+            this.notificationService.showNotification(
+            `A tarefa '${task.title}' está perto do prazo!`, 'warning',
+            { silent: false, link: `/tasks/${task.id}` }
           );
-          sessionStorage.setItem(notificationKey, 'true');
+            sessionStorage.setItem(notificationKey, 'true');
         }
       }
     });
-  }
-
-  /**
-   * Busca todas as tarefas filtradas por status e setor.
-   * @param status O status das tarefas.
-   * @param sector O setor das tarefas.
-   * @returns Um Observable com as tarefas filtradas.
-   */
-  getAllFiltered(status: string, sector: string): Observable<Task[]> {
-    const tasksRef = collection(this.db, 'tasks');
-    const q = query(
-      tasksRef,
-      where('status', '==', status),
-      where('sector', '==', sector)
-    );
-
-    return from(getDocs(q)).pipe(
-      map((querySnapshot: QuerySnapshot) => {
-        return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Task[];
-      })
-    );
   }
 }
